@@ -12,7 +12,6 @@
  * All Rights Reserved.
  * Contributor(s): ______________________________________.
 ********************************************************************************/
-echo "hello";
 include('vtigerversion.php');
 
 // more than 8MB memory needed for graphics
