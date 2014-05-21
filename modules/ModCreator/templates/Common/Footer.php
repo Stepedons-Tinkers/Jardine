@@ -1,0 +1,1 @@
+<table border =1 id="footer">	<tr>		<td>			<h1>FOOTER</h1>		</td>	</tr></table>

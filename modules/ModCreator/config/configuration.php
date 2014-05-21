@@ -1,0 +1,1 @@
+<?php$configuration['default_controller'] = 'ListView';$configuration['default_controller_action'] = 'index';$configuration['path'] = 'modules/ModCreator/';?>

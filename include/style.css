@@ -1,0 +1,176 @@
+/*********************************************************************************
+** The contents of this file are subject to the vtiger CRM Public License Version 1.0
+* ("License"); You may not use this file except in compliance with the License
+* The Original Code is:  vtiger CRM Open Source
+* The Initial Developer of the Original Code is vtiger.
+* Portions created by vtiger are Copyright (C) vtiger.
+* All Rights Reserved.
+********************************************************************************/
+
+body {
+	font-family: Arial, Helvetica, san-serif;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: grey;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #0000FF;
+}
+
+.loginContainer {
+    width: 800px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:25px;
+}
+
+.loginWrapper {
+	padding: 10px;
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(123,165,216,1) 50%, rgba(123,165,216,1) 50%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(123,165,216,1)), color-stop(50%,rgba(255,255,255,1)rgba(123,165,216,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(123,165,216,1) 50%,rgba(123,165,216,1) 50%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(123,165,216,1) 50%,rgba(123,165,216,1) 50%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(123,165,216,1) 50%,rgba(123,165,216,1) 50%,rgba(255,255,255,1) 100%); /* IE10+ */
+	background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(123,165,216,1) 50%,rgba(123,165,216,1) 50%,rgba(255,255,255,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#7ba5d8',GradientType=0 ); /* IE6-9 */
+}
+
+.loginForm, .importantLinks {
+	width:;
+}
+
+.loginForm {
+	background-image:url('../Image/background.jpg');
+	background-repeat:no-repeat;
+    background-position:center center;
+	z-index:-1;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:auto;
+	margin-bottom:auto;
+	width:399px;
+	height:286px;;
+	
+}
+
+.importantLinks {
+	text-align: center;
+	padding: 30px;
+	padding-top: 10px;
+	font-size: 0.8em;
+}
+
+.pluginsPromotionDiv {
+	background-color: #D0DDED;
+	-webkit-box-shadow: 3px 3px 3px 3px rgba(150, 150, 150, 0.5);
+	-moz-box-shadow: 3px 3px 3px 3px rgba(150, 150, 150, 0.5);
+	box-shadow: 3px 3px 3px 3px rgba(150, 150, 150, 0.5);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+.loginForm .poweredBy {
+	width: 100%;
+	font-size: 0.8em;
+	text-align: right;
+	padding-bottom: 1.5em;
+	color: #2d3642;
+}
+
+.loginForm .label {
+	font-weight: bold;
+	font-family: Arial;
+	padding-top: 20px;
+	padding-left: 12px;
+	padding-bottom: 2px;
+	width: 300px;
+}
+
+.loginForm .input input {
+	width: 350px;
+	height: 45px;
+	font-size: 14px;
+	font-family:Arial;
+	font-weight:1000;
+	color: #3D698E;
+	-moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+	padding-left: 19px;
+	border-color:#AEAEB1;
+	border-style:solid;
+	border-width:1.9px;
+}
+
+.loginForm .input{
+	padding-left: 24px;
+}
+
+.loginForm .input input:focus {
+
+	//border: 2px solid #3D698E;
+	outline:none;
+    border-color:#005CE6;
+    box-shadow:0 0 10px #005CE6;
+}
+
+.loginForm .button #submitButton {
+    margin-left:auto;
+	margin-right:auto;
+	padding-right: 24px; 
+}
+
+.importantLinks, .communityLinks {
+	font-size: 0.8em;
+}
+
+.errorMessage {
+	color: #FF0000;
+	padding-top: 10px;
+	font-family: Arial;
+	padding-left: 29px;
+	margin-bottom:auto;
+	margin-left:auto;
+	margin-right:auto;
+	font-size: 12px;
+}
+
+.toplogo{
+    width: 300px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.centerlog{
+	margin-top:30px;
+    width: 600px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+
+.inputdiv {
+	margin-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.signlabel
+{
+	background-image:url('../Image/sign.jpg');
+	background-repeat:no-repeat;
+    background-position:center center;
+	height:40px;
+	width:200px;
+	margin-left:auto;
+	margin-right:auto;
+}

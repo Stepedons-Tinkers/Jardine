@@ -1,0 +1,1 @@
+<?phpClass TableTemplating{		public function __construct($dirPath){		$this->dirPath = $dirPath;	}		public function setDisplay($display){		require $this->dirPath."libraries/tables/templates/".$display.".php";		$this->display = new $display();	}		public function getDisplay(){		return $this->display;	}}?>

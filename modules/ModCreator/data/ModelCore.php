@@ -1,0 +1,1 @@
+<?phpClass ModelCore{	protected $adb;		public function __construct(){		}		public function __initialize(){	  global $adb;	  $this->adb = $adb;	}}?>

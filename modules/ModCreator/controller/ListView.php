@@ -1,0 +1,1 @@
+<?phpclass ListView extends ControllerCore{	public function __initialize(){		$this->style('listview');		$this->setModel('ListView');		$this->setUtility('utilities');	}		public function index(){				$data = $this->listview->getAllTables();				$this->template('Common/Header');		$this->template('ListView/Container',$data);			}}?>
