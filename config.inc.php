@@ -1,4 +1,5 @@
 <?php
+echo "hello";
 /*********************************************************************************
  * The contents of this file are subject to the SugarCRM Public License Version 1.1.2
  * ("License"); You may not use this file except in compliance with the 
@@ -81,7 +82,7 @@ $host_name = $dbconfig['db_hostname'];
 $site_URL = 'http://localhost/Jardine';
 
 // root directory path
-$root_directory = '/var/www/html/Jardine/';
+$root_directory = 'C:\wamp\www\Jardine/';
 
 // cache direcory path
 $cache_dir = 'cache/';
