@@ -81,9 +81,8 @@ $host_name = $dbconfig['db_hostname'];
 
 $site_URL = 'http://localhost/Jardine';
 
-$stephen = "hello";
 // root directory path
-$root_directory = 'awdawdwad';
+$root_directory = 'C:\wamp\www\Jardine/';
 
 // cache direcory path
 $cache_dir = 'cache/';
