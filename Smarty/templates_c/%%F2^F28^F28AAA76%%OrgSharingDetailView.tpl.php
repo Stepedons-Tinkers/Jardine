@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-17 13:18:48
+<?php /* Smarty version 2.6.18, created on 2014-05-23 09:43:12
          compiled from OrgSharingDetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'OrgSharingDetailView.tpl', 39, false),array('modifier', 'getTranslatedString', 'OrgSharingDetailView.tpl', 111, false),array('modifier', 'cat', 'OrgSharingDetailView.tpl', 115, false),)), $this); ?>

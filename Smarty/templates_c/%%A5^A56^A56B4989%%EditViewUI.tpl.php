@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-17 11:31:22
+<?php /* Smarty version 2.6.18, created on 2014-05-23 09:40:43
          compiled from EditViewUI.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'EditViewUI.tpl', 34, false),array('modifier', 'getTranslatedString', 'EditViewUI.tpl', 66, false),array('modifier', 'getTranslatedCurrencyString', 'EditViewUI.tpl', 415, false),array('modifier', 'substr', 'EditViewUI.tpl', 472, false),)), $this); ?>

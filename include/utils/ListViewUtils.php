@@ -2710,7 +2710,7 @@ function getListQuery($module, $where = '') {
 			break;
 		Case "Users":
 			$query = "SELECT id,user_name,first_name,last_name,email1,phone_mobile,phone_work,is_admin,status,email2,
-					vtiger_user2role.roleid as roleid,vtiger_role.depth as depth
+					vtiger_user2role.roleid as roleid,vtiger_role.depth as depth,z_area
 				 	FROM vtiger_users
 				 	INNER JOIN vtiger_user2role ON vtiger_users.id = vtiger_user2role.userid
 				 	INNER JOIN vtiger_role ON vtiger_user2role.roleid = vtiger_role.roleid

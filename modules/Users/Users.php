@@ -90,7 +90,7 @@ class Users extends CRMEntity {
     // This is used to retrieve related fields from form posts.
     var $additional_column_fields = Array('reports_to_name');
 
-    var $sortby_fields = Array('status','email1','email2','phone_work','is_admin','user_name','last_name');
+    var $sortby_fields = Array('status','email1','email2','phone_work','is_admin','user_name','last_name','z_area');
 
     // This is the list of vtiger_fields that are in the lists.
     var $list_fields = Array(
@@ -102,7 +102,8 @@ class Users extends CRMEntity {
             'Email'=>Array('vtiger_users'=>'email1'),
             'Email2'=>Array('vtiger_users'=>'email2'),
             'Admin'=>Array('vtiger_users'=>'is_admin'),
-            'Phone'=>Array('vtiger_users'=>'phone_work')
+            'Phone'=>Array('vtiger_users'=>'phone_work'),
+            'Area'=>Array('vtiger_users'=>'z_area')
     );
     var $list_fields_name = Array(
             'Last Name'=>'last_name',
@@ -113,7 +114,8 @@ class Users extends CRMEntity {
             'Email'=>'email1',
             'Email2'=>'email2',
             'Admin'=>'is_admin',
-            'Phone'=>'phone_work'
+            'Phone'=>'phone_work',
+            'Area'=>'z_area'
     );
 
     //Default Fields for Email Templates -- Pavani

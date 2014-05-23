@@ -47,6 +47,7 @@
 	<td class="colHeader small" valign=top>{$LIST_HEADER.5}</td>
 	<td class="colHeader small" valign=top>{$LIST_HEADER.7}</td>
 	<td class="colHeader small" valign=top>{$LIST_HEADER.6}</td>
+	<td class="colHeader small" valign=top>{$LIST_HEADER.9}</td>
 	<td class="colHeader small" valign=top>{$LIST_HEADER.4}</td>
 </tr>
 	{foreach name=userlist item=listvalues key=userid from=$LIST_ENTRIES}
@@ -70,12 +71,12 @@
 	<td class="listTableRow small" valign=top>{$listvalues.5}&nbsp;</td>
 	<td class="listTableRow small" valign=top>{$listvalues.7}&nbsp;</td>
 	<td class="listTableRow small" valign=top>{$listvalues.6}&nbsp;</td>
+	<td class="listTableRow small" valign=top>{$listvalues.9}</td>
 	{if $listvalues.4|@strip_tags|@trim eq 'Active'}
 	<td class="listTableRow small active" valign=top>{$APP.Active}</td>
 	{else}
 	<td class="listTableRow small inactive" valign=top>{$APP.Inactive}</td>
 	{/if}	
-
 </tr>
 	{foreachelse}
 	<tr>

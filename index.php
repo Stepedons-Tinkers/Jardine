@@ -1,5 +1,4 @@
 <?php
-echo "test";
 /*********************************************************************************
  * The contents of this file are subject to the SugarCRM Public License Version 1.1.2
  * ("License"); You may not use this file except in compliance with the 
@@ -601,7 +600,10 @@ if($action == "DetailView")
 
 }	
 
-//ed edited //Supreme Admin
+//ed edited 
+$current_user->rolename = getRoleName($current_user->roleid);	//include/utils/UserInfoUtil.php
+$current_user->area = $current_user->column_fields['z_area'];
+//Supreme Admin
 $current_user->isSupreme = 0;
 $supremeAdmins = getSupremeAdmins(); 	//include/utils/CommonUtils.php
 if(in_array($current_user->user_name,$supremeAdmins)){
