@@ -2758,6 +2758,7 @@ function _2digit( no ){
 
 function confirmdelete(url)
 {  
+
     /* ADDED BY: STEPHEN
      * REASON: For changing the alert for CLIENTS, QUERIES and COMPLAINTS module
      */

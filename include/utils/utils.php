@@ -4498,8 +4498,11 @@ function DeleteEntity($module,$return_module,$focus,$record,$return_id) {
 		$focus->unlinkRelationship($record, $return_module, $return_id);
 		$focus->trackUnLinkedInfo($return_module, $return_id, $module, $record);
 	} else {
-		$focus->trash($module, $record);
+		if($focus->checkForDependencies($module, $record)){
+			$focus->trash($module, $record);
+		}
 	}
+
 	$log->debug("Exiting DeleteEntity method ...");
 }
 

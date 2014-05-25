@@ -487,7 +487,7 @@ class ListViewController {
 				}
 			}
 
-			if(isPermitted($module,"Delete","") == 'yes'){
+			if( isPermitted($module,"Delete","") == 'yes' && $focus->checkForDependencies($module, $recordId) ){
 				$del_link = $this->getListViewDeleteLink($module,$recordId);
 				if($actionLinkInfo != "" && $del_link != "")
 					$actionLinkInfo .=  " | ";
@@ -511,6 +511,7 @@ class ListViewController {
 			$data[$recordId] = $row;
 
 		}
+		
 		return $data;
 	}
 
