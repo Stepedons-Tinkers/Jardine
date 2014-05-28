@@ -105,9 +105,9 @@ $focus->markAsViewed($current_user->id);
 $modules_actions = array();
 if($current_user->isSupreme || in_array($current_user->rolename, array('User Maintenance Admin','Marketing Manager'))){
 	if($focus->column_fields['z_smr_isactv'] != 1)
-		$modules_actions[0]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action=XSMR&functionNextIX=activate&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Activate</a>";
+		$modules_actions[0]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX=activate&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Activate</a>";
 	else
-		$modules_actions[1]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action=XSMR&functionNextIX=deactivate&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Deactivate</a>";
+		$modules_actions[1]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX=deactivate&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Deactivate</a>";
 }
 $smarty->assign("MODULES_ACTIONS", $modules_actions);
 

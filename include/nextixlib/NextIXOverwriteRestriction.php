@@ -70,12 +70,25 @@ class NextIXOverwriteRestriction		//used in util/UserInfoUtil.php
 		return false;
 	}
 	
+	public function permXSMRTimeCard(){
+		$permission = false;
+		if($this->actionname == 'EditView'){
+			if($this->record_id != ''){	//edit
+				if(!in_array($this->current_user->rolename,array('User Maintenance Admin')))
+					$permission = "no";	
+			}
+			else{	//create
+				if(!in_array($this->current_user->rolename,array('Regional / Area Sales Manager','SMR','DIY Supervisor','PCO Supervisor')))
+					$permission = "no";					
+			}
+		}
+		return $permission;
+	}
+	
 	public function permXWorkplan(){
 		$permission = false;
 
 		return $permission;
-		
-		// require('user_privileges/user_privileges_'.$current_user->id.'.php');
 	}
 	
 	public function checkAreaRestriction(){

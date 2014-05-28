@@ -978,8 +978,10 @@ function getListViewEntries($focus, $module, $list_result, $navigation_array, $r
 
 			//Added for Actions ie., edit and delete links in listview
 			$links_info = "";
+			$module_recordid = $adb->query_result($list_result, $i - 1, 'crmid'); //ed edited
+			
 			if (!(is_array($selectedfields) && $selectedfields != '')) {
-				if (isPermitted($module, "EditView", "") == 'yes') {
+				if (isPermitted($module, "EditView", $module_recordid) == 'yes') {
 					$edit_link = getListViewEditLink($module, $entity_id, $relatedlist, $varreturnset, $list_result, $list_result_count);
 					if (isset($_REQUEST['start']) && $_REQUEST['start'] > 1 && $module != 'Emails')
 						$links_info .= "<a href=\"$edit_link&start=" . vtlib_purify($_REQUEST['start']) . "\">" . $app_strings["LNK_EDIT"] . "</a> ";

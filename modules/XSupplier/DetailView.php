@@ -103,6 +103,15 @@ $smarty->assign('CUSTOM_LINKS', Vtiger_Link::getAllByType(getTabid($currentModul
 $focus->markAsViewed($current_user->id);
 // END
 
+$modules_actions = array();
+if($current_user->isSupreme || in_array($current_user->rolename, array('Parameter Maintenance Admin','Marketing Manager','Product Manager'))){
+	if($focus->column_fields['z_sup_isactive'] != 1)
+		$modules_actions[0]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX=activate&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Activate</a>";
+	else
+		$modules_actions[1]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX=deactivate&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Deactivate</a>";
+}
+$smarty->assign("MODULES_ACTIONS", $modules_actions);
+
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 
 $smarty->display('DetailView.tpl');

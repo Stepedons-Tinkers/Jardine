@@ -3316,25 +3316,49 @@ function getSMRs(){
 	return $data;
 }
 
-function getSMRs_area($area_arr){
+function getUsers_roles($roles_arr){
 	global $adb;
-		
-	$str_arr = array('SMR');
-	$str = implode("','",$str_arr);	
-	$area_str = implode("','",$area_arr);
-	$query = "SELECT * 
+
+	$str = implode("','",$roles_arr);
+	$query = "SELECT *
 				FROM vtiger_users 
 				INNER JOIN vtiger_user2role ON vtiger_users.id = vtiger_user2role.userid
 				INNER JOIN vtiger_role ON vtiger_user2role.roleid = vtiger_role.roleid
 				WHERE rolename IN ('{$str}')
-				AND vtiger_users.status = 'Active'
-				AND vtiger_users.z_area IN ('{$area_str}') ";
+				AND vtiger_users.status = 'Active'";
 	$result = $adb->pquery($query,array());
 	$noofrows = $adb->num_rows($result);
 	$data = array();
 	if($noofrows) {
 		while($resultrow = $adb->fetchByAssoc($result)) {
 			$data[$resultrow['id']] = $resultrow;
+		}
+    }
+	return $data;
+}
+
+function getSMRs_area($area_arr){
+	global $adb;
+		
+	$str_arr = array('SMR');
+	$str = implode("','",$str_arr);
+	$query = "SELECT * 
+				FROM vtiger_users 
+				INNER JOIN vtiger_user2role ON vtiger_users.id = vtiger_user2role.userid
+				INNER JOIN vtiger_role ON vtiger_user2role.roleid = vtiger_role.roleid
+				WHERE rolename IN ('{$str}')
+				AND vtiger_users.status = 'Active'
+				AND vtiger_users.z_area IS NOT null
+				AND vtiger_users.z_area != '' ";
+	$result = $adb->pquery($query,array());
+	$noofrows = $adb->num_rows($result);
+	$data = array();
+	if($noofrows) {
+		while($resultrow = $adb->fetchByAssoc($result)) {
+			$area_temp = explode(' |##| ',$resultrow['z_area']);
+			$coArea = array_intersect($area_temp, $area_arr);
+			if(!empty($coArea))
+				$data[$resultrow['id']] = $resultrow;
 		}
     }
 	return $data;

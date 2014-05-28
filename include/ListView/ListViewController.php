@@ -475,7 +475,7 @@ class ListViewController {
 
 			//Added for Actions ie., edit and delete links in listview
 			$actionLinkInfo = "";
-			if(isPermitted($module,"EditView","") == 'yes'){
+			if(isPermitted($module,"EditView",$recordId) == 'yes'){
 				$edit_link = $this->getListViewEditLink($module,$recordId);
 				if(isset($navigationInfo['start']) && $navigationInfo['start'] > 1 && $module != 'Emails') {
 					$actionLinkInfo .= "<a href=\"$edit_link&start=".

@@ -1,5 +1,5 @@
 <?php
-include_once('include/custom_workflows/XSMR.php');
+include_once('include/custom_workflows/XSupplier.php');
 
 $function = $_REQUEST['functionNextIX'];
 $function();	
@@ -7,31 +7,31 @@ $function();
 function activate(){
 	global $current_user;
 
-	$currentModule = 'XSMR';
+	$currentModule = 'XSupplier';
     $record = $_REQUEST['entityid'];
     
     $focus = CRMEntity::getInstance($currentModule);
     $focus->retrieve_entity_info($record, $currentModule);
     $focus->id  = "x".$record;
 
-	activateSMR($focus);
+	activateSupplier($focus);
 	
-	header("Location: index.php?action=DetailView&module=XSMR&record=$record");
+	header("Location: index.php?action=DetailView&module=XSupplier&record=$record");
 }
 
 function deactivate(){
 	global $current_user;
 
-	$currentModule = 'XSMR';
+	$currentModule = 'XSupplier';
     $record = $_REQUEST['entityid'];
     
     $focus = CRMEntity::getInstance($currentModule);
     $focus->retrieve_entity_info($record, $currentModule);
     $focus->id  = "x".$record;
 
-	deactivateSMR($focus);
+	deactivateSupplier($focus);
 	
-	header("Location: index.php?action=DetailView&module=XSMR&record=$record");
+	header("Location: index.php?action=DetailView&module=XSupplier&record=$record");
 }
 
 
