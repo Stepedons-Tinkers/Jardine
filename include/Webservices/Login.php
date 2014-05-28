@@ -1,4 +1,5 @@
 <?php
+include("AuthToken.php");
 /*+***********************************************************************************
  * The contents of this file are subject to the vtiger CRM Public License Version 1.0
  * ("License"); You may not use this file except in compliance with the License
@@ -9,9 +10,13 @@
  *************************************************************************************/
 	
 	function vtws_login($username,$pwd){
+	
+		vtws_getchallenge($username);
 		
 		$user = new Users();
 		$userId = $user->retrieve_user_id($username);
+		$user->retrieve_entity_info($userId,'Users');
+		$password = $user->column_fields['user_password'];
 		
 		$token = vtws_getActiveToken($userId);
 		if($token == null){
@@ -23,15 +28,27 @@
 			throw new WebServiceException(WebServiceErrorCode::$ACCESSKEYUNDEFINED,"Access key for the user is undefined");
 		}
 		
+		/* This is removed we will use password directly
 		$accessCrypt = md5($token.$accessKey);
 		if(strcmp($accessCrypt,$pwd)!==0){
 			throw new WebServiceException(WebServiceErrorCode::$INVALIDUSERPWD,"Invalid username or password");
 		}
+		*/
+		
+		$salt = substr($username, 0, 2);
+		$salt = '$1$' . $salt . '$';
+		$encrypted_password = crypt($pwd, $salt);	
+		
+		if(strcmp($password,$encrypted_password)!==0){
+			throw new WebServiceException(WebServiceErrorCode::$INVALIDUSERPWD,"Invalid password");
+		}
+		
 		$user = $user->retrieveCurrentUserInfoFromFile($userId);
 		if($user->status != 'Inactive'){
 			return $user;
 		}
 		throw new WebServiceException(WebServiceErrorCode::$AUTHREQUIRED,'Given user is inactive');
+		
 	}
 	
 	function vtws_getActiveToken($userId){
