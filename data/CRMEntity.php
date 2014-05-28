@@ -27,6 +27,8 @@ require_once('include/utils/utils.php');
 require_once('include/utils/UserInfoUtil.php');
 require_once("include/Zend/Json.php");
 
+require_once("include/nextixlib/ManipulateAccessControlQuery.php");	//ed edited
+
 class CRMEntity {
 
 	var $ownedby;
@@ -2325,6 +2327,8 @@ class CRMEntity {
 	function getNonAdminAccessControlQuery($module, $user, $scope = '') {
 		require('user_privileges/user_privileges_' . $user->id . '.php');
 		require('user_privileges/sharing_privileges_' . $user->id . '.php');
+		
+		$macq = new ManipulateAccessControlQuery();	//ed edited
 		$query = ' ';
 		$tabId = getTabid($module);
 		if ($is_admin == false && $profileGlobalPermission[1] == 1 && $profileGlobalPermission[2]
@@ -2344,7 +2348,15 @@ class CRMEntity {
 			$query = " INNER JOIN $tableName $tableName$scope ON $tableName$scope.id = " .
 					"vtiger_crmentity$scope.smownerid ";
 		}
-		return $query;
+		
+		//ed edited
+		$macq->setModule($module);
+		$macq->setUser($user);
+		$macq->setcurrent_user_parent_role_seq($current_user_parent_role_seq);
+		$queryNextIX = $macq->addQuery();
+		//ed edited end
+		
+		return $query.$queryNextIX;
 	}
 
 	public function listQueryNonAdminChange($query, $scope = '') {

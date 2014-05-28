@@ -144,7 +144,6 @@ if($_REQUEST['hmode'] == 'viewBox' && isset($_REQUEST['homeowner'])){
 	$queryGenerator->addCondition('homeowner',$displayValueHomeOwner,'c');
 	$queryGenerator->endGroup();
 }
-
 $list_query = $queryGenerator->getQuery();
 
 $where = $queryGenerator->getConditionalWhere();

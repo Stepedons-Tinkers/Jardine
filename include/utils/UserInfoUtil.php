@@ -762,6 +762,13 @@ function isPermitted($module,$actionname,$record_id='')
 
 	}
 
+	//Retreiving the default Organisation sharing Access
+	$others_permission_id = $defaultOrgSharingPermission[$tabid];
+	//0 public:readonly
+	//1 public:read and edit
+	//2 public:read,edit and delete
+	//3 private
+	
 	//Checking the Access for the Settings Module
 	if($module == 'Settings' || $module == 'Administration' || $module == 'System' || $_REQUEST['parenttab'] == 'Settings')
 	{
@@ -777,6 +784,32 @@ function isPermitted($module,$actionname,$record_id='')
 		return $permission;
 	}
 
+	//ed edited
+	if($actionname == 'blockThis'){
+		return "no";
+	}
+	
+	//ed edited for this user no delete in specific module
+	if(class_exists('NextIXOverwriteRestriction') != true)
+		require_once('include/nextixlib/NextIXOverwriteRestriction.php');	
+	
+	$actionid=getActionid($actionname);
+	$nextIXOverwriteRestriction = new NextIXOverwriteRestriction($module,$actionname,$actionid,$record_id,$adb,$current_user);
+	$permissionFlag = $nextIXOverwriteRestriction->permissionStatic();	
+	
+	if($permissionFlag !== false)
+		return $permissionFlag;
+
+	//check Area and Hierarchy
+	$permissionFlag = $nextIXOverwriteRestriction->checkAreaRestriction();
+	if($permissionFlag !== false)
+		return $permissionFlag;
+	$others_permission_id = $nextIXOverwriteRestriction->manipulateOtherPermission($others_permission_id);
+	
+	if($others_permission_id == 'no' || $others_permission_id == 'yes')
+		return $others_permission_id;
+	//ed edited end		
+	
 	//Checking whether the user is admin
 	if($is_admin)
 	{
@@ -875,9 +908,7 @@ function isPermitted($module,$actionname,$record_id='')
 		$recOwnType=$type;
 		$recOwnId=$id;
 	}
-	//Retreiving the default Organisation sharing Access
-	$others_permission_id = $defaultOrgSharingPermission[$tabid];
-
+	
 	if($recOwnType == 'Users')
 	{
 		//Checking if the Record Owner is the current User

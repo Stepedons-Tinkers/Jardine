@@ -602,7 +602,7 @@ if($action == "DetailView")
 
 //ed edited 
 $current_user->rolename = getRoleName($current_user->roleid);	//include/utils/UserInfoUtil.php
-$current_user->area = $current_user->column_fields['z_area'];
+$current_user->area = explode(' |##| ',$current_user->column_fields['z_area']);
 //Supreme Admin
 $current_user->isSupreme = 0;
 $supremeAdmins = getSupremeAdmins(); 	//include/utils/CommonUtils.php
