@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-23 15:49:38
+<?php /* Smarty version 2.6.18, created on 2014-05-28 13:34:48
          compiled from DetailViewFields.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'count', 'DetailViewFields.tpl', 34, false),array('modifier', 'vtiger_imageurl', 'DetailViewFields.tpl', 46, false),array('modifier', 'cat', 'DetailViewFields.tpl', 95, false),array('modifier', 'replace', 'DetailViewFields.tpl', 100, false),array('modifier', 'regex_replace', 'DetailViewFields.tpl', 119, false),)), $this); ?>

@@ -763,6 +763,7 @@ function isPermitted($module,$actionname,$record_id='')
 	}
 
 	//Retreiving the default Organisation sharing Access
+	$tabid = getTabid($module);
 	$others_permission_id = $defaultOrgSharingPermission[$tabid];
 	//0 public:readonly
 	//1 public:read and edit
@@ -818,7 +819,7 @@ function isPermitted($module,$actionname,$record_id='')
 		return $permission;
 	}
 	//Retreiving the Tabid and Action Id
-	$tabid = getTabid($module);
+	// $tabid = getTabid($module);
 	$actionid=getActionid($actionname);
 	//If no actionid, then allow action is vtiger_tab permission is available
 	if($actionid === '')

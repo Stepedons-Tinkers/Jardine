@@ -167,7 +167,7 @@ alt="Clear" title="Clear" LANGUAGE=javascript	onClick="this.form.{$fldname}.valu
 				<font color="red">{$mandatory_field}</font>{$usefldlabel} {if $MASS_EDIT eq '1'}<input {$forcedisableStat} type="checkbox" name="{$fldname}_mass_edit_check" id="{$fldname}_mass_edit_check" class="small" >{/if}
 			</td>
 			<td {$hidingStatField} width="30%" align=left class="dvtCellInfo">
-			   <select MULTIPLE name="{$fldname}[]" size="4" style="width:160px;" tabindex="{$vt_tab}" class="small">
+			   <select MULTIPLE id="{$fldname}" name="{$fldname}[]" size="4" style="width:160px;" {$forcedisableStat} tabindex="{$vt_tab}" class="small">
 				{foreach item=arr from=$fldvalue}
 					<option value="{$arr[1]}" {$arr[2]}>
                                                 {$arr[0]}
@@ -193,24 +193,29 @@ alt="Clear" title="Clear" LANGUAGE=javascript	onClick="this.form.{$fldname}.valu
 					{/foreach}
 				{/foreach}
 
-				{if $check eq 0}
+				{* {if $check eq 0} *}
 					{assign var=select_user value='checked'}
 					{assign var=style_user value='display:block'}
 					{assign var=style_group value='display:none'}
-				{else}
+				{* {else}
 					{assign var=select_group value='checked'}
 					{assign var=style_user value='display:none'}
 					{assign var=style_group value='display:block'}
 				{/if}
+				*}
 
-				<input {$forcedisableStat} {$hidingIMG} type="radio" tabindex="{$vt_tab}" name="assigntype" {$select_user} value="U" onclick="toggleAssignType(this.value)" >&nbsp;<span {$hidingIMG}>{$APP.LBL_USER}</span>
-
-				{if $secondvalue neq ''}
-					<input {$forcedisableStat} {$hidingIMG} type="radio" name="assigntype" {$select_group} value="T" onclick="toggleAssignType(this.value)">&nbsp;<span {$hidingIMG}>{$APP.LBL_GROUP}</span>
-				{/if}
-
+				{* ed edited removed assigned to group *}
+				<div style="display:none">
+					<input {$forcedisableStat} {$hidingIMG} type="radio" tabindex="{$vt_tab}" name="assigntype" {$select_user} value="U" onclick="toggleAssignType(this.value)" >&nbsp;<span {$hidingIMG}>{$APP.LBL_USER}</span>
+					
+					{if $secondvalue neq ''}
+						<input {$forcedisableStat} {$hidingIMG} type="radio" name="assigntype" {$select_group} value="T" onclick="toggleAssignType(this.value)">&nbsp;<span {$hidingIMG}>{$APP.LBL_GROUP}</span>
+					{/if}
+				</div>
+				{* end *}
+				
 				<span id="assign_user" style="{$style_user}">
-					<select {$forcedisableStat} name="{$fldname}" class="small">
+					<select {$forcedisableStat} id="{$fldname}" name="{$fldname}" class="small">
 						{foreach key=key_one item=arr from=$fldvalue}
 							{foreach key=sel_value item=value from=$arr}
 								<option value="{$key_one}" {$value}>{$sel_value}</option>

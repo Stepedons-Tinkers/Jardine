@@ -36,9 +36,13 @@ if(empty($_REQUEST['record']) && $focus->mode != 'edit'){
 }
 
 $disp_view = getView($focus->mode);
-	$smarty->assign('BLOCKS', getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields));
-	$smarty->assign('BASBLOCKS', getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields, 'BAS'));
-	$smarty->assign('ADVBLOCKS',getBlocks($currentModule,$disp_view,$mode,$focus->column_fields,'ADV'));
+	$blocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields);
+	$basblocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields, 'BAS');
+	$advblocks = getBlocks($currentModule,$disp_view,$mode,$focus->column_fields,'ADV');
+
+	$smarty->assign('BLOCKS', $blocks);
+	$smarty->assign('BASBLOCKS', $basblocks);
+	$smarty->assign('ADVBLOCKS', $advblocks);
 
 $smarty->assign('OP_MODE',$disp_view);
 $smarty->assign('APP', $app_strings);

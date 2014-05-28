@@ -293,6 +293,17 @@ $viewAttachment = false;
 $skipSecurityCheck= false;
 //echo $module;
 // echo $action;
+//ed edited NextIXfunctions
+if(isset($action) && isset($module))
+{
+	if(preg_match("/^NextIXfunctions/", $module))
+	{
+		$skipHeaders=true;
+		$skipFooters=true;
+		$viewAttachment = true;			
+	}
+}
+//ed edited end
 
 if(isset($action) && isset($module))
 {
@@ -600,16 +611,16 @@ if($action == "DetailView")
 
 }	
 
-//ed edited 
-$current_user->rolename = getRoleName($current_user->roleid);	//include/utils/UserInfoUtil.php
-$current_user->area = explode(' |##| ',$current_user->column_fields['z_area']);
-//Supreme Admin
-$current_user->isSupreme = 0;
-$supremeAdmins = getSupremeAdmins(); 	//include/utils/CommonUtils.php
-if(in_array($current_user->user_name,$supremeAdmins)){
-	$current_user->isSupreme = 1;
-}
-$supremeAdmins = array();
+//ed edited 	//transferred in Users.php
+// $current_user->rolename = getRoleName($current_user->roleid);	//include/utils/UserInfoUtil.php
+// $current_user->area = explode(' |##| ',$current_user->column_fields['z_area']);
+// //Supreme Admin
+// $current_user->isSupreme = 0;
+// $supremeAdmins = getSupremeAdmins(); 	//include/utils/CommonUtils.php
+// if(in_array($current_user->user_name,$supremeAdmins)){
+	// $current_user->isSupreme = 1;
+// }
+// $supremeAdmins = array();
 //ed edited end
 
 // set user, theme and language cookies so that login screen defaults to last values

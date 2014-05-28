@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-23 15:49:36
+<?php /* Smarty version 2.6.18, created on 2014-05-28 18:20:06
          compiled from DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 34, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 216, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 227, false),array('modifier', 'count', 'DetailView.tpl', 248, false),array('modifier', 'in_array', 'DetailView.tpl', 320, false),array('modifier', 'replace', 'DetailView.tpl', 364, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 53, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 235, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 246, false),array('modifier', 'count', 'DetailView.tpl', 267, false),array('modifier', 'in_array', 'DetailView.tpl', 341, false),array('modifier', 'replace', 'DetailView.tpl', 385, false),)), $this); ?>
 <link rel="stylesheet" type="text/css" media="all" href="jscalendar/calendar-win2k-cold-1.css">
 <script type="text/javascript" src="jscalendar/calendar.js"></script>
 <script type="text/javascript" src="jscalendar/lang/calendar-en.js"></script>
@@ -18,6 +18,26 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purif
 <script type="text/javascript">
 	jQuery.noConflict();
 </script>
+
+<?php echo '
+<script type="text/javascript">
+if (typeof jQuery != \'undefined\') {
+    jQuery(document).ready(function(){
+		jQuery.fn.confirmationPrompt = function(){
+			var r = confirm("Are you sure you want to continue?");
+			if (r==true){
+				return true;
+			}
+			else{
+				return false;
+			}			
+		}
+    });
+} 
+</script>
+'; ?>
+
+
 
 <span id="crmspanid" style="display:none;position:absolute;"  onmouseover="show('crmspanid');">
 	<!-- <a class="link"  align="right" href="javascript:;"><?php echo $this->_tpl_vars['APP']['LBL_EDIT_BUTTON']; ?>
@@ -314,15 +334,7 @@ unset($_smarty_tpl_vars);
 ';submitFormForAction('DetailView','EditView');" type="button" name="Edit" value="&nbsp;<?php echo $this->_tpl_vars['APP']['LBL_EDIT_BUTTON_LABEL']; ?>
 &nbsp;">&nbsp;
 												<?php endif; ?>
-												<?php if ($this->_tpl_vars['EDIT_DUPLICATE'] == 'permitted' && $this->_tpl_vars['MODULE'] != 'Documents'): ?>
-													<input title="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_TITLE']; ?>
-" accessKey="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_KEY']; ?>
-" class="crmbutton small create" onclick="DetailView.return_module.value='<?php echo $this->_tpl_vars['MODULE']; ?>
-'; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='<?php echo $this->_tpl_vars['MODULE']; ?>
-'; submitFormForAction('DetailView','EditView');" type="button" name="Duplicate" value="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_LABEL']; ?>
-">&nbsp;
-												<?php endif; ?>
-												<?php if ($this->_tpl_vars['DELETE'] == 'permitted'): ?>
+																								<?php if ($this->_tpl_vars['DELETE'] == 'permitted'): ?>
 													<input title="<?php echo $this->_tpl_vars['APP']['LBL_DELETE_BUTTON_TITLE']; ?>
 " accessKey="<?php echo $this->_tpl_vars['APP']['LBL_DELETE_BUTTON_KEY']; ?>
 " class="crmbutton small delete" onclick="DetailView.return_module.value='<?php echo $this->_tpl_vars['MODULE']; ?>
@@ -957,27 +969,18 @@ unset($_smarty_tpl_vars);
 														<?php endif; ?>
 													<?php endif; ?>
 													
-																										<?php if ($this->_tpl_vars['MODULE'] == 'PersonnelAssignments'): ?>
-														<?php if ($this->_tpl_vars['ACTIVATE_PERSONNEL_LINK'] == 'YES'): ?>
-															<tr>
-																<td align="left" style="padding-left:10px;">
-																	<!-- <a class="webMnu" href="#" ><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
+																										<?php $_from = $this->_tpl_vars['MODULES_ACTIONS']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['act_keys'] => $this->_tpl_vars['act_val']):
+?>
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<!-- <a class="webMnu" href="#" ><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
 " hspace="5" align="absmiddle"  border="0"/></a> -->
-																	<a class="webMnu" href="#" onclick="return jQuery.fn.confirmationPrompt();">Activate Personnel</a>
-																</td>
-															</tr>
-														<?php elseif ($this->_tpl_vars['DEACTIVATE_PERSONNEL_LINK'] == 'YES'): ?>
-															<tr>
-																<td align="left" style="padding-left:10px;">
-																	<!-- <a class="webMnu" href="#" ><img src="<?php echo vtiger_imageurl('convert.gif', $this->_tpl_vars['THEME']); ?>
-" hspace="5" align="absmiddle"  border="0"/></a> -->
-																	<a class="webMnu" href="#" onclick="return jQuery.fn.confirmationPrompt();">Deactivate Personnel</a>
-																</td>
-															</tr>
-														<?php endif; ?>
-													<?php endif; ?>
-													
-													
+																<?php echo $this->_tpl_vars['act_val']['link']; ?>
+
+															</td>
+														</tr>													
+													<?php endforeach; endif; unset($_from); ?>
 													
 																										
 													
@@ -1176,15 +1179,7 @@ _indicator");
 ';submitFormForAction('DetailView','EditView');" type="submit" name="Edit" value="&nbsp;<?php echo $this->_tpl_vars['APP']['LBL_EDIT_BUTTON_LABEL']; ?>
 &nbsp;">&nbsp;
 												<?php endif; ?>
-												<?php if ($this->_tpl_vars['EDIT_DUPLICATE'] == 'permitted' && $this->_tpl_vars['MODULE'] != 'Documents'): ?>
-													<input title="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_TITLE']; ?>
-" accessKey="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_KEY']; ?>
-" class="crmbutton small create" onclick="DetailView.return_module.value='<?php echo $this->_tpl_vars['MODULE']; ?>
-'; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='<?php echo $this->_tpl_vars['MODULE']; ?>
-'; submitFormForAction('DetailView','EditView');" type="submit" name="Duplicate" value="<?php echo $this->_tpl_vars['APP']['LBL_DUPLICATE_BUTTON_LABEL']; ?>
-">&nbsp;
-												<?php endif; ?>
-												<?php if ($this->_tpl_vars['DELETE'] == 'permitted'): ?>
+																								<?php if ($this->_tpl_vars['DELETE'] == 'permitted'): ?>
 													<input title="<?php echo $this->_tpl_vars['APP']['LBL_DELETE_BUTTON_TITLE']; ?>
 " accessKey="<?php echo $this->_tpl_vars['APP']['LBL_DELETE_BUTTON_KEY']; ?>
 " class="crmbutton small delete" onclick="DetailView.return_module.value='<?php echo $this->_tpl_vars['MODULE']; ?>

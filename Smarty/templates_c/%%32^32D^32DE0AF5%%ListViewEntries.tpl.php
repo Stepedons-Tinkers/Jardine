@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-23 15:49:29
+<?php /* Smarty version 2.6.18, created on 2014-05-28 11:27:58
          compiled from ListViewEntries.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'ListViewEntries.tpl', 131, false),array('modifier', 'vtiger_imageurl', 'ListViewEntries.tpl', 141, false),array('modifier', 'count', 'ListViewEntries.tpl', 363, false),array('function', 'html_options', 'ListViewEntries.tpl', 408, false),)), $this); ?>

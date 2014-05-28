@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-23 09:42:57
+<?php /* Smarty version 2.6.18, created on 2014-05-28 16:59:24
          compiled from Home/Homestuff.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'Home/Homestuff.tpl', 23, false),array('modifier', 'getTranslatedString', 'Home/Homestuff.tpl', 36, false),array('modifier', 'count', 'Home/Homestuff.tpl', 53, false),array('modifier', 'array_reverse', 'Home/Homestuff.tpl', 54, false),)), $this); ?>
@@ -119,4 +119,4 @@ $this->_smarty_include(array('smarty_include_tpl_file' => "Home/FirstTimeLogin.t
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-<?php endif; ?>
+<?php endif; ?>

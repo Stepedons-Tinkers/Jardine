@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-23 09:42:57
+<?php /* Smarty version 2.6.18, created on 2014-05-28 16:59:22
          compiled from Home/HomeBlock.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'count', 'Home/HomeBlock.tpl', 67, false),array('modifier', 'vtiger_imageurl', 'Home/HomeBlock.tpl', 72, false),array('modifier', 'truncate', 'Home/HomeBlock.tpl', 127, false),array('modifier', 'is_array', 'Home/HomeBlock.tpl', 149, false),)), $this); ?>

@@ -3274,5 +3274,70 @@ function getSupremeAdmins(){
     }
 	return $data;
 }
+
+function getUserDetails_id($userIdarr){
+	global $adb;
+	$str = implode("','",$userIdarr);
+	$query = "SELECT *
+				FROM vtiger_users 
+				INNER JOIN vtiger_user2role ON vtiger_users.id = vtiger_user2role.userid
+				INNER JOIN vtiger_role ON vtiger_user2role.roleid = vtiger_role.roleid
+				WHERE vtiger_users.id IN ('{$str}')";
+	$result = $adb->pquery($query,array());
+	$noofrows = $adb->num_rows($result);
+	$data = array();
+	if($noofrows) {
+		while($resultrow = $adb->fetchByAssoc($result)) {
+			$data[$resultrow['id']] = $resultrow;
+		}
+    }
+	return $data;
+}
+
+function getSMRs(){
+	global $adb;
+	
+	$str_arr = array('SMR');
+	$str = implode("','",$str_arr);
+	$query = "SELECT *
+				FROM vtiger_users 
+				INNER JOIN vtiger_user2role ON vtiger_users.id = vtiger_user2role.userid
+				INNER JOIN vtiger_role ON vtiger_user2role.roleid = vtiger_role.roleid
+				WHERE rolename IN ('{$str}')
+				AND vtiger_users.status = 'Active'";
+	$result = $adb->pquery($query,array());
+	$noofrows = $adb->num_rows($result);
+	$data = array();
+	if($noofrows) {
+		while($resultrow = $adb->fetchByAssoc($result)) {
+			$data[$resultrow['id']] = $resultrow;
+		}
+    }
+	return $data;
+}
+
+function getSMRs_area($area_arr){
+	global $adb;
+		
+	$str_arr = array('SMR');
+	$str = implode("','",$str_arr);	
+	$area_str = implode("','",$area_arr);
+	$query = "SELECT * 
+				FROM vtiger_users 
+				INNER JOIN vtiger_user2role ON vtiger_users.id = vtiger_user2role.userid
+				INNER JOIN vtiger_role ON vtiger_user2role.roleid = vtiger_role.roleid
+				WHERE rolename IN ('{$str}')
+				AND vtiger_users.status = 'Active'
+				AND vtiger_users.z_area IN ('{$area_str}') ";
+	$result = $adb->pquery($query,array());
+	$noofrows = $adb->num_rows($result);
+	$data = array();
+	if($noofrows) {
+		while($resultrow = $adb->fetchByAssoc($result)) {
+			$data[$resultrow['id']] = $resultrow;
+		}
+    }
+	return $data;
+}
 //ed edited end
 ?>

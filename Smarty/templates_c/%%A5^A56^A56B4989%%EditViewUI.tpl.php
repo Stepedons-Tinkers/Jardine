@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-23 09:40:43
+<?php /* Smarty version 2.6.18, created on 2014-05-28 14:59:01
          compiled from EditViewUI.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'EditViewUI.tpl', 34, false),array('modifier', 'getTranslatedString', 'EditViewUI.tpl', 66, false),array('modifier', 'getTranslatedCurrencyString', 'EditViewUI.tpl', 415, false),array('modifier', 'substr', 'EditViewUI.tpl', 472, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'EditViewUI.tpl', 34, false),array('modifier', 'getTranslatedString', 'EditViewUI.tpl', 66, false),array('modifier', 'getTranslatedCurrencyString', 'EditViewUI.tpl', 420, false),array('modifier', 'substr', 'EditViewUI.tpl', 477, false),)), $this); ?>
 		<?php $this->assign('uitype', ($this->_tpl_vars['maindata'][0][0])); ?>
 		<?php $this->assign('fldlabel', ($this->_tpl_vars['maindata'][1][0])); ?>
 		<?php $this->assign('fldlabel_sel', ($this->_tpl_vars['maindata'][1][1])); ?>
@@ -320,8 +320,10 @@ _mass_edit_check" class="small" ><?php endif; ?>
 			</td>
 			<td <?php echo $this->_tpl_vars['hidingStatField']; ?>
  width="30%" align=left class="dvtCellInfo">
-			   <select MULTIPLE name="<?php echo $this->_tpl_vars['fldname']; ?>
-[]" size="4" style="width:160px;" tabindex="<?php echo $this->_tpl_vars['vt_tab']; ?>
+			   <select MULTIPLE id="<?php echo $this->_tpl_vars['fldname']; ?>
+" name="<?php echo $this->_tpl_vars['fldname']; ?>
+[]" size="4" style="width:160px;" <?php echo $this->_tpl_vars['forcedisableStat']; ?>
+ tabindex="<?php echo $this->_tpl_vars['vt_tab']; ?>
 " class="small">
 				<?php $_from = $this->_tpl_vars['fldvalue']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['arr']):
@@ -364,37 +366,34 @@ _mass_edit_check" class="small" ><?php endif; ?>
 					<?php endforeach; endif; unset($_from); ?>
 				<?php endforeach; endif; unset($_from); ?>
 
-				<?php if ($this->_tpl_vars['check'] == 0): ?>
-					<?php $this->assign('select_user', 'checked'); ?>
+									<?php $this->assign('select_user', 'checked'); ?>
 					<?php $this->assign('style_user', 'display:block'); ?>
 					<?php $this->assign('style_group', 'display:none'); ?>
-				<?php else: ?>
-					<?php $this->assign('select_group', 'checked'); ?>
-					<?php $this->assign('style_user', 'display:none'); ?>
-					<?php $this->assign('style_group', 'display:block'); ?>
-				<?php endif; ?>
-
-				<input <?php echo $this->_tpl_vars['forcedisableStat']; ?>
+				
+								<div style="display:none">
+					<input <?php echo $this->_tpl_vars['forcedisableStat']; ?>
  <?php echo $this->_tpl_vars['hidingIMG']; ?>
  type="radio" tabindex="<?php echo $this->_tpl_vars['vt_tab']; ?>
 " name="assigntype" <?php echo $this->_tpl_vars['select_user']; ?>
  value="U" onclick="toggleAssignType(this.value)" >&nbsp;<span <?php echo $this->_tpl_vars['hidingIMG']; ?>
 ><?php echo $this->_tpl_vars['APP']['LBL_USER']; ?>
 </span>
-
-				<?php if ($this->_tpl_vars['secondvalue'] != ''): ?>
-					<input <?php echo $this->_tpl_vars['forcedisableStat']; ?>
+					
+					<?php if ($this->_tpl_vars['secondvalue'] != ''): ?>
+						<input <?php echo $this->_tpl_vars['forcedisableStat']; ?>
  <?php echo $this->_tpl_vars['hidingIMG']; ?>
  type="radio" name="assigntype" <?php echo $this->_tpl_vars['select_group']; ?>
  value="T" onclick="toggleAssignType(this.value)">&nbsp;<span <?php echo $this->_tpl_vars['hidingIMG']; ?>
 ><?php echo $this->_tpl_vars['APP']['LBL_GROUP']; ?>
 </span>
-				<?php endif; ?>
-
+					<?php endif; ?>
+				</div>
+								
 				<span id="assign_user" style="<?php echo $this->_tpl_vars['style_user']; ?>
 ">
 					<select <?php echo $this->_tpl_vars['forcedisableStat']; ?>
- name="<?php echo $this->_tpl_vars['fldname']; ?>
+ id="<?php echo $this->_tpl_vars['fldname']; ?>
+" name="<?php echo $this->_tpl_vars['fldname']; ?>
 " class="small">
 						<?php $_from = $this->_tpl_vars['fldvalue']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key_one'] => $this->_tpl_vars['arr']):
@@ -2207,4 +2206,4 @@ _mass_edit_check" class="small" ><?php endif; ?>
 					})
 				</script>
 			</td>
-		<?php endif; ?>
+		<?php endif; ?>

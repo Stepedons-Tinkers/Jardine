@@ -24,6 +24,25 @@
 	jQuery.noConflict();
 </script>
 
+{literal}
+<script type="text/javascript">
+if (typeof jQuery != 'undefined') {
+    jQuery(document).ready(function(){
+		jQuery.fn.confirmationPrompt = function(){
+			var r = confirm("Are you sure you want to continue?");
+			if (r==true){
+				return true;
+			}
+			else{
+				return false;
+			}			
+		}
+    });
+} 
+</script>
+{/literal}
+
+
 <span id="crmspanid" style="display:none;position:absolute;"  onmouseover="show('crmspanid');">
 	<!-- <a class="link"  align="right" href="javascript:;">{$APP.LBL_EDIT_BUTTON}</a> -->
 </span>
@@ -267,9 +286,11 @@ function sendfile_email()
 												{if $EDIT_DUPLICATE eq 'permitted'}
 													<input title="{$APP.LBL_EDIT_BUTTON_TITLE}" accessKey="{$APP.LBL_EDIT_BUTTON_KEY}" class="crmbutton small edit" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.return_id.value='{$ID}';DetailView.module.value='{$MODULE}';submitFormForAction('DetailView','EditView');" type="button" name="Edit" value="&nbsp;{$APP.LBL_EDIT_BUTTON_LABEL}&nbsp;">&nbsp;
 												{/if}
+												{*
 												{if $EDIT_DUPLICATE eq 'permitted' && $MODULE neq 'Documents'}
 													<input title="{$APP.LBL_DUPLICATE_BUTTON_TITLE}" accessKey="{$APP.LBL_DUPLICATE_BUTTON_KEY}" class="crmbutton small create" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='{$MODULE}'; submitFormForAction('DetailView','EditView');" type="button" name="Duplicate" value="{$APP.LBL_DUPLICATE_BUTTON_LABEL}">&nbsp;
 												{/if}
+												*}
 												{if $DELETE eq 'permitted'}
 													<input title="{$APP.LBL_DELETE_BUTTON_TITLE}" accessKey="{$APP.LBL_DELETE_BUTTON_KEY}" class="crmbutton small delete" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='index'; {if $MODULE eq 'Accounts'} var confirmMsg = '{$APP.NTC_ACCOUNT_DELETE_CONFIRMATION}' {else} var confirmMsg = '{$APP.NTC_DELETE_CONFIRMATION}' {/if}; submitFormForActionWithConfirmation('DetailView', 'Delete', confirmMsg);" type="button" name="Delete" value="{$APP.LBL_DELETE_BUTTON_LABEL}">&nbsp;
 												{/if}
@@ -691,25 +712,14 @@ function sendfile_email()
 													{/if}
 													
 													{* NEXTIX CUSTOM MODULES *}
-													{if $MODULE eq 'PersonnelAssignments'}
-														{if $ACTIVATE_PERSONNEL_LINK eq 'YES'}
-															<tr>
-																<td align="left" style="padding-left:10px;">
-																	<!-- <a class="webMnu" href="#" ><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a> -->
-																	<a class="webMnu" href="#" onclick="return jQuery.fn.confirmationPrompt();">Activate Personnel</a>
-																</td>
-															</tr>
-														{elseif $DEACTIVATE_PERSONNEL_LINK eq 'YES'}
-															<tr>
-																<td align="left" style="padding-left:10px;">
-																	<!-- <a class="webMnu" href="#" ><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a> -->
-																	<a class="webMnu" href="#" onclick="return jQuery.fn.confirmationPrompt();">Deactivate Personnel</a>
-																</td>
-															</tr>
-														{/if}
-													{/if}
-													
-													
+													{foreach key=act_keys item=act_val from=$MODULES_ACTIONS}
+														<tr>
+															<td align="left" style="padding-left:10px;">
+																<!-- <a class="webMnu" href="#" ><img src="{'convert.gif'|@vtiger_imageurl:$THEME}" hspace="5" align="absmiddle"  border="0"/></a> -->
+																{$act_val.link}
+															</td>
+														</tr>													
+													{/foreach}
 													
 													{* NEXTIX CUSTOM MODULES END *}
 													
@@ -883,9 +893,11 @@ function sendfile_email()
 												{if $EDIT_DUPLICATE eq 'permitted'}
 													<input title="{$APP.LBL_EDIT_BUTTON_TITLE}" accessKey="{$APP.LBL_EDIT_BUTTON_KEY}" class="crmbutton small edit" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.return_id.value='{$ID}';DetailView.module.value='{$MODULE}';submitFormForAction('DetailView','EditView');" type="submit" name="Edit" value="&nbsp;{$APP.LBL_EDIT_BUTTON_LABEL}&nbsp;">&nbsp;
 												{/if}
+												{*
 												{if $EDIT_DUPLICATE eq 'permitted' && $MODULE neq 'Documents'}
 													<input title="{$APP.LBL_DUPLICATE_BUTTON_TITLE}" accessKey="{$APP.LBL_DUPLICATE_BUTTON_KEY}" class="crmbutton small create" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='DetailView'; DetailView.isDuplicate.value='true';DetailView.module.value='{$MODULE}'; submitFormForAction('DetailView','EditView');" type="submit" name="Duplicate" value="{$APP.LBL_DUPLICATE_BUTTON_LABEL}">&nbsp;
 												{/if}
+												*}
 												{if $DELETE eq 'permitted'}
 													<input title="{$APP.LBL_DELETE_BUTTON_TITLE}" accessKey="{$APP.LBL_DELETE_BUTTON_KEY}" class="crmbutton small delete" onclick="DetailView.return_module.value='{$MODULE}'; DetailView.return_action.value='index'; {if $MODULE eq 'Accounts'} var confirmMsg = '{$APP.NTC_ACCOUNT_DELETE_CONFIRMATION}' {else} var confirmMsg = '{$APP.NTC_DELETE_CONFIRMATION}' {/if}; submitFormForActionWithConfirmation('DetailView', 'Delete', confirmMsg);" type="button" name="Delete" value="{$APP.LBL_DELETE_BUTTON_LABEL}">&nbsp;
 												{/if}

@@ -129,7 +129,42 @@ class EditViewClasses {
 			}	
 		}
 		return $blocks;
+	}	
+	
+	public function leavingSetOfPicklistValue_assignedto($blocks,$keyArray,$manipulate_picklist,$picklist_array){
+		//ed edited, for removing picklist values
+		foreach($manipulate_picklist as $key => $value){
+			if(array_key_exists($value, $keyArray)){
+				$key1 = $keyArray[$value][0];
+				$key2 = $keyArray[$value][1];
+				$key3 = $keyArray[$value][2];
+				$temp = array();
+				$selected = false;
+				foreach($blocks[$key1][$key2][$key3][3][0] as $picklistkey => $picklist){
+					foreach($picklist as $namekey => $status){
+						if(in_array($namekey,$picklist_array[$value])){
+							$temp[$picklistkey] = $picklist;
+							if($status == 'selected')
+								$selected = true;
+						}
+					}
+				}
+				if(!$selected){
+					foreach($temp as $picklistkey => $picklist){
+						foreach($picklist as $namekey => $status){
+							$temp[$picklistkey][$namekey] = 'selected';
+							break;
+						}
+						break;
+					}
+				}
+				$blocks[$key1][$key2][$key3][3][0] = $temp;
+			}	
+		}
+		return $blocks;
 	}
+	
+	
 	
 	public function addAndLeaveDashDashPicklistValue($blocks,$keyArray,$makeDashOnlyPicklist){
 		//ed edited, for removing picklist values

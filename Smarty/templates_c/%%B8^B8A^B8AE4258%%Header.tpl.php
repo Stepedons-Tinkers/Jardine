@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-23 09:40:14
+<?php /* Smarty version 2.6.18, created on 2014-05-28 11:22:04
          compiled from Header.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'Header.tpl', 15, false),array('modifier', 'vtiger_imageurl', 'Header.tpl', 85, false),array('modifier', 'escape', 'Header.tpl', 176, false),array('modifier', 'vtlib_purify', 'Header.tpl', 372, false),)), $this); ?>

@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-23 20:50:56
+<?php /* Smarty version 2.6.18, created on 2014-05-28 14:12:26
          compiled from CreateView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'CreateView.tpl', 44, false),array('modifier', 'vtiger_imageurl', 'CreateView.tpl', 99, false),array('modifier', 'getTranslatedString', 'CreateView.tpl', 111, false),array('modifier', 'cat', 'CreateView.tpl', 117, false),array('modifier', 'in_array', 'CreateView.tpl', 192, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'CreateView.tpl', 45, false),array('modifier', 'vtiger_imageurl', 'CreateView.tpl', 100, false),array('modifier', 'getTranslatedString', 'CreateView.tpl', 112, false),array('modifier', 'cat', 'CreateView.tpl', 118, false),array('modifier', 'in_array', 'CreateView.tpl', 193, false),)), $this); ?>
 
 
 <link rel="stylesheet" type="text/css" media="all" href="jscalendar/calendar-win2k-cold-1.css">
@@ -11,6 +11,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purif
 <script type="text/javascript" src="jscalendar/calendar-setup.js"></script>
 <script type="text/javascript" src="include/js/FieldDependencies.js"></script>
 <script type="text/javascript" src="modules/com_vtiger_workflow/resources/jquery-1.2.6.js"></script>
+<script type="text/javascript" src="include/js/nextixEditViewjs.js"></script>
 <script type="text/javascript" src="modules/<?php echo $this->_tpl_vars['MODULE']; ?>
 /<?php echo $this->_tpl_vars['MODULE']; ?>
 .js"></script>

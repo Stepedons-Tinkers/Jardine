@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-23 09:40:14
+<?php /* Smarty version 2.6.18, created on 2014-05-28 16:02:05
          compiled from UserListViewContents.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'math', 'UserListViewContents.tpl', 56, false),array('modifier', 'vtiger_imageurl', 'UserListViewContents.tpl', 57, false),array('modifier', 'strip_tags', 'UserListViewContents.tpl', 75, false),array('modifier', 'trim', 'UserListViewContents.tpl', 75, false),)), $this); ?>
@@ -141,3 +141,4 @@ if ($this->_foreach['userlist']['total'] > 0):
 	<tr><td class="small" nowrap align=right><a href="#top"><?php echo $this->_tpl_vars['MOD']['LBL_SCROLL']; ?>
 </a></td></tr>
 </table>
+

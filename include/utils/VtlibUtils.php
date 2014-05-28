@@ -135,7 +135,7 @@ function vtlib_moduleAlwaysActive() {
 	$modules = Array (
 		'Administration', 'CustomView', 'Settings', 'Users', 'Migration',
 		'Utilities', 'uploads', 'Import', 'System', 'com_vtiger_workflow', 'PickList',
-		'Ondemand'
+		'Ondemand','NextIXfunctions'
 	);
 	return $modules;
 }
