@@ -88,7 +88,7 @@ if($singlepane_view == 'true') {
 
 if(isPermitted($currentModule, 'EditView', $record) == 'yes')
 	$smarty->assign('EDIT_DUPLICATE', 'permitted');
-if(isPermitted($currentModule, 'Delete', $record) == 'yes')
+if(isPermitted($currentModule, 'Delete', $record) == 'yes' && $focus->checkForDependencies($module, $record))
 	$smarty->assign('DELETE', 'permitted');
 
 $smarty->assign('BLOCKS', getBlocks($currentModule,'detail_view','',$focus->column_fields));

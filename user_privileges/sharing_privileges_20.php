@@ -106,7 +106,11 @@ $ModCreator_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
 
 $ModCreator_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
 
+<<<<<<< HEAD
 $XSMR_share_read_permission=array('ROLE'=>array(),'GROUP'=>array());
+=======
+$XSMR_share_read_permission=array('ROLE'=>array(),'GROUP'=>array(30=>array(0=>16,1=>20,2=>24,3=>27,),));
+>>>>>>> master
 
 $XSMR_share_write_permission=array('ROLE'=>array(),'GROUP'=>array());
 

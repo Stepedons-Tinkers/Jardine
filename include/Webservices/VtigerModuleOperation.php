@@ -25,6 +25,7 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		return WebserviceEntityOperation::$metaCache[$this->webserviceObject->getEntityName()][$this->user->id];
 	}
 	
+	/* Removed this process
 	public function create($elementType,$element){
 		$crmObject = new VtigerCRMObject($elementType, false);
 		
@@ -53,6 +54,41 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		}
 		
 		return DataTransform::filterAndSanitize($crmObject->getFields(),$this->meta);
+	}
+	*/
+	public function create($elementType,$element){
+		
+		$mobile_id = $element['mobile_id'];
+		unset($element['mobile_id']);
+		$crmObject = new VtigerCRMObject($elementType, false);
+		$error = $crmObject->create($element);
+		if(!$error){
+			throw new WebServiceException(WebServiceErrorCode::$DATABASEQUERYERROR,
+					vtws_getWebserviceTranslatedString('LBL_'.
+							WebServiceErrorCode::$DATABASEQUERYERROR));
+		}
+		
+		$id = $crmObject->getObjectId();
+
+			
+		// Bulk Save Mode
+		if(CRMEntity::isBulkSaveMode()) {		
+			// Avoiding complete read, as during bulk save mode, $result['id'] is enough
+			return array('id' => vtws_getId($this->meta->getEntityId(), $id) );
+		}
+		
+		$error = $crmObject->read($id);
+		if(!$error){
+			throw new WebServiceException(WebServiceErrorCode::$DATABASEQUERYERROR,
+				vtws_getWebserviceTranslatedString('LBL_'.
+						WebServiceErrorCode::$DATABASEQUERYERROR));
+		}
+		$column_fields = $crmObject->getFields();
+		return array("id"=>$column_fields['record_id'],
+					 "mobile_id"=>$mobile_id,
+					 "modifiedtime"=>$column_fields['ModifiedTime']
+					);
+		//return DataTransform::filterAndSanitize($crmObject->getFields(),$this->meta);
 	}
 	
 	public function retrieve($id){

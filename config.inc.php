@@ -84,6 +84,7 @@ $site_URL = 'http://localhost/Jardine';
 
 $root_directory = 'C:/wamp/www/Jardine/';
 
+
 // cache direcory path
 $cache_dir = 'cache/';
 

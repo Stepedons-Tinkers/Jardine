@@ -1187,6 +1187,35 @@ class CRMEntity {
 			}
 		}
 	}
+	
+	function checkForDependencies($module, $id) {
+		global $log;
+	
+		$deletable = true;
+		
+		$fieldRes = $this->db->pquery('SELECT tabid, tablename, columnname FROM vtiger_field WHERE fieldid IN (
+			SELECT fieldid FROM vtiger_fieldmodulerel WHERE relmodule=?)', array($module));
+		$numOfFields = $this->db->num_rows($fieldRes);
+		for ($i = 0; $i < $numOfFields; $i++) {
+			$tabId = $this->db->query_result($fieldRes, $i, 'tabid');
+			$tableName = $this->db->query_result($fieldRes, $i, 'tablename');
+			$columnName = $this->db->query_result($fieldRes, $i, 'columnname');
+
+			$relatedModule = vtlib_getModuleNameById($tabId);
+			$focusObj = CRMEntity::getInstance($relatedModule);
+
+			//Backup Field Relations for the deleted entity
+			$relQuery = "SELECT $focusObj->table_index FROM $tableName WHERE $columnName=?";
+			$relResult = $this->db->pquery($relQuery, array($id));
+			$numOfRelRecords = $this->db->num_rows($relResult);
+
+			if ($numOfRelRecords > 0) {
+				$deletable = false;
+				break;
+			}
+		}
+		return $deletable;
+	}
 
 	/** Function to unlink an entity with given Id from another entity */
 	function unlinkRelationship($id, $return_module, $return_id) {
