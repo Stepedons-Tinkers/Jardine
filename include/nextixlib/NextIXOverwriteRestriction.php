@@ -123,10 +123,10 @@ class NextIXOverwriteRestriction		//used in util/UserInfoUtil.php
 		if($restrictionType == "HierarchyPeer_Area"){
 			if($this->record_id != ''){
 				$current_user_parent_role_seq_arr = explode('::',$this->reccurrent_user_parent_role_seq);
-				if(in_array($this->current_user->roleid,$current_user_parent_role_seq_arr))
-					$others_permission_id = "yes";
-				else
+				if(!in_array($this->current_user->roleid,$current_user_parent_role_seq_arr))
 					$others_permission_id = "no";
+				// else
+					// $others_permission_id = "yes";
 			}
 		}		
 		else if(in_array($restrictionType, array("Hierarchy_Area","Hierarchy"))){
