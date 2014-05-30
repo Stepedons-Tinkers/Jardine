@@ -807,7 +807,7 @@ function isPermitted($module,$actionname,$record_id='')
 		return $permissionFlag;
 	$others_permission_id = $nextIXOverwriteRestriction->manipulateOtherPermission($others_permission_id);
 	
-	if($others_permission_id == 'no' || $others_permission_id == 'yes')
+	if($others_permission_id == 'no')
 		return $others_permission_id;
 	//ed edited end		
 	
