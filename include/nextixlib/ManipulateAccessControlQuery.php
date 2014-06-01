@@ -41,8 +41,13 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 				$restrictionType = "HierarchyPeer_Area_field";
 			}
 		}
+		else if(in_array($this->module, array('XCCPerson'))){
+			if(in_array($this->rolename,$userrole_1)){
+				$restrictionType = "Customer_field";
+			}
+		}
 		else if(in_array($this->module, array('XSMRTimeCard','XWorkplan','XWorkplanEntry','XActivity','XJDIMerchCheck',
-											'XJDIProductStockCheck','XCompProdStockCheck','XMarketingMat','XProjectRequirement'))){
+											'XJDIProductStockCheck','XCompProdStockCheck','XMarketingIntel','XProjectRequirement'))){
 											
 			if(in_array($this->rolename,array('Regional / Area Sales Manager'))){
 				$restrictionType = "HierarchyPeer_Area";
@@ -70,6 +75,9 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 		}		
 		else if($restrictionType == "Hierarchy"){
 			$query .= $this->setHierarchy();	
+		}		
+		else if($restrictionType == "Customer_field"){
+			$query .= $this->setCustomer_field();	
 		}
 		return $query;
 	}
@@ -113,7 +121,7 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 	}
 	
 	public function setArea(){
-		$tableName_a = 'vt_tmp_u_a' . $this->userid;
+		// $tableName_a = 'vt_tmp_u_a' . $this->userid;
 		
 		$query_temp = "SELECT id,z_area FROM vtiger_users
 						WHERE status = 'Active'
@@ -145,6 +153,7 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 	}
 	
 	public function setArea_field(){
+		$query = '';
 		if ($this->module == 'XCustomers' && !empty($this->area)) {
 			$areas = array();
 			foreach($this->area as $value)
@@ -154,6 +163,48 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 			"vtiger_xcustomers.z_area ";
 		}
 		return $query;
+	}
+	
+	public function setCustomer_field(){
+		$query = '';
+		if ($this->module == 'XCCPerson' && !empty($this->area)) {
+			$tableName_c = 'vt_tmp_u_c' . $this->userid;
+			$areas = array();
+			foreach($this->area as $value)
+				$areas[] ="SELECT '{$value}' AS area";
+			$areas_str = implode(' UNION ', $areas);
+				
+			$query_temp = "(SELECT xcustomersid 
+								FROM vtiger_xcustomers
+								INNER JOIN ($areas_str) user_area ON user_area.area = vtiger_xcustomers.z_area)
+								";
+			$query_temp = "create temporary table IF NOT EXISTS $tableName_c(id int(11) primary key) ignore " .
+					$query_temp;
+			$db = PearDatabase::getInstance();
+			$result = $db->pquery($query_temp, array());
+			
+			if (is_object($result)) {
+				$query = " INNER JOIN $tableName_c $tableName_c ON $tableName_c.xcustomersid = " .
+				"vtiger_xccperson.z_cuc_customer ";
+			}		
+		}
+		return $query;
+		
+		
+		//use this if slow ang taas na query, but changing $mystring
+		// $query = '';
+		// if ($this->module == 'XCCPerson' && !empty($this->area)) {
+			// if(strpos($mystring, 'vtiger_xcustomers') === false){
+				// $query = " INNER JOIN vtiger_xcustomers ON vtiger_xcustomers.xcustomersid = vtiger_xccperson.x_cuc_customer ";
+			// }
+			// $areas = array();
+			// foreach($this->area as $value)
+				// $areas[] ="SELECT '{$value}' AS area";
+			// $areas_str = implode(' UNION ', $areas);
+			// $query = " INNER JOIN ($areas_str) user_area ON user_area.area = " .
+			// "vtiger_xcustomers.z_area ";
+		// }
+		// return $query;
 	}
 	
 }
