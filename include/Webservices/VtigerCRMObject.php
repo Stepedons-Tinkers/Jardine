@@ -110,6 +110,29 @@ class VtigerCRMObject{
 		return !$error;
 	}
 	
+	
+	public function reads($elementType,$ids){
+	
+		global $adb;
+		$this->details = array();
+		$error = false;
+		$adb->startTransaction();
+		foreach($ids as $fieldname => $id){
+			if(!empty($id)){
+				$this->instance->retrieve_entity_info($id,$elementType);
+				$this->details[$id] = $this->instance->column_fields;
+			}
+		}
+		$error = $adb->hasFailedTransaction();
+		$adb->completeTransaction();		
+		return !$error;
+		
+	}
+	
+	public function getDetails(){
+		return $this->details;
+	}
+	
 	public function create($element){
 		global $adb;
 		

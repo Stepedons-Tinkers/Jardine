@@ -36,8 +36,8 @@ function vtws_create($elementType, $elements, $user) {
 		throw new WebServiceException(WebServiceErrorCode::$ACCESSDENIED, "Permission to write is denied");
 	}
 
-	$referenceFields = $meta->getReferenceFieldDetails();
-	$ownerFields = $meta->getOwnerFields();
+	//$referenceFields = $meta->getReferenceFieldDetails();
+	//$ownerFields = $meta->getOwnerFields();
 	
 	/* remove this so that process would be the same web Gideon Rosales
 	foreach($elements as $key => $element){
