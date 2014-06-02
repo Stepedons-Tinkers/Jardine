@@ -7,7 +7,7 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-global $app_strings, $mod_strings, $current_language, $currentModule, $theme;
+global $app_strings, $mod_strings, $current_language, $currentModule, $theme, $current_user;
 require_once('Smarty_setup.php');
 require_once('include/nextixlib/EditViewClasses.php');
 
@@ -43,6 +43,16 @@ $disp_view = getView($focus->mode);
 	// $basblocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields, 'BAS');
 	// $advblocks = getBlocks($currentModule,$disp_view,$mode,$focus->column_fields,'ADV');
 
+	if(in_array($current_user->rolename, array('Regional / Area Sales Manager','SMR'))){
+		$keyArray = $editViewClasses->findKeyInBlocks($blocks);
+		$picklists['z_area'] = $current_user->area;
+		array_unshift($picklists['z_area'], '- Select -');
+		$blocks = $editViewClasses->leavingSelectedPicklistValue_wOtherValues($blocks,$keyArray,array('z_area'),$picklists);
+
+		$focus->column_fields['z_area'] = $current_user->z_area;
+	}
+		
+	
 	$smarty->assign('BLOCKS', $blocks);
 	$smarty->assign('BASBLOCKS', $blocks);
 	// $smarty->assign('ADVBLOCKS', $advblocks);

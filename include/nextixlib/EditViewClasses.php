@@ -90,26 +90,25 @@ class EditViewClasses {
 		return $blocks;
 		//ed edited end
 	}
-	public function leavingSelectedPicklistValueSpecial($blocks,$keyArray,$only_selected_value_picklist,$staffs){
+	
+	public function leavingSelectedPicklistValue_wOtherValues($blocks,$keyArray,$manipulate_picklist,$picklist_array){
 		//ed edited, for removing picklist values
-		foreach($only_selected_value_picklist as $key => $value){
+		foreach($manipulate_picklist as $key => $value){
 			if(array_key_exists($value, $keyArray)){
 				$key1 = $keyArray[$value][0];
 				$key2 = $keyArray[$value][1];
 				$key3 = $keyArray[$value][2];
 				$temp = array();
+				$selected = false;
 				foreach($blocks[$key1][$key2][$key3][3][0] as $picklistkey => $picklist){
-					foreach($picklist as $namekey => $status){
-						if($status == 'selected' || in_array($picklistkey,$staffs)){
-							$temp[$picklistkey] = $picklist;
-						}
+					if($picklist[2] == 'selected' || in_array($picklist[0],$picklist_array[$value])){
+						$temp[$picklistkey] = $picklist;
 					}
-				}	
+				}
 				$blocks[$key1][$key2][$key3][3][0] = $temp;
 			}	
-		}		
+		}
 		return $blocks;
-		//ed edited end
 	}
 	
 	//added by Kirstin, to leave values of picklist in a chosen array
