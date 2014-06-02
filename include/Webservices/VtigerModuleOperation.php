@@ -91,6 +91,7 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		//return DataTransform::filterAndSanitize($crmObject->getFields(),$this->meta);
 	}
 	
+	/*
 	public function retrieve($id){
 		
 		$ids = vtws_getIdComponents($id);
@@ -106,6 +107,26 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		
 		return DataTransform::filterAndSanitize($crmObject->getFields(),$this->meta);
 	}
+	*/
+	public function retrieve($ids){
+		
+		$crmObject = new VtigerCRMObject($this->tabId, true);
+		$crmObject->reads(getTabname($this->tabId),$ids);
+		
+		/*
+		$error = $crmObject->read($elemid);
+		if(!$error){
+			throw new WebServiceException(WebServiceErrorCode::$DATABASEQUERYERROR,
+					vtws_getWebserviceTranslatedString('LBL_'.
+							WebServiceErrorCode::$DATABASEQUERYERROR));
+		}
+		
+		return DataTransform::filterAndSanitize($crmObject->getFields(),$this->meta);
+		*/
+		
+		return $crmObject->getDetails();
+	}
+	
 	
 	public function update($element){
 		$ids = vtws_getIdComponents($element["id"]);
