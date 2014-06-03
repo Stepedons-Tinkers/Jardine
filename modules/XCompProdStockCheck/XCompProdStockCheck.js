@@ -6,3 +6,16 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
+if (typeof jQuery != 'undefined') {
+    jQuery(document).ready(function(){
+		jQuery.fn.clearUIType10Dependent = function(){
+			var a = jQuery(this);
+			a.unbind().change(function(e){
+				//clear Customer, Workplan
+				jQuery("#z_cps_activity").val('');
+				jQuery("#z_cps_activity_display").val('');
+			});
+		}
+		jQuery("#assigned_user_id").clearUIType10Dependent();
+    });
+} 

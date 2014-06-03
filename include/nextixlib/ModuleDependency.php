@@ -12,7 +12,8 @@ class ModuleDependency	//modules/../EditView.php
 						'AssignedTo'=>'assigned_user_id',
 						'XWorkplan'=>'z_ac_workplan',
 						'XWorkplanEntry'=>'z_ac_workplanentry',
-						'XCustomers'=>'z_ac_customer'
+						'XCustomers'=>'z_ac_customer',
+						'XActivityType'=>'z_ac_activitytype'
 					),
 					'XJDIMerchCheck'=>array(
 						'AssignedTo'=>'assigned_user_id',
