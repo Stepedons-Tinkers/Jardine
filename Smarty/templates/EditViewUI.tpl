@@ -26,8 +26,8 @@ if (typeof jQuery != 'undefined') {
 					});	
 				}
 			}
-			return window.open(path+datastring,"test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");
-			//return window.open(path+datastring,"test","width=640,height=602,top=150,left=200");
+			//return window.open(path+datastring,"test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");
+			return window.open(path+datastring,"test","width=640,height=602,resizable=1,scrollbars=1,top=150,left=200");
 		}
     });
 } 
