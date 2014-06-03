@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-03 12:11:03
+<?php /* Smarty version 2.6.18, created on 2014-06-03 20:45:57
          compiled from EditViewUI.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'EditViewUI.tpl', 60, false),array('modifier', 'getTranslatedString', 'EditViewUI.tpl', 92, false),array('modifier', 'getTranslatedCurrencyString', 'EditViewUI.tpl', 447, false),array('modifier', 'substr', 'EditViewUI.tpl', 504, false),)), $this); ?>
@@ -19,8 +19,8 @@ if (typeof jQuery != \'undefined\') {
 					});	
 				}
 			}
-			return window.open(path+datastring,"test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");
-			//return window.open(path+datastring,"test","width=640,height=602,top=150,left=200");
+			//return window.open(path+datastring,"test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");
+			return window.open(path+datastring,"test","width=640,height=602,resizable=1,scrollbars=1,top=150,left=200");
 		}
     });
 } 
