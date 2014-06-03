@@ -9,6 +9,32 @@
   *
  ********************************************************************************/
 -->*}
+<!--ed edited-->
+{literal}
+<script type="text/javascript">
+if (typeof jQuery != 'undefined') {
+    jQuery(document).ready(function(){
+		jQuery.fn.openNewWindow = function(path){
+			var datastring = '';
+			if(jQuery('#uitype10_fields').length > 0){
+				var uitype10_fields = jQuery('#uitype10_fields').html();
+				if(uitype10_fields.length > 0){
+					var myData = JSON.parse(uitype10_fields);
+					jQuery.each(myData, function(e,a) {
+						fieldvalue = jQuery('#'+a).val();
+						datastring += '&'+e+'='+fieldvalue;
+					});	
+				}
+			}
+			return window.open(path+datastring,"test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");
+			//return window.open(path+datastring,"test","width=640,height=602,top=150,left=200");
+		}
+    });
+} 
+</script>
+{/literal}
+<!--ed edited end-->
+
 		{assign var="uitype" value="$maindata[0][0]"}
 		{assign var="fldlabel" value="$maindata[1][0]"}
 		{assign var="fldlabel_sel" value="$maindata[1][1]"}
@@ -79,8 +105,9 @@
 				<img {$hidingIMG} src="{'select.gif'|@vtiger_imageurl:$THEME}" tabindex="{$vt_tab}"
 alt="Select" title="Select" LANGUAGE=javascript  onclick='return window.open("index.php?module="+ document.QcEditView.{$fldname}_type.value +"&action=Popup&html=Popup_picker&form=vtlibPopupView&forfield={$fldname}&srcmodule={$MODULE}&forrecord={$ID}","test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");' align="absmiddle" style='cursor:hand;cursor:pointer'>&nbsp;
 				{else}
+				<div id='uitype10_fields' style='display:none'>{$uitype10_fields}</div>
 				<img {$hidingIMG} src="{'select.gif'|@vtiger_imageurl:$THEME}" tabindex="{$vt_tab}"
-alt="Select" title="Select" LANGUAGE=javascript  onclick='return window.open("index.php?module="+ document.EditView.{$fldname}_type.value +"&action=Popup&html=Popup_picker&form=vtlibPopupView&forfield={$fldname}&srcmodule={$MODULE}&forrecord={$ID}{$HOMEOWNER}","test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");' align="absmiddle" style='cursor:hand;cursor:pointer'>&nbsp;
+alt="Select" title="Select" LANGUAGE=javascript  onclick='return jQuery.fn.openNewWindow("index.php?module="+ document.EditView.{$fldname}_type.value +"&action=Popup&html=Popup_picker&form=vtlibPopupView&forfield={$fldname}&srcmodule={$MODULE}&forrecord={$ID}{$HOMEOWNER}");' align="absmiddle" style='cursor:hand;cursor:pointer'>&nbsp;
 				{/if}
 				<input {$forcedisableStat} {$hidingIMG} type="image" src="{'clear_field.gif'|@vtiger_imageurl:$THEME}"
 alt="Clear" title="Clear" LANGUAGE=javascript	onClick="this.form.{$fldname}.value=''; this.form.{$fldname}_display.value=''; return false;" align="absmiddle" style='cursor:hand;cursor:pointer'>&nbsp;
@@ -144,7 +171,7 @@ alt="Clear" title="Clear" LANGUAGE=javascript	onClick="this.form.{$fldname}.valu
 				{if $MODULE eq 'Calendar'}
 			   		<select name="{$fldname}" tabindex="{$vt_tab}" class="small" style="width:160px;">
 				{else}
-			   		<select {$forcedisableStat} name="{$fldname}" tabindex="{$vt_tab}" class="small">
+			   		<select {$forcedisableStat} id="{$fldname}" name="{$fldname}" tabindex="{$vt_tab}" class="small">
 			   	{/if}
 				{foreach item=arr from=$fldvalue}
 					{if $arr[0] eq $APP.LBL_NOT_ACCESSIBLE}

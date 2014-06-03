@@ -3289,6 +3289,7 @@ function getUserDetails_id($userIdarr){
 	if($noofrows) {
 		while($resultrow = $adb->fetchByAssoc($result)) {
 			$data[$resultrow['id']] = $resultrow;
+			$data[$resultrow['id']]['area'] = explode(' |##| ',$resultrow['z_area']);
 		}
     }
 	return $data;
@@ -3362,6 +3363,24 @@ function getSMRs_area($area_arr){
 		}
     }
 	return $data;
+}
+
+function getAreas($removeVal=array()){
+	global $adb;
+
+	$query = "SELECT z_area
+				FROM vtiger_z_area
+				WHERE presence=1";
+	$result = $adb->pquery($query,array());
+	$noofrows = $adb->num_rows($result);
+	$data = array();
+	if($noofrows) {
+		while($resultrow = $adb->fetchByAssoc($result)) {
+			if(!in_array($resultrow['z_area'],$removeVal))
+				$data[] = $resultrow['z_area'];
+		}
+    }
+	return $data;	
 }
 //ed edited end
 ?>

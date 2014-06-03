@@ -2379,12 +2379,27 @@ class CRMEntity {
 		}
 		
 		//ed edited
+		$normal_customized = true;
 		$macq->setModule($module);
-		$macq->setUser($user);
-		$macq->setcurrent_user_parent_role_seq($current_user_parent_role_seq);
+		if($_REQUEST['action'] == 'Popup'){
+			require_once("include/nextixlib/ModuleDependency.php");	//ed edited
+			$moduleDependency = new ModuleDependency();
+			$modules_wDependency = $moduleDependency->getModuleDependency();
+
+			if(isset($modules_wDependency[$_REQUEST['srcmodule']]) && isset($modules_wDependency[$_REQUEST['srcmodule']][$_REQUEST['module']])){
+				$user_temp = getUserDetails_id(array($_REQUEST['AssignedTo']));
+				$macq->setUser_array($user_temp[$_REQUEST['AssignedTo']]);
+				$macq->setcurrent_user_parent_role_seq($user_temp[$_REQUEST['AssignedTo']]['parentrole']);
+				$normal_customized = false;
+			}
+		}
+		if($normal_customized){
+			$macq->setUser($user);
+			$macq->setcurrent_user_parent_role_seq($current_user_parent_role_seq);
+		}
 		$queryNextIX = $macq->addQuery();
 		//ed edited end
-		
+		// echo $query.$queryNextIX;
 		return $query.$queryNextIX;
 	}
 

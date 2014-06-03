@@ -1,7 +1,34 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 22:11:40
+<?php /* Smarty version 2.6.18, created on 2014-06-03 12:11:03
          compiled from EditViewUI.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'EditViewUI.tpl', 34, false),array('modifier', 'getTranslatedString', 'EditViewUI.tpl', 66, false),array('modifier', 'getTranslatedCurrencyString', 'EditViewUI.tpl', 420, false),array('modifier', 'substr', 'EditViewUI.tpl', 477, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'EditViewUI.tpl', 60, false),array('modifier', 'getTranslatedString', 'EditViewUI.tpl', 92, false),array('modifier', 'getTranslatedCurrencyString', 'EditViewUI.tpl', 447, false),array('modifier', 'substr', 'EditViewUI.tpl', 504, false),)), $this); ?>
+<!--ed edited-->
+<?php echo '
+<script type="text/javascript">
+if (typeof jQuery != \'undefined\') {
+    jQuery(document).ready(function(){
+		jQuery.fn.openNewWindow = function(path){
+			var datastring = \'\';
+			if(jQuery(\'#uitype10_fields\').length > 0){
+				var uitype10_fields = jQuery(\'#uitype10_fields\').html();
+				if(uitype10_fields.length > 0){
+					var myData = JSON.parse(uitype10_fields);
+					jQuery.each(myData, function(e,a) {
+						fieldvalue = jQuery(\'#\'+a).val();
+						datastring += \'&\'+e+\'=\'+fieldvalue;
+					});	
+				}
+			}
+			return window.open(path+datastring,"test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");
+			//return window.open(path+datastring,"test","width=640,height=602,top=150,left=200");
+		}
+    });
+} 
+</script>
+'; ?>
+
+<!--ed edited end-->
+
 		<?php $this->assign('uitype', ($this->_tpl_vars['maindata'][0][0])); ?>
 		<?php $this->assign('fldlabel', ($this->_tpl_vars['maindata'][1][0])); ?>
 		<?php $this->assign('fldlabel_sel', ($this->_tpl_vars['maindata'][1][1])); ?>
@@ -111,16 +138,18 @@ _type.value +"&action=Popup&html=Popup_picker&form=vtlibPopupView&forfield=<?php
 &forrecord=<?php echo $this->_tpl_vars['ID']; ?>
 ","test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");' align="absmiddle" style='cursor:hand;cursor:pointer'>&nbsp;
 				<?php else: ?>
+				<div id='uitype10_fields' style='display:none'><?php echo $this->_tpl_vars['uitype10_fields']; ?>
+</div>
 				<img <?php echo $this->_tpl_vars['hidingIMG']; ?>
  src="<?php echo vtiger_imageurl('select.gif', $this->_tpl_vars['THEME']); ?>
 " tabindex="<?php echo $this->_tpl_vars['vt_tab']; ?>
 "
-alt="Select" title="Select" LANGUAGE=javascript  onclick='return window.open("index.php?module="+ document.EditView.<?php echo $this->_tpl_vars['fldname']; ?>
+alt="Select" title="Select" LANGUAGE=javascript  onclick='return jQuery.fn.openNewWindow("index.php?module="+ document.EditView.<?php echo $this->_tpl_vars['fldname']; ?>
 _type.value +"&action=Popup&html=Popup_picker&form=vtlibPopupView&forfield=<?php echo $this->_tpl_vars['fldname']; ?>
 &srcmodule=<?php echo $this->_tpl_vars['MODULE']; ?>
 &forrecord=<?php echo $this->_tpl_vars['ID']; ?>
 <?php echo $this->_tpl_vars['HOMEOWNER']; ?>
-","test","width=640,height=602,resizable=0,scrollbars=0,top=150,left=200");' align="absmiddle" style='cursor:hand;cursor:pointer'>&nbsp;
+");' align="absmiddle" style='cursor:hand;cursor:pointer'>&nbsp;
 				<?php endif; ?>
 				<input <?php echo $this->_tpl_vars['forcedisableStat']; ?>
  <?php echo $this->_tpl_vars['hidingIMG']; ?>
@@ -279,7 +308,8 @@ _mass_edit_check" class="small" ><?php endif; ?>
 " class="small" style="width:160px;">
 				<?php else: ?>
 			   		<select <?php echo $this->_tpl_vars['forcedisableStat']; ?>
- name="<?php echo $this->_tpl_vars['fldname']; ?>
+ id="<?php echo $this->_tpl_vars['fldname']; ?>
+" name="<?php echo $this->_tpl_vars['fldname']; ?>
 " tabindex="<?php echo $this->_tpl_vars['vt_tab']; ?>
 " class="small">
 			   	<?php endif; ?>
