@@ -82,7 +82,7 @@ $site_URL = 'http://localhost/Jardine';
 
 // root directory path
 
-$root_directory = '/var/www/html/Jardine/';
+$root_directory = 'C:/wamp/www/Jardine/';
 
 
 // cache direcory path

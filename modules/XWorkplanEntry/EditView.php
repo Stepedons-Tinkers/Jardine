@@ -10,11 +10,12 @@
 global $app_strings, $mod_strings, $current_language, $currentModule, $theme, $current_user;
 require_once('Smarty_setup.php');
 require_once('include/nextixlib/EditViewClasses.php');
-
+require_once 'include/nextixlib/ModuleDependency.php';
 
 $focus = CRMEntity::getInstance($currentModule);
 $smarty = new vtigerCRM_Smarty();
 $editViewClasses = new EditViewClasses();
+$moduleDependency = new ModuleDependency();
 
 $category = getParentTab($currentModule);
 $record = $_REQUEST['record'];
@@ -66,6 +67,17 @@ $disp_view = getView($focus->mode);
 
 	$keyArray = $editViewClasses->findKeyInBlocks($blocks);
 	$blocks = $editViewClasses->leavingSetOfPicklistValue_assignedto($blocks,$keyArray,array('assigned_user_id'),$picklist_array);
+
+	if(in_array($current_user->rolename, array('Regional / Area Sales Manager','SMR'))){
+		//get selected user
+		$assignedtoUserdetail = getUserDetails_id(array($focus->column_fields['assigned_user_id']));
+		//get area of selected user
+		$picklists['z_area'] = $assignedtoUserdetail[$focus->column_fields['assigned_user_id']]['area'];
+		array_unshift($picklists['z_area'], '- Select -');
+		$blocks = $editViewClasses->leavingSelectedPicklistValue_wOtherValues($blocks,$keyArray,array('z_area'),$picklists);
+
+		$focus->column_fields['z_area'] = $current_user->z_area;
+	}
 	
 	$smarty->assign('BLOCKS', $blocks);
 	$smarty->assign('BASBLOCKS', $blocks);
@@ -144,6 +156,10 @@ $smarty->assign('FIELDHELPINFO', vtlib_getFieldHelpInfo($currentModule));
 $picklistDependencyDatasource = Vtiger_DependencyPicklist::getPicklistDependencyDatasource($currentModule);
 $smarty->assign("PICKIST_DEPENDENCY_DATASOURCE", Zend_Json::encode($picklistDependencyDatasource));
 
+$uitype10_fields = $moduleDependency->getModuleDependency_module($currentModule);
+if($uitype10_fields)
+	$smarty->assign("uitype10_fields", json_encode($uitype10_fields));
+	
 if($focus->mode == 'edit') {
 	$smarty->display('salesEditView.tpl');
 } else {

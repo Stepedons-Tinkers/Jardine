@@ -22,6 +22,12 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 		$this->rolename = $user->rolename;
 	}
 
+	public function setUser_array($user){
+		$this->userid = $user['id'];
+		$this->area = $user['area'];
+		$this->rolename = $user['rolename'];
+	}
+
 	public function setcurrent_user_parent_role_seq($current_user_parent_role_seq){
 		$this->current_user_parent_role_seq = $current_user_parent_role_seq;
 	}

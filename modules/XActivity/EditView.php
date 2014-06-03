@@ -10,11 +10,12 @@
 global $app_strings, $mod_strings, $current_language, $currentModule, $theme, $current_user;
 require_once('Smarty_setup.php');
 require_once('include/nextixlib/EditViewClasses.php');
-
+require_once 'include/nextixlib/ModuleDependency.php';
 
 $focus = CRMEntity::getInstance($currentModule);
 $smarty = new vtigerCRM_Smarty();
 $editViewClasses = new EditViewClasses();
+$moduleDependency = new ModuleDependency();
 
 $category = getParentTab($currentModule);
 $record = $_REQUEST['record'];
@@ -144,6 +145,10 @@ $smarty->assign('FIELDHELPINFO', vtlib_getFieldHelpInfo($currentModule));
 $picklistDependencyDatasource = Vtiger_DependencyPicklist::getPicklistDependencyDatasource($currentModule);
 $smarty->assign("PICKIST_DEPENDENCY_DATASOURCE", Zend_Json::encode($picklistDependencyDatasource));
 
+$uitype10_fields = $moduleDependency->getModuleDependency_module($currentModule);
+if($uitype10_fields)
+	$smarty->assign("uitype10_fields", json_encode($uitype10_fields));
+	
 if($focus->mode == 'edit') {
 	$smarty->display('salesEditView.tpl');
 } else {
