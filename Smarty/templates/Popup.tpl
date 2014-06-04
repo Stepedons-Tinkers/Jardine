@@ -62,6 +62,31 @@ function redirectWhenNoRelatedRecordsFound()
 <script type='text/javascript'>
 	jQuery.noConflict();
 </script>
+{literal}		
+<script type='text/javascript'>
+if (typeof jQuery != 'undefined') {
+    jQuery(document).ready(function(){
+		jQuery.fn.popupajax = function(recordid,value,target_fieldname){	//used in include/js/vtlib.js
+			var current_module = jQuery('#srcmodule').val();
+			var returnData;
+			var datastring = 'recordid='+recordid+'&value='+value+'&target_fieldname='+target_fieldname+'&current_module='+current_module;
+			jQuery.ajax({
+				 url:    'index.php?module=NextIXfunctions&action=popupAjax',
+				 type : 'post',
+				 data : datastring,
+				 success: function(result) {
+								// alert(result);
+								var data = result.split("##############BELOWISDATA##############");
+								returnData = data[1];    
+						  },
+				async:   false
+			}); 
+			return returnData;
+		}
+    });
+} 
+</script>
+{/literal}
 <script type="text/javascript">
 {literal}
 function add_data_to_relatedlist(entity_id,recordid,mod, popupmode, callback) {

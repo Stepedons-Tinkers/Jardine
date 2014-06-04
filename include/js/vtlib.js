@@ -12,6 +12,22 @@
  */
 function vtlib_setvalue_from_popup(recordid,value,target_fieldname) {
     if(window.opener.document.EditView) {
+		if (typeof jQuery.fn.popupajax != 'undefined') {	//Smarty/templates/Popup.tpl
+			var data = jQuery.fn.popupajax(recordid,value,target_fieldname);
+
+			var myData = JSON.parse(data);
+			jQuery.each(myData, function(e,a) {
+				if(a.recordid == ''){
+					var domenode_id_test = window.opener.document.EditView[a.target_fieldname];
+					if(domenode_id_test) domenode_id_test.value = a.value;
+				}else{
+					var domnode_id_test = window.opener.document.EditView[a.target_fieldname];
+					var domnode_display_test = window.opener.document.EditView[a.target_fieldname+'_display'];
+					if(domnode_id_test) domnode_id_test.value = a.recordid;
+					if(domnode_display_test) domnode_display_test.value = a.value;						
+				}
+			});
+		}
         var domnode_id = window.opener.document.EditView[target_fieldname];
         var domnode_display = window.opener.document.EditView[target_fieldname+'_display'];
         if(domnode_id) domnode_id.value = recordid;
