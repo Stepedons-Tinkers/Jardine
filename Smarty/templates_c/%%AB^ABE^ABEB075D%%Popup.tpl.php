@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-31 15:38:21
+<?php /* Smarty version 2.6.18, created on 2014-06-04 15:21:41
          compiled from Popup.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'Popup.tpl', 116, false),array('modifier', 'vtlib_purify', 'Popup.tpl', 141, false),array('function', 'html_options', 'Popup.tpl', 127, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'Popup.tpl', 141, false),array('modifier', 'vtlib_purify', 'Popup.tpl', 166, false),array('function', 'html_options', 'Popup.tpl', 152, false),)), $this); ?>
 <script>
 var image_pth = '<?php echo $this->_tpl_vars['IMAGE_PATH']; ?>
 ';
@@ -59,6 +59,32 @@ style.css">
 <script type='text/javascript'>
 	jQuery.noConflict();
 </script>
+<?php echo '		
+<script type=\'text/javascript\'>
+if (typeof jQuery != \'undefined\') {
+    jQuery(document).ready(function(){
+		jQuery.fn.popupajax = function(recordid,value,target_fieldname){	//used in include/js/vtlib.js
+			var current_module = jQuery(\'#srcmodule\').val();
+			var returnData;
+			var datastring = \'recordid=\'+recordid+\'&value=\'+value+\'&target_fieldname=\'+target_fieldname+\'&current_module=\'+current_module;
+			jQuery.ajax({
+				 url:    \'index.php?module=NextIXfunctions&action=popupAjax\',
+				 type : \'post\',
+				 data : datastring,
+				 success: function(result) {
+								// alert(result);
+								var data = result.split("##############BELOWISDATA##############");
+								returnData = data[1];    
+						  },
+				async:   false
+			}); 
+			return returnData;
+		}
+    });
+} 
+</script>
+'; ?>
+
 <script type="text/javascript">
 <?php echo '
 function add_data_to_relatedlist(entity_id,recordid,mod, popupmode, callback) {

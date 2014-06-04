@@ -435,9 +435,7 @@ if(isset($_REQUEST['start']) && $_REQUEST['start'] != '') {
 	$start = 1;
 }
 $limstart=($start-1)*$list_max_entries_per_page;
-echo $query;
-echo "<br/>";
-echo "<br/>";
+
 //ed edited
 $popUpModuleDependency = new PopUpModuleDependency();
 $popUpModuleDependency->setRequest($_REQUEST);
@@ -456,9 +454,7 @@ if($popUpModuleDependency->checkIfDependentQuery()){
 }
 $smarty->assign("AllValuedFields", $getAllValuedFields);
 //ed edited end
-echo $query;
-echo "<br/>";
-echo "<br/>";
+
 $query.=" LIMIT $limstart,$list_max_entries_per_page";
 
 $list_result = $adb->query($query);
