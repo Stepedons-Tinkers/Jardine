@@ -779,6 +779,83 @@ class CRMEntity {
 		$this->column_fields["record_module"] = $module;
 	}
 
+	function retrieve_entity_info_nextix($record, $module) {
+		global $adb, $log, $app_strings;
+		$result = Array();
+		foreach ($this->tab_name_index as $table_name => $index) {
+			$result[$table_name] = $adb->pquery("select * from $table_name where $index=?", array($record));
+			$isRecordDeleted = $adb->query_result($result["vtiger_crmentity"], 0, "deleted");
+			if ($isRecordDeleted !== 0 && $isRecordDeleted !== '0') {
+				return false;
+			}
+		}
+
+		/* Prasad: Fix for ticket #4595 */
+		if (isset($this->table_name)) {
+			$mod_index_col = $this->tab_name_index[$this->table_name];
+			if ($adb->query_result($result[$this->table_name], 0, $mod_index_col) == '')
+				return false;
+		}
+
+		// Lookup in cache for information
+		$cachedModuleFields = VTCacheUtils::lookupFieldInfo_Module($module);
+
+		if ($cachedModuleFields === false) {
+			$tabid = getTabid($module);
+
+			// Let us pick up all the fields first so that we can cache information
+			$sql1 = "SELECT fieldname, fieldid, fieldlabel, columnname, tablename, uitype, typeofdata, presence
+    	FROM vtiger_field WHERE tabid=?";
+
+			// NOTE: Need to skip in-active fields which we will be done later.
+			$result1 = $adb->pquery($sql1, array($tabid));
+			$noofrows = $adb->num_rows($result1);
+
+			if ($noofrows) {
+				while ($resultrow = $adb->fetch_array($result1)) {
+					// Update information to cache for re-use
+					VTCacheUtils::updateFieldInfo(
+							$tabid, $resultrow['fieldname'], $resultrow['fieldid'], $resultrow['fieldlabel'], $resultrow['columnname'], $resultrow['tablename'], $resultrow['uitype'], $resultrow['typeofdata'], $resultrow['presence']
+					);
+				}
+			}
+
+			// Get only active field information
+			$cachedModuleFields = VTCacheUtils::lookupFieldInfo_Module($module);
+		}
+
+		if ($cachedModuleFields) {
+			foreach ($cachedModuleFields as $fieldname => $fieldinfo) {
+				$fieldcolname = $fieldinfo['columnname'];
+				$tablename = $fieldinfo['tablename'];
+				$fieldname = $fieldinfo['fieldname'];
+
+				// To avoid ADODB execption pick the entries that are in $tablename
+				// (ex. when we don't have attachment for troubletickets, $result[vtiger_attachments]
+				// will not be set so here we should not retrieve)
+				if (isset($result[$tablename])) {
+					$fld_value = $adb->query_result($result[$tablename], 0, $fieldcolname);
+				} else {
+					$adb->println("There is no entry for this entity $record ($module) in the table $tablename");
+					$fld_value = "";
+				}
+				$this->column_fields[$fieldname] = $fld_value;
+			}
+		}
+		if ($module == 'Users') {
+			for ($i = 0; $i < $noofrows; $i++) {
+				$fieldcolname = $adb->query_result($result1, $i, "columnname");
+				$tablename = $adb->query_result($result1, $i, "tablename");
+				$fieldname = $adb->query_result($result1, $i, "fieldname");
+				$fld_value = $adb->query_result($result[$tablename], 0, $fieldcolname);
+				$this->$fieldname = $fld_value;
+			}
+		}
+
+		$this->column_fields["record_id"] = $record;
+		$this->column_fields["record_module"] = $module;
+	}	
+	
 	/** Function to saves the values in all the tables mentioned in the class variable $tab_name for the specified module
 	 * @param $module -- module:: Type varchar
 	 */

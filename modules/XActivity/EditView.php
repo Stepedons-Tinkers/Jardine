@@ -17,6 +17,21 @@ $smarty = new vtigerCRM_Smarty();
 $editViewClasses = new EditViewClasses();
 $moduleDependency = new ModuleDependency();
 
+//From Related List
+if(isset($_REQUEST['z_ac_workplanentry']) && $_REQUEST['z_ac_workplanentry'] != ''){
+	$focus_wpe = CRMEntity::getInstance("XWorkplanEntry");
+	$focus_wpe->id = $_REQUEST['z_ac_workplanentry'];
+	$focus_wpe->retrieve_entity_info_nextix($_REQUEST['z_ac_workplanentry'], "XWorkplanEntry");
+	$_REQUEST['z_ac_customer'] = $focus_wpe->column_fields['z_wpe_customer'];
+	$_REQUEST['z_ac_customer_type'] = 'XCustomers';
+	$_REQUEST['z_ac_activitytype'] = $focus_wpe->column_fields['z_wpe_activitytype'];
+	$_REQUEST['z_ac_activitytype_type'] = 'XActivityType';
+	$_REQUEST['z_ac_workplan'] = $focus_wpe->column_fields['z_wpe_workplan'];
+	$_REQUEST['z_ac_workplan_type'] = 'XWorkplan';
+	$_REQUEST['assigned_user_id'] = $focus_wpe->column_fields['assigned_user_id'];
+}
+//For Related List End
+
 $category = getParentTab($currentModule);
 $record = $_REQUEST['record'];
 $isduplicate = vtlib_purify($_REQUEST['isDuplicate']);
@@ -53,7 +68,7 @@ foreach($smrs_details as $key => $value){
 	$picklist_array['assigned_user_id'][$key] = $value['first_name'].' '.$value['last_name'];
 }
 
-if($focus->mode != 'edit') {
+if($focus->mode != 'edit' && $focus->column_fields['assigned_user_id'] == '') {
 	foreach($smrs_details as $id => $value){
 		$focus->column_fields['assigned_user_id'] = $id;
 		break;
