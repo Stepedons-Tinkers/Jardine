@@ -116,7 +116,7 @@ $smarty->assign("PICKIST_DEPENDENCY_DATASOURCE", Zend_Json::encode($picklistDepe
 
 
 $smarty->assign('hideFieldsTPL', array('z_cuc_isactive'));
-$smarty->assign('forcedisable', array('assigned_user_id'));
+$smarty->assign('forcedisable', array('assigned_user_id','z_cuc_daysunchanged'));
 
 if($focus->mode == 'edit') {
 	$smarty->display('salesEditView.tpl');
