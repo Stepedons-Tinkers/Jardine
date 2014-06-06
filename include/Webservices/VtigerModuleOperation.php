@@ -25,7 +25,7 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		return WebserviceEntityOperation::$metaCache[$this->webserviceObject->getEntityName()][$this->user->id];
 	}
 	
-	/* Removed this process
+
 	public function create($elementType,$element){
 		$crmObject = new VtigerCRMObject($elementType, false);
 		
@@ -55,8 +55,8 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		
 		return DataTransform::filterAndSanitize($crmObject->getFields(),$this->meta);
 	}
-	*/
-	public function create($elementType,$element){
+	
+	public function creates($elementType,$element){
 		
 		$mobile_id = $element['mobile_id'];
 		unset($element['mobile_id']);
@@ -69,8 +69,7 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		}
 		
 		$id = $crmObject->getObjectId();
-
-			
+	
 		// Bulk Save Mode
 		if(CRMEntity::isBulkSaveMode()) {		
 			// Avoiding complete read, as during bulk save mode, $result['id'] is enough
@@ -91,7 +90,7 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		//return DataTransform::filterAndSanitize($crmObject->getFields(),$this->meta);
 	}
 	
-	/*
+	
 	public function retrieve($id){
 		
 		$ids = vtws_getIdComponents($id);
@@ -107,8 +106,8 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		
 		return DataTransform::filterAndSanitize($crmObject->getFields(),$this->meta);
 	}
-	*/
-	public function retrieve($ids){
+	
+	public function retrieves($ids){
 		
 		$crmObject = new VtigerCRMObject($this->tabId, true);
 		$crmObject->reads(getTabname($this->tabId),$ids);
@@ -127,6 +126,45 @@ class VtigerModuleOperation extends WebserviceEntityOperation {
 		return $crmObject->getDetails();
 	}
 	
+	
+	public function updates($elementType,$element){
+	
+		$mobile_id = $element['mobile_id'];
+		$crmid = $element['crmid'];
+		
+		unset($element['mobile_id']);
+		unset($element['crmid']);
+		
+		$crmObject = new VtigerCRMObject($elementType, false);
+		$crmObject->setObjectId($crmid);
+		$error = $crmObject->update($element);
+		if(!$error){
+			throw new WebServiceException(WebServiceErrorCode::$DATABASEQUERYERROR,
+					vtws_getWebserviceTranslatedString('LBL_'.
+							WebServiceErrorCode::$DATABASEQUERYERROR));
+		}
+		
+		$id = $crmObject->getObjectId();
+	
+		// Bulk Save Mode
+		if(CRMEntity::isBulkSaveMode()) {		
+			// Avoiding complete read, as during bulk save mode, $result['id'] is enough
+			return array('id' => vtws_getId($this->meta->getEntityId(), $id) );
+		}
+		
+		$error = $crmObject->read($id);
+		if(!$error){
+			throw new WebServiceException(WebServiceErrorCode::$DATABASEQUERYERROR,
+				vtws_getWebserviceTranslatedString('LBL_'.
+						WebServiceErrorCode::$DATABASEQUERYERROR));
+		}
+		$column_fields = $crmObject->getFields();
+		return array("id"=>$column_fields['record_id'],
+					 "mobile_id"=>$mobile_id,
+					 "modifiedtime"=>$column_fields['ModifiedTime']
+					);
+		//return DataTransform::filterAndSanitize($crmObject->getFields(),$this->meta);
+	}
 	
 	public function update($element){
 		$ids = vtws_getIdComponents($element["id"]);

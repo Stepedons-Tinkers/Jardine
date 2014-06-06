@@ -26,6 +26,7 @@ if($_REQUEST['assigntype'] == 'U') {
 	$focus->column_fields['assigned_user_id'] = $_REQUEST['assigned_group_id'];
 }
 
+
 $focus->save($currentModule);
 $return_id = $focus->id;
 
