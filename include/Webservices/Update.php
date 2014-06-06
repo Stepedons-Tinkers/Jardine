@@ -85,4 +85,45 @@
 		return $entity;
 	}
 	
+	function vtws_updates($elementType, $elements, $user){
+		
+		$types = vtws_listtypes(null, $user);
+		if (!in_array($elementType, $types['types'])) {
+			throw new WebServiceException(WebServiceErrorCode::$ACCESSDENIED, "Permission to perform the operation is denied");
+		}
+
+		global $log, $adb;
+		// Cache the instance for re-use
+		if(!isset($vtws_create_cache[$elementType]['webserviceobject'])) {
+			$webserviceObject = VtigerWebserviceObject::fromName($adb,$elementType);
+			$vtws_create_cache[$elementType]['webserviceobject'] = $webserviceObject;
+		} else {
+			$webserviceObject = $vtws_create_cache[$elementType]['webserviceobject'];
+		}
+		// END			
+
+		$handlerPath = $webserviceObject->getHandlerPath();
+		$handlerClass = $webserviceObject->getHandlerClass();
+
+		require_once $handlerPath;
+
+		$handler = new $handlerClass($webserviceObject, $user, $adb, $log);
+		$meta = $handler->getMeta();
+
+		if ($meta->hasWriteAccess() !== true) {
+			throw new WebServiceException(WebServiceErrorCode::$ACCESSDENIED, "Permission to write is denied");
+		}
+
+		foreach($elements as $element){
+			if ($meta->hasMandatoryFields($element)) {
+				$entity[] = $handler->updates($elementType,$element);
+				VTWS_PreserveGlobal::flush();
+			} else {
+				return null;
+			}
+		}
+
+		return array("update"=>$entity);
+	}
+	
 ?>
