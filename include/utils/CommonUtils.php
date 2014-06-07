@@ -3382,5 +3382,26 @@ function getAreas($removeVal=array()){
     }
 	return $data;	
 }
+
+function getWorkplanEntriesDetail($workplan_arr){
+	global $adb;
+	$data = array();
+	if(!empty($workplan_arr)){
+		$str = implode("','",$workplan_arr);
+		$query = "SELECT * 
+					FROM vtiger_xworkplanentry 
+					INNER JOIN vtiger_crmentity ON (vtiger_crmentity.crmid = vtiger_xworkplanentry.xworkplanentryid)
+					WHERE vtiger_xworkplanentry.z_wpe_workplan IN ('{$str}')
+					AND vtiger_crmentity.deleted = 0";
+		$result = $adb->pquery($query,array());
+		$noofrows = $adb->num_rows($result);
+		if($noofrows) {
+			while($resultrow = $adb->fetchByAssoc($result)) {
+				$data[$resultrow['z_wpe_workplan']][$resultrow['xworkplanentryid']] = $resultrow;
+			}
+		}
+		return $data;	
+	}
+}
 //ed edited end
 ?>

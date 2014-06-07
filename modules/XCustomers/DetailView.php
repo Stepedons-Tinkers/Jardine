@@ -105,10 +105,14 @@ $focus->markAsViewed($current_user->id);
 
 $modules_actions = array();
 if($current_user->isSupreme || in_array($current_user->rolename, array('Marketing Manager','Brand Assistant / Marketing Service Assistant'))){
+	//isactive
 	if($focus->column_fields['z_cu_isactive'] != 1)
 		$modules_actions[0]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX=activate&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Activate</a>";
 	else
 		$modules_actions[1]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX=deactivate&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Deactivate</a>";
+	//status
+	if($focus->column_fields['z_cu_customerrecstat'] == "Pending For Approval")
+		$modules_actions[2]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX=approve&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Approve</a>";
 }
 $smarty->assign("MODULES_ACTIONS", $modules_actions);
 

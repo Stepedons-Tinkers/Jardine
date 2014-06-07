@@ -38,6 +38,9 @@ if(empty($_REQUEST['record']) && $focus->mode != 'edit'){
 	setObjectValuesFromRequest($focus);
 }
 
+// set status to "Pending For Approval" if in Edit View
+$focus->column_fields['z_cu_customerrecstat'] = 'Pending For Approval';
+
 $disp_view = getView($focus->mode);
 	$blocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields);
 	// $basblocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields, 'BAS');
@@ -126,7 +129,7 @@ $smarty->assign("PICKIST_DEPENDENCY_DATASOURCE", Zend_Json::encode($picklistDepe
 
 
 $smarty->assign('hideFieldsTPL', array('z_cu_isactive'));
-$smarty->assign('forcedisable', array('assigned_user_id'));
+$smarty->assign('forcedisable', array('assigned_user_id','z_cu_customerrecstat'));
 
 if($focus->mode == 'edit') {
 	$smarty->display('salesEditView.tpl');
