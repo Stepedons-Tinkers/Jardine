@@ -60,6 +60,9 @@ if($focus->mode != 'edit') {
 	}
 }
 
+// set status to "Pending For Approval" if in Edit View
+$focus->column_fields['z_wpe_status'] = 'Pending For Approval';
+
 $disp_view = getView($focus->mode);
 	$blocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields);
 	// $basblocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields, 'BAS');
@@ -159,6 +162,8 @@ $smarty->assign("PICKIST_DEPENDENCY_DATASOURCE", Zend_Json::encode($picklistDepe
 $uitype10_fields = $moduleDependency->getModuleDependency_module($currentModule);
 if($uitype10_fields)
 	$smarty->assign("uitype10_fields", json_encode($uitype10_fields));
+
+$smarty->assign('forcedisable', array('z_wpe_status'));
 	
 if($focus->mode == 'edit') {
 	$smarty->display('salesEditView.tpl');

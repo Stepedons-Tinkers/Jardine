@@ -103,6 +103,52 @@ $smarty->assign('CUSTOM_LINKS', Vtiger_Link::getAllByType(getTabid($currentModul
 $focus->markAsViewed($current_user->id);
 // END
 
+$workplanentries_detail = getWorkplanEntriesDetail(array($focus->id));
+$workplanentries_total = count($workplanentries_detail[$focus->id]);
+foreach($workplanentries_detail[$focus->id] as $workplanentryid => $workplanentryval){
+	//use assigned to of workplan since same assigned to rana cya sa tanan workplan entries
+	if(in_array($workplanentryval['z_wpe_status'], array('Pending For Approval','Approved by Regional or Area Manager'))){
+		if($workplanentryval['z_wpe_status'] == 'Pending For Approval'){
+		
+		}
+		else if($workplanentryval['z_wpe_status'] == 'Approved by Regional or Area Manager'){
+		
+		}
+	}
+}
+
+$modules_actions = array();
+$assignedtouser_detail = getUserDetails_id(array($focus->column_fields['assigned_user_id']));
+$assignedtouser_role = $assignedtouser_detail[$focus->column_fields['assigned_user_id']]['rolename'];
+$workplanentries_detail = getWorkplanEntriesDetail(array($focus->id));
+$workplanentries_total = count($workplanentries_detail[$focus->id]);
+$workplanentries_lack = 0;
+$approveAction = '';
+foreach($workplanentries_detail[$focus->id] as $workplanentryid => $workplanentryval){
+	if($assignedtouser_role == 'SMR'){
+		if(($current_user->isSupreme || $current_user->rolename == 'Regional / Area Sales Manager') && $workplanentryval['z_wpe_status'] == 'Pending For Approval'){
+			$workplanentries_lack++;
+			$approveAction = 'approveToRegional';
+		}
+		else if(($current_user->isSupreme || $current_user->rolename == 'National Sales Manager') && in_array($workplanentryval['z_wpe_status'], array('Pending For Approval','Approved by Regional or Area Manager'))){
+			$workplanentries_lack++;
+			$approveAction = 'approveToNSM';
+		}
+	}
+	else if(in_array($assignedtouser_role,array('DIY Supervisor','PCO Supervisor'))){
+		if($workplanentryval['z_wpe_status'] == 'Pending For Approval' && ($current_user->isSupreme || $current_user->rolename == 'National Sales Manager')){
+			$workplanentries_lack++;
+			$approveAction = 'approveToNSM';
+		}	
+	}
+}
+$workplanentries_approved = $workplanentries_total - $workplanentries_lack;
+$left_str = $workplanentries_approved."/".$workplanentries_total;
+if(!empty($workplanentries_lack))
+	$modules_actions[0]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX={$approveAction}&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Approve ({$left_str})</a>";
+
+$smarty->assign("MODULES_ACTIONS", $modules_actions);
+
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 
 $smarty->display('DetailView.tpl');
