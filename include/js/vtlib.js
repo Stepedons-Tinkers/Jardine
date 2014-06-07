@@ -18,8 +18,26 @@ function vtlib_setvalue_from_popup(recordid,value,target_fieldname) {
 			var myData = JSON.parse(data);
 			jQuery.each(myData, function(e,a) {
 				if(a.recordid == ''){
-					var domenode_id_test = window.opener.document.EditView[a.target_fieldname];
-					if(domenode_id_test) domenode_id_test.value = a.value;
+					if(a.target_fieldname == 'blocksShown'){
+						var blocksarr = ["General Information", "With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings"];
+						for(var i=0;i<blocksarr.length;i++){
+							if(a.value.indexOf(blocksarr[i]) == -1){
+								window.opener.document.getElementById(blocksarr[i]).style.display = 'none';
+
+								window.opener.jQuery("[id='"+blocksarr[i]+"']").find('input').val('');
+								window.opener.jQuery("[id='"+blocksarr[i]+"']").find('textarea').val('');
+								window.opener.jQuery("[id='"+blocksarr[i]+"']").find('select').val('- Select -');
+								window.opener.jQuery("[id='"+blocksarr[i]+"']").find('select').val('- Select -');
+							}
+							else{
+								window.opener.document.getElementById(blocksarr[i]).style.display = '';
+							}
+						}					
+					}
+					else{
+						var domenode_id_test = window.opener.document.EditView[a.target_fieldname];
+						if(domenode_id_test) domenode_id_test.value = a.value;
+					}
 				}else{
 					var domnode_id_test = window.opener.document.EditView[a.target_fieldname];
 					var domnode_display_test = window.opener.document.EditView[a.target_fieldname+'_display'];

@@ -1,7 +1,9 @@
 <?php
+require_once("include/nextixlib/BlockRestriction.php");
 // We are using manual adb query, so that if there is block of records, there wont be a problem;
 global $adb;
 
+$blockRestriction = new BlockRestriction();
 $current_module = $_REQUEST['current_module'];
 $recordid = $_REQUEST['recordid'];
 $target_fieldname = $_REQUEST['target_fieldname'];
@@ -27,7 +29,12 @@ if($current_module == 'XActivity'){
 			$ary[] = array('recordid'=>$customer, 'value'=>$customername, 'target_fieldname'=>'z_ac_customer');
 			$ary[] = array('recordid'=>$activitytype, 'value'=>$activitytypename, 'target_fieldname'=>'z_ac_activitytype');
 			$ary[] = array('recordid'=>$workplan, 'value'=>$workplanname, 'target_fieldname'=>'z_ac_workplan');
+		
+			$ary[] = $blockRestriction->getBlocksShown_activity($activitytype);
 		}
+	}
+	else if($target_fieldname == 'z_ac_activitytype'){
+		$ary[] = $blockRestriction->getBlocksShown_activity($recordid);
 	}
 }
 
