@@ -48,6 +48,10 @@ if($record) {
 	$focus->mode = 'edit';
 	$focus->retrieve_entity_info($record, $currentModule);
 }
+else{
+	$focus->column_fields['z_ac_source'] = 'Web';
+}
+
 if($isduplicate == 'true') {
 	$focus->id = '';
 	$focus->mode = '';
@@ -176,6 +180,7 @@ if($uitype10_fields)
 	$smarty->assign("uitype10_fields", json_encode($uitype10_fields));
 
 $smarty->assign("hideBlocksTPL",$hideBlocksTPL);  
+$smarty->assign('forcedisable', array('z_ac_source'));
 	
 if($focus->mode == 'edit') {
 	$smarty->display('salesEditView.tpl');
