@@ -11,11 +11,13 @@ global $app_strings, $mod_strings, $current_language, $currentModule, $theme, $c
 require_once('Smarty_setup.php');
 require_once('include/nextixlib/EditViewClasses.php');
 require_once 'include/nextixlib/ModuleDependency.php';
+require_once("include/nextixlib/BlockRestriction.php");
 
 $focus = CRMEntity::getInstance($currentModule);
 $smarty = new vtigerCRM_Smarty();
 $editViewClasses = new EditViewClasses();
 $moduleDependency = new ModuleDependency();
+$blockRestriction = new BlockRestriction();
 
 //From Related List
 if(isset($_REQUEST['z_ac_workplanentry']) && $_REQUEST['z_ac_workplanentry'] != ''){
@@ -87,6 +89,15 @@ $disp_view = getView($focus->mode);
 	$smarty->assign('BASBLOCKS', $blocks);
 	// $smarty->assign('ADVBLOCKS', $advblocks);
 
+//hide blocks
+	$hideBlocksTPL = array();
+	if(!empty($focus->column_fields['z_ac_activitytype'])){
+		$allBlocks = array("General Information", "With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings");
+		$showBlocks = $blockRestriction->getBlocksShown_activity($focus->column_fields['z_ac_activitytype']);
+		$hideBlocksTPL = array_diff($allBlocks, $showBlocks['value']);
+	}
+//hide blocks end	
+	
 // echo "<pre>";
 
 // print_r($basblocks);
@@ -163,6 +174,8 @@ $smarty->assign("PICKIST_DEPENDENCY_DATASOURCE", Zend_Json::encode($picklistDepe
 $uitype10_fields = $moduleDependency->getModuleDependency_module($currentModule);
 if($uitype10_fields)
 	$smarty->assign("uitype10_fields", json_encode($uitype10_fields));
+
+$smarty->assign("hideBlocksTPL",$hideBlocksTPL);  
 	
 if($focus->mode == 'edit') {
 	$smarty->display('salesEditView.tpl');
