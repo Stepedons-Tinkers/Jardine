@@ -35,9 +35,11 @@ class NextIXOverwriteRestriction		//used in util/UserInfoUtil.php
 			{
 				$recOwnId=$id;
 			}
-			require('user_privileges/user_privileges_'.$recOwnId.'.php');
-			$this->recuser_info = $user_info;
-			$this->reccurrent_user_parent_role_seq = $current_user_parent_role_seq;
+			if(!empty($recOwnId)){
+				require('user_privileges/user_privileges_'.$recOwnId.'.php');
+				$this->recuser_info = $user_info;
+				$this->reccurrent_user_parent_role_seq = $current_user_parent_role_seq;
+			}
 		}
     }
 
