@@ -277,6 +277,10 @@ class Import_Data_Controller {
 					if($fieldData == null) {
 						$entityInfo = null;
 					} else {
+						if($moduleName == "XActivity"){		//ed edited for if no source, default value
+							if(!isset($fieldData['z_ac_source']))
+								$fieldData['z_ac_source'] = "Web";
+						}		
 						$entityInfo = vtws_create($moduleName, $fieldData, $this->user);
 						$entityInfo['status'] = self::$IMPORT_RECORD_CREATED;
 					}
