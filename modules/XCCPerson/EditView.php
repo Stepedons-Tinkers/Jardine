@@ -38,6 +38,8 @@ if(empty($_REQUEST['record']) && $focus->mode != 'edit'){
 	setObjectValuesFromRequest($focus);
 }
 
+$focus->column_fields['z_cuc_daysunchanged'] = 0;
+
 $disp_view = getView($focus->mode);
 	$blocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields);
 	// $basblocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields, 'BAS');

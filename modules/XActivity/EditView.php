@@ -100,6 +100,9 @@ $disp_view = getView($focus->mode);
 		$showBlocks = $blockRestriction->getBlocksShown_activity($focus->column_fields['z_ac_activitytype']);
 		$hideBlocksTPL = array_diff($allBlocks, $showBlocks['value']);
 	}
+	else{
+		$hideBlocksTPL = array("With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings");
+	}
 //hide blocks end	
 	
 // echo "<pre>";
