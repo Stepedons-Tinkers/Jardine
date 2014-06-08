@@ -18,7 +18,7 @@ class Import_Utils {
 	static $AUTO_MERGE_OVERWRITE = 2;
 	static $AUTO_MERGE_MERGEFIELDS = 3;
 
-	static $supportedFileEncoding = array('UTF-8'=>'UTF-8', 'ISO-8859-1'=>'ISO-8859-1');
+	static $supportedFileEncoding = array('ISO-8859-1'=>'ISO-8859-1','UTF-8'=>'UTF-8'); //ed edited, switched order of values in array, to make iso default
 	static $supportedDelimiters = array(','=>'comma', ';'=>'semicolon');
 	static $supportedFileExtensions = array('csv','vcf');
 
