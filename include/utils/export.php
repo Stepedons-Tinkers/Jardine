@@ -291,10 +291,14 @@ class ExportUtils{
 				if(empty($this->picklistValues[$fieldname])){
 					$this->picklistValues[$fieldname] = getAssignedPicklistValues($fieldname, $roleid, $adb);
 				}
-				$value = trim($value);
+				// $value = trim($value);
+				$value = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', trim($value)); //ed edited
+				//compatibility with excel, since excel have trouble with utf8
 			}elseif($uitype == 10){
 				//have to handle uitype 10
-				$value = trim($value);
+				// $value = trim($value);
+				$value = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', trim($value)); //ed edited
+				//compatibility with excel, since excel have trouble with utf8
 				if(!empty($value)) {
 					$parent_module = getSalesEntityType($value);
 					$displayValueArray = getEntityName($parent_module, $value);
@@ -311,6 +315,10 @@ class ExportUtils{
 				} else {
 					$value = '';
 				}
+			}
+			else{ //ed edited
+				$value = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', trim($value)); 
+				//compatibility with excel, since excel have trouble with utf8			
 			}
 		}
 		return $arr;
