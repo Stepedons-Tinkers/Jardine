@@ -55,12 +55,13 @@ if($focus->is_authenticated())
 
 	
 	// Recording the login info
-        $usip=$_SERVER['REMOTE_ADDR'];
-        $intime=date("Y/m/d H:i:s");
-        require_once('modules/Users/LoginHistory.php');
-        $loghistory=new LoginHistory();
-        $Signin = $loghistory->user_login($focus->column_fields["user_name"],$usip,$intime);
-
+		if(php_sapi_name() != 'cli'){	// ed edited 	//added this because error in console / cron
+			$usip=$_SERVER['REMOTE_ADDR'];
+			$intime=date("Y/m/d H:i:s");
+			require_once('modules/Users/LoginHistory.php');
+			$loghistory=new LoginHistory();
+			$Signin = $loghistory->user_login($focus->column_fields["user_name"],$usip,$intime);
+		}
 	//Security related entries start
 	require_once('include/utils/UserInfoUtil.php');
 
@@ -118,10 +119,12 @@ if($focus->is_authenticated())
 		unlink($tmp_file_name);
 	}
 	$arr = $_SESSION['lastpage'];
-	if(isset($_SESSION['lastpage']))
-		header("Location: index.php?".$arr);
-	else
-		header("Location: index.php");
+	if(php_sapi_name() != 'cli'){		// ed edited
+		if(isset($_SESSION['lastpage']))
+			header("Location: index.php?".$arr);
+		else
+			header("Location: index.php");
+	}
 }
 else
 {
@@ -142,7 +145,8 @@ else
 	
 	// go back to the login screen.	
 	// create an error message for the user.
-	header("Location: index.php");
+	if(php_sapi_name() != 'cli')	// ed edited
+		header("Location: index.php");
 }
 
 ?>
