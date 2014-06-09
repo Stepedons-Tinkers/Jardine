@@ -81,6 +81,10 @@ if($focus->mode != 'edit' && $focus->column_fields['assigned_user_id'] == '') {
 	}
 }
 
+$custom_mandatory = array('z_ac_smr','z_ac_issuesidentified','z_ac_feedbackfromcu','z_ac_ongoingcampaigns','z_ac_lastdelivery',
+		'z_ac_promostubsdetails','z_ac_projectname','z_ac_projectstage','z_ac_projectcategory','z_ac_date',
+		'z_ac_time','z_ac_venue','z_ac_noofattenees');
+
 $disp_view = getView($focus->mode);
 	$blocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields);
 	// $basblocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields, 'BAS');
@@ -88,6 +92,15 @@ $disp_view = getView($focus->mode);
 
 	$keyArray = $editViewClasses->findKeyInBlocks($blocks);
 	$blocks = $editViewClasses->leavingSetOfPicklistValue_assignedto($blocks,$keyArray,array('assigned_user_id'),$picklist_array);
+	
+	//fake mandatory 
+	foreach($custom_mandatory as $fields){
+		$key1 = $keyArray[$fields][0];
+		$key2 = $keyArray[$fields][1];
+		$key3 = $keyArray[$fields][2];	
+
+		$blocks[$key1][$key2][$key3][4] = "M";
+	}
 	
 	$smarty->assign('BLOCKS', $blocks);
 	$smarty->assign('BASBLOCKS', $blocks);
@@ -142,8 +155,18 @@ if (isset($_REQUEST['return_viewname'])) $smarty->assign("RETURN_VIEWNAME", vtli
 // Field Validation Information
 $tabid = getTabid($currentModule);
 $validationData = getDBValidationData($focus->tab_name,$tabid);
+
+//ed edited
+foreach($validationData as $key => $fieldvalue){
+	if(in_array($key,$custom_mandatory))
+		foreach($fieldvalue as $key2 => $datatype)
+			$validationData[$key][$key2] = str_replace('~O','~M',$datatype);
+}	
+//ed edited end
+
 $validationArray = split_validationdataArray($validationData);
 
+	
 $smarty->assign("VALIDATION_DATA_FIELDNAME",$validationArray['fieldname']);
 $smarty->assign("VALIDATION_DATA_FIELDDATATYPE",$validationArray['datatype']);
 $smarty->assign("VALIDATION_DATA_FIELDLABEL",$validationArray['fieldlabel']);
