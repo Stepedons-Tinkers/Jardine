@@ -1187,6 +1187,7 @@ function doformValidation(edit_type) {
 	//ed edited for Queries others checking
 	var queriesOthers = checkQueriesOthers('SET');
 	//ed edited end
+	var module = getObj('module').value;
 	for (var i=0; i<fieldname.length; i++) {
 
 		if(edit_type == 'mass_edit') {
@@ -1205,8 +1206,16 @@ function doformValidation(edit_type) {
 			//ed edited for others checking end
 
 			if (type[1]=="M") {
-				if (!emptyCheck(fieldname[i],fieldlabel[i],getObj(fieldname[i]).type))
-					{return false;}
+				if(module == 'XActivity'){	//ed edited
+					if(isVisible(getObj(fieldname[i]))){
+						if (!emptyCheck(fieldname[i],fieldlabel[i],getObj(fieldname[i]).type))
+							{return false;}
+					}
+				}
+				else{
+					if (!emptyCheck(fieldname[i],fieldlabel[i],getObj(fieldname[i]).type))
+						{return false;}			
+				}
 			}
 			switch (type[0]) {
 				case "O"  :
@@ -5199,4 +5208,22 @@ function checkQueriesOthers(key,fieldname,fieldlabel,queriesOthers)
 		return true;
 	}
 }
+
+
+function isVisible(e) { //from the net
+	//returns true is should be visible to user.
+	// if (typeof e == "string") {
+		// e = xGetElementById(e);
+	// }
+	while (e.nodeName.toLowerCase() != 'body' && e.style.display.toLowerCase() != 'none' && e.style.visibility.toLowerCase() != 'hidden') {
+		e = e.parentNode;
+	}
+	if (e.nodeName.toLowerCase() == 'body') {
+		return true;
+	} else{
+		return false;
+	}
+}
+
+
 //ed edited end
