@@ -865,7 +865,16 @@ class CRMEntity {
 
 		//Event triggering code
 		require_once("include/events/include.inc");
-		global $adb;
+		global $adb, $m_flds, $all_flds;
+		
+		if(in_array($module_name, array('XActivity')) && !empty($this->id)){
+			$m_focus = CRMEntity::getInstance($module_name);
+			$m_focus->retrieve_entity_info($this->id,$module_name);
+			
+			$m_flds = $all_flds = $m_focus->column_fields;
+			if(isset($m_focus->cust_fields)) $m_flds = array_intersect_key($m_focus->column_fields,array_flip($m_focus->cust_fields));
+			if(isset($m_focus->all_flds)) $all_flds = array_intersect_key($m_focus->column_fields,array_flip($m_focus->all_flds));
+		}
 
 		$em = new VTEventsManager($adb);
 		// Initialize Event trigger cache
