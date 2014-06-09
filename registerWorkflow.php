@@ -16,4 +16,7 @@ $emm = new VTEntityMethodManager($adb);
 //$emm->addEntityMethod("House", "updateHouseInfo", "include/custom_workflows/House.php", "updateHouseInfo");
 //$emm->addEntityMethod("Cars", "updateCarsInfo", "include/custom_workflows/Cars.php", "updateCarsInfo");
 //$emm->addEntityMethod("ReportsKHA", "createClass", "include/custom_workflows/ReportsKHA.php", "createClass");
+
+// $emm->addEntityMethod("XActivity", "insertCommitmentDateToTODO", "include/custom_workflows/XActivity.php", "insertCommitmentDateToTODO");
+
 ?>
