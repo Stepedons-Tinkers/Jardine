@@ -15,18 +15,18 @@ if($current_module == 'XActivity'){
 		$rs = $adb->pquery($query,array($recordid));
 		$rs_rows = $adb->num_rows($rs);
 		if ($rs_rows > 0) {
-			$customer = $adb->query_result($rs, 0, 'z_wpe_customer');
+			// $customer = $adb->query_result($rs, 0, 'z_wpe_customer');
 			$activitytype = $adb->query_result($rs, 0, 'z_wpe_activitytype');
 			$workplan = $adb->query_result($rs, 0, 'z_wpe_workplan');
 			
-			$customername = getEntityName('XCustomers',array($customer));
-			$customername = $customername[$customer];
+			// $customername = getEntityName('XCustomers',array($customer));
+			// $customername = $customername[$customer];
 			$activitytypename = getEntityName('XActivityType',array($activitytype));
 			$activitytypename = $activitytypename[$activitytype];
 			$workplanname = getEntityName('XWorkplan',array($workplan));
 			$workplanname = $workplanname[$workplan];
 			
-			$ary[] = array('recordid'=>$customer, 'value'=>$customername, 'target_fieldname'=>'z_ac_customer');
+			// $ary[] = array('recordid'=>$customer, 'value'=>$customername, 'target_fieldname'=>'z_ac_customer');
 			$ary[] = array('recordid'=>$activitytype, 'value'=>$activitytypename, 'target_fieldname'=>'z_ac_activitytype');
 			$ary[] = array('recordid'=>$workplan, 'value'=>$workplanname, 'target_fieldname'=>'z_ac_workplan');
 		

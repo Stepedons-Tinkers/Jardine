@@ -16,8 +16,8 @@ if (typeof jQuery != 'undefined') {
 				jQuery("#z_ac_workplan_display").val('');
 				jQuery("#z_ac_workplanentry").val('');
 				jQuery("#z_ac_workplanentry_display").val('');
-				jQuery("#z_ac_customer").val('');
-				jQuery("#z_ac_customer_display").val('');
+				// jQuery("#z_ac_customer").val('');
+				// jQuery("#z_ac_customer_display").val('');
 			});
 		}
 		jQuery("#assigned_user_id").clearUIType10Dependent();

@@ -6,7 +6,7 @@ class ModuleDependency	//modules/../EditView.php
 					'XWorkplanEntry'=>array(
 						'AssignedTo'=>'assigned_user_id',
 						'XWorkplan'=>'z_wpe_workplan',
-						'XCustomers'=>'z_wpe_customer',
+						// 'XCustomers'=>'z_wpe_customer',
 						'XActivityType'=>'z_wpe_activitytype'
 					),
 					'XActivity'=>array(

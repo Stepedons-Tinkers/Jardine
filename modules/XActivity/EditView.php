@@ -24,8 +24,8 @@ if(isset($_REQUEST['z_ac_workplanentry']) && $_REQUEST['z_ac_workplanentry'] != 
 	$focus_wpe = CRMEntity::getInstance("XWorkplanEntry");
 	$focus_wpe->id = $_REQUEST['z_ac_workplanentry'];
 	$focus_wpe->retrieve_entity_info_nextix($_REQUEST['z_ac_workplanentry'], "XWorkplanEntry");
-	$_REQUEST['z_ac_customer'] = $focus_wpe->column_fields['z_wpe_customer'];
-	$_REQUEST['z_ac_customer_type'] = 'XCustomers';
+	// $_REQUEST['z_ac_customer'] = $focus_wpe->column_fields['z_wpe_customer'];
+	// $_REQUEST['z_ac_customer_type'] = 'XCustomers';
 	$_REQUEST['z_ac_activitytype'] = $focus_wpe->column_fields['z_wpe_activitytype'];
 	$_REQUEST['z_ac_activitytype_type'] = 'XActivityType';
 	$_REQUEST['z_ac_workplan'] = $focus_wpe->column_fields['z_wpe_workplan'];
