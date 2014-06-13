@@ -35,8 +35,8 @@ if (typeof jQuery != 'undefined') {
 					 async:   false
 				}); 		
 				//clear Customer, Workplan
-				jQuery("#z_wpe_customer").val('');
-				jQuery("#z_wpe_customer_display").val('');
+				// jQuery("#z_wpe_customer").val('');
+				// jQuery("#z_wpe_customer_display").val('');
 				jQuery("#z_wpe_workplan").val('');
 				jQuery("#z_wpe_workplan_display").val('');
 			});
