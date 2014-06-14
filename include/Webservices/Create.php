@@ -38,14 +38,22 @@ function vtws_creates($elementType, $elements, $user) {
 
 	foreach($elements as $element){
 		if ($meta->hasMandatoryFields($element)) {
-			$entity[] = $handler->creates($elementType,$element);
+			$entity = $handler->creates($elementType,$element);
+			$entities[] = $entity;
+			if( $elementType == 'Documents'){
+				$forModule = $element['forModule'];
+				$forEntityId = $element['forEntityId'];
+				$ids = explode(";",$entity['id']);
+				$focus = CRMEntity::getInstance( $forModule );
+				$focus->save_related_module($forModule, $forEntityId, $elementType, $ids);
+			}
 			VTWS_PreserveGlobal::flush();
 		} else {
 			return null;
 		}
 	}
 
-	return array("create"=>$entity);
+	return array("create"=>$entities);
 	
 }
 
