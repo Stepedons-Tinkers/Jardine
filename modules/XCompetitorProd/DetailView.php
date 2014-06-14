@@ -104,7 +104,7 @@ $focus->markAsViewed($current_user->id);
 // END
 
 $modules_actions = array();
-if($current_user->isSupreme || in_array($current_user->rolename, array('Parameter Maintenance Admin','Marketing Manager','Product Manager','Brand Assistant / Marketing Service Assistant'))){
+if($current_user->isSupreme || in_array($current_user->rolename, array('Marketing Manager','Product Manager','Brand Assistant / Marketing Service Assistant'))){
 	if($focus->column_fields['z_cmp_isactive'] != 1)
 		$modules_actions[0]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX=activate&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Activate</a>";
 	else

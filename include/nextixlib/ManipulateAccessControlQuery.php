@@ -180,7 +180,7 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 				$areas[] ="SELECT '{$value}' AS area";
 			$areas_str = implode(' UNION ', $areas);
 				
-			$query_temp = "(SELECT xcustomersid 
+			$query_temp = "(SELECT xcustomersid AS id
 								FROM vtiger_xcustomers
 								INNER JOIN ($areas_str) user_area ON user_area.area = vtiger_xcustomers.z_area)
 								";
@@ -190,7 +190,7 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 			$result = $db->pquery($query_temp, array());
 			
 			if (is_object($result)) {
-				$query = " INNER JOIN $tableName_c $tableName_c ON $tableName_c.xcustomersid = " .
+				$query = " INNER JOIN $tableName_c $tableName_c ON $tableName_c.id = " .
 				"vtiger_xccperson.z_cuc_customer ";
 			}		
 		}
