@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 22:11:39
+<?php /* Smarty version 2.6.18, created on 2014-06-17 22:35:07
          compiled from EditViewHidden.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'EditViewHidden.tpl', 110, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'EditViewHidden.tpl', 121, false),)), $this); ?>
 
 <?php if ($this->_tpl_vars['MODULE'] == 'Emails'): ?>
 	<form name="EditView" method="POST" ENCTYPE="multipart/form-data" action="index.php" onsubmit="VtigerJS_DialogBox.block();">
@@ -121,7 +121,24 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purif
 	</script>
 	'; ?>
 		
-	<form id='secureSaving' name="EditView" method="POST" action="javascriptFailPage.php" onsubmit="">
+	<?php if ($this->_tpl_vars['MODULE'] == 'XActivity'): ?>
+		<form id='secureSaving' name="EditView" method="POST" ENCTYPE="multipart/form-data" action="index.php" onsubmit="">
+		<input type="hidden" name="max_file_size" value="<?php echo $this->_tpl_vars['MAX_FILE_SIZE']; ?>
+">
+		<input type="hidden" name="form">
+		<input type="hidden" name="email_id" value="<?php echo $this->_tpl_vars['EMAILID']; ?>
+">
+		<input type="hidden" name="ticket_id" value="<?php echo $this->_tpl_vars['TICKETID']; ?>
+">
+		<input type="hidden" name="fileid" value="<?php echo $this->_tpl_vars['FILEID']; ?>
+">
+		<input type="hidden" name="old_id" value="<?php echo $this->_tpl_vars['OLD_ID']; ?>
+">
+		<input type="hidden" name="parentid" value="<?php echo $this->_tpl_vars['PARENTID']; ?>
+">	
+	<?php else: ?>
+		<form id='secureSaving' name="EditView" method="POST" action="javascriptFailPage.php" onsubmit="">
+	<?php endif; ?>
 <?php endif; ?>
 
 <input type="hidden" name="pagenumber" value="<?php echo vtlib_purify($_REQUEST['start']); ?>

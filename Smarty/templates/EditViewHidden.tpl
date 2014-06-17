@@ -104,7 +104,18 @@
 	} 
 	</script>
 	{/literal}		
-	<form id='secureSaving' name="EditView" method="POST" action="javascriptFailPage.php" onsubmit="">
+	{if $MODULE eq 'XActivity'}
+		<form id='secureSaving' name="EditView" method="POST" ENCTYPE="multipart/form-data" action="index.php" onsubmit="">
+		<input type="hidden" name="max_file_size" value="{$MAX_FILE_SIZE}">
+		<input type="hidden" name="form">
+		<input type="hidden" name="email_id" value="{$EMAILID}">
+		<input type="hidden" name="ticket_id" value="{$TICKETID}">
+		<input type="hidden" name="fileid" value="{$FILEID}">
+		<input type="hidden" name="old_id" value="{$OLD_ID}">
+		<input type="hidden" name="parentid" value="{$PARENTID}">	
+	{else}
+		<form id='secureSaving' name="EditView" method="POST" action="javascriptFailPage.php" onsubmit="">
+	{/if}
 {/if}
 
 <input type="hidden" name="pagenumber" value="{$smarty.request.start|@vtlib_purify}">

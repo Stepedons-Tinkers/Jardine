@@ -31,10 +31,14 @@ if($current_module == 'XActivity'){
 			$ary[] = array('recordid'=>$workplan, 'value'=>$workplanname, 'target_fieldname'=>'z_ac_workplan');
 		
 			$ary[] = $blockRestriction->getBlocksShown_activity($activitytype);
+			$forcedisable = $blockRestriction->getDisableField_activity(array('z_ac_othersacttypermrk'));
+			$ary[] = array('recordid'=>'', 'value'=>$forcedisable, 'target_fieldname'=>'forcedisable');
 		}
 	}
 	else if($target_fieldname == 'z_ac_activitytype'){
 		$ary[] = $blockRestriction->getBlocksShown_activity($recordid);
+		$forcedisable = $blockRestriction->getDisableField_activity(array('z_ac_othersacttypermrk'));
+		$ary[] = array('recordid'=>'', 'value'=>$forcedisable, 'target_fieldname'=>'forcedisable');
 	}
 }
 

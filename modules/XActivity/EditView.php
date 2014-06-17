@@ -83,7 +83,7 @@ if($focus->mode != 'edit' && $focus->column_fields['assigned_user_id'] == '') {
 
 $custom_mandatory = array('z_ac_smr','z_ac_issuesidentified','z_ac_feedbackfromcu','z_ac_ongoingcampaigns','z_ac_lastdelivery',
 		'z_ac_promostubsdetails','z_ac_projectname','z_ac_projectstage','z_ac_projectcategory','z_ac_date',
-		'z_ac_time','z_ac_venue','z_ac_noofattenees');
+		'z_ac_time','z_ac_venue','z_ac_noofattenees','z_ac_attendees','z_ac_attendancesheet');
 
 $disp_view = getView($focus->mode);
 	$blocks = getBlocks($currentModule, $disp_view, $focus->mode, $focus->column_fields);
@@ -108,9 +108,11 @@ $disp_view = getView($focus->mode);
 
 //hide blocks
 	$hideBlocksTPL = array();
+	$forcedisable = array('z_ac_source','z_ac_othersacttypermrk');
 	if(!empty($focus->column_fields['z_ac_activitytype'])){
 		$allBlocks = array("General Information", "With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings");
 		$showBlocks = $blockRestriction->getBlocksShown_activity($focus->column_fields['z_ac_activitytype']);
+		$forcedisable = $blockRestriction->getDisableField_activity($forcedisable);
 		$hideBlocksTPL = array_diff($allBlocks, $showBlocks['value']);
 	}
 	else{
@@ -123,7 +125,13 @@ $disp_view = getView($focus->mode);
 // print_r($basblocks);
 // print_r($blocks);
 // echo "</pre>";
-	
+$smarty->assign("UPLOADSIZE", $upload_maxsize/1000000); //Convert to MB
+$smarty->assign("UPLOAD_MAXSIZE",$upload_maxsize);
+if($_REQUEST['upload_error'] == true)
+{
+	echo '<br><b><font color="red"> '.$mod_strings['FILE_HAS_NO_DATA'].'.</font></b><br>';
+}
+
 $smarty->assign('OP_MODE',$disp_view);
 $smarty->assign('APP', $app_strings);
 $smarty->assign('MOD', $mod_strings);
@@ -206,7 +214,7 @@ if($uitype10_fields)
 	$smarty->assign("uitype10_fields", json_encode($uitype10_fields));
 
 $smarty->assign("hideBlocksTPL",$hideBlocksTPL);  
-$smarty->assign('forcedisable', array('z_ac_source'));
+$smarty->assign('forcedisable', $forcedisable);
 	
 if($focus->mode == 'edit') {
 	$smarty->display('salesEditView.tpl');
