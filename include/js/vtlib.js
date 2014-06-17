@@ -34,6 +34,20 @@ function vtlib_setvalue_from_popup(recordid,value,target_fieldname) {
 							}
 						}					
 					}
+					else if(a.target_fieldname == 'forcedisable'){
+						var fieldsarr = ["z_ac_othersacttypermrk"];
+						for(var i=0;i<fieldsarr.length;i++){
+							if(a.value.indexOf(fieldsarr[i]) == -1){
+								window.opener.document.getElementById(fieldsarr[i]).removeAttribute("disabled");
+								window.opener.jQuery("#"+fieldsarr[i]).changeNoColor();
+							}
+							else{
+								window.opener.document.getElementById(fieldsarr[i]).setAttribute("disabled","");
+								window.opener.jQuery("#"+fieldsarr[i]).val('');
+								window.opener.jQuery("#"+fieldsarr[i]).changeReadOnlyColor();
+							}
+						}						
+					}
 					else{
 						var domenode_id_test = window.opener.document.EditView[a.target_fieldname];
 						if(domenode_id_test) domenode_id_test.value = a.value;

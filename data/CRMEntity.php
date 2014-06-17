@@ -773,6 +773,10 @@ class CRMEntity {
 				$fld_value = $adb->query_result($result[$tablename], 0, $fieldcolname);
 				$this->$fieldname = $fld_value;
 			}
+		}		
+		else if($module == 'XActivity'){	//ed edited for file upload
+			$this->column_fields['filelocationtype'] = "I";
+			$this->column_fields['filestatus'] = "1";	
 		}
 
 		$this->column_fields["record_id"] = $record;
@@ -850,6 +854,10 @@ class CRMEntity {
 				$fld_value = $adb->query_result($result[$tablename], 0, $fieldcolname);
 				$this->$fieldname = $fld_value;
 			}
+		}		
+		else if($module == 'XActivity'){	//ed edited for file upload
+			$this->column_fields['filelocationtype'] = "I";
+			$this->column_fields['filestatus'] = "1";	
 		}
 
 		$this->column_fields["record_id"] = $record;

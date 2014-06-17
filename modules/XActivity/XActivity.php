@@ -32,8 +32,8 @@
 		return $orderby;
 	}
 
-	function save_module($module) {
-		$this->insertIntoAttachment($this->id,$module);
+	function save_module($module) {		global $log,$adb,$upload_badext;
+		$this->insertIntoAttachment($this->id,$module);				//ed edited		$filename_fieldname = 'z_ac_attendancesheet';		if($_FILES[$filename_fieldname]['name'] != ''){			$errCode=$_FILES[$filename_fieldname]['error'];				if($errCode == 0){					foreach($_FILES as $fileindex => $files)					{						if($files['name'] != '' && $files['size'] > 0){							$filename = $_FILES[$filename_fieldname]['name'];							$filename = from_html(preg_replace('/\s+/', '_', $filename));							$binFile = sanitizeUploadFileName($filename, $upload_badext);							$filename = ltrim(basename(" ".$binFile)); //allowed filename like UTF-8 characters						}					}				}		}elseif($this->mode == 'edit') {			$fileres = $adb->pquery("select {$filename_fieldname} from {$this->table_name} where {$this->table_index}=?", array($this->id));			if ($adb->num_rows($fileres) > 0) {				$filename = $adb->query_result($fileres, 0, 'filename');			}		}		$query = "UPDATE {$this->table_name} SET {$filename_fieldname} = ? WHERE {$this->table_index} = ?"; 		$adb->pquery($query,array($filename,$this->id));		//ed edited end
 	}
 
 	function insertIntoAttachment($id,$module)

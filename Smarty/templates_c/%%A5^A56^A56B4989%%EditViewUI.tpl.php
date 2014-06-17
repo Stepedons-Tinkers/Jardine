@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-04 23:46:12
+<?php /* Smarty version 2.6.18, created on 2014-06-17 17:59:17
          compiled from EditViewUI.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'EditViewUI.tpl', 60, false),array('modifier', 'getTranslatedString', 'EditViewUI.tpl', 92, false),array('modifier', 'getTranslatedCurrencyString', 'EditViewUI.tpl', 447, false),array('modifier', 'substr', 'EditViewUI.tpl', 504, false),)), $this); ?>
@@ -284,6 +284,7 @@ _mass_edit_check" class="small" ><?php endif; ?>
  width=30% align=left class="dvtCellInfo">
 				<textarea <?php echo $this->_tpl_vars['forcedisableStat']; ?>
  value="<?php echo $this->_tpl_vars['fldvalue']; ?>
+" id="<?php echo $this->_tpl_vars['fldname']; ?>
 " name="<?php echo $this->_tpl_vars['fldname']; ?>
 " tabindex="<?php echo $this->_tpl_vars['vt_tab']; ?>
 " class=detailedViewTextBox onFocus="this.className='detailedViewTextBoxOn'" onBlur="this.className='detailedViewTextBox'" rows=2><?php echo $this->_tpl_vars['fldvalue']; ?>

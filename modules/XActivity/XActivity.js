@@ -21,5 +21,7 @@ if (typeof jQuery != 'undefined') {
 			});
 		}
 		jQuery("#assigned_user_id").clearUIType10Dependent();
+		
+		changeDldType('file', true);	//EditViewUI.tpl -> for documents
     });
 } 

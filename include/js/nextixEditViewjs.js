@@ -10,5 +10,13 @@ if (typeof jQuery != 'undefined') {
 		jQuery("input[disabled]").changeReadOnlyColor();
 		jQuery("textarea[disabled]").changeReadOnlyColor();
 		jQuery("select[disabled]").changeReadOnlyColor();
+		
+		jQuery.fn.changeNoColor = function(){
+			return this.each(function(){
+				var a = jQuery(this);
+				a.css('background-color','');
+				a.css('color','');
+			});
+		}		
     });
 } 

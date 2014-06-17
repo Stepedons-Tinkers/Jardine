@@ -3,10 +3,17 @@ class BlockRestriction{
 	private $blocksShown;
 	private $relatedblocksShown;
 	
+	private $z_act_activitytype;
+	private $z_act_acttypcat;
+	
 	public function __construct(){
 	
 	}
 	
+	public function getRelatedblocksShown(){
+		return $this->relatedblocksShown;
+	}
+
 	public function getBlocksShown_activity($activity_record){
 		//get Activity Type Data
 		$activity_mod = 'XActivityType';
@@ -14,30 +21,38 @@ class BlockRestriction{
 		$focus_activity = CRMEntity::getInstance($activity_mod);
 		$focus_activity->retrieve_entity_info($activity_record, $activity_mod);
 		$focus_activity->id  = $activity_record;			
-		$z_act_activitytype = $focus_activity->column_fields['z_act_activitytype'];
-		$z_act_acttypcat = $focus_activity->column_fields['z_act_acttypcat'];
+		$this->z_act_activitytype = $focus_activity->column_fields['z_act_activitytype'];
+		$this->z_act_acttypcat = $focus_activity->column_fields['z_act_acttypcat'];
 		
 		$blocksShown = array('General Information');
-		if(in_array($z_act_activitytype, array('Retail Visits (Traditional Hardware)','Retail Visit (Merienda)')))
+		if(in_array($this->z_act_activitytype, array('Retail Visits (Traditional Hardware)','Retail Visit (Merienda)')))
 			array_push($blocksShown,'Retail Visit');
-		// else if(in_array($z_act_activitytype, array('Sub-Dealer / Wholesaler Visit','Dealer Depot Visits')))	
+		// else if(in_array($this->z_act_activitytype, array('Sub-Dealer / Wholesaler Visit','Dealer Depot Visits')))	
 			// array_push($blocksShown,'Dealer Visit');
-		else if(in_array($z_act_activitytype, array('DIY Visits','Supermarket Visits')))	
+		else if(in_array($this->z_act_activitytype, array('DIY Visits','Supermarket Visits')))	
 			array_push($blocksShown,'DIY or Supermarket');
-		else if(in_array($z_act_activitytype, array('Company Work-with Co-SMR/ Supervisor')))	
+		else if(in_array($this->z_act_activitytype, array('Company Work-with Co-SMR/ Supervisor')))	
 			array_push($blocksShown,'With CoSMRs');
-		else if(in_array($z_act_acttypcat, array('Training')))	
+		else if(in_array($this->z_act_activitytype, array('KI Visits - On-site')))	
+			array_push($blocksShown,'Project Visit');
+		else if(in_array($this->z_act_acttypcat, array('Training')))	
 			array_push($blocksShown,'Trainings');
 		
 		$this->blocksShown = $blocksShown;
 		
 		//related
-		$relatedblocksShown = array('JDI Product Stock Check','JDI Merchandising Check','Competitor Product Stock Check','Marketing Intel','Project Requirement','Customer Contact Person');
-		if(in_array($z_act_activitytype, array('End-User Visit - Homeowners High-End', 'End-User Visit - Homeowners Middle Class'))){
+		$relatedblocksShown = array('Marketing Intel','Customer Contact Person');
+		if(in_array($this->z_act_activitytype, array('End-User Visit - Homeowners High-End', 'End-User Visit - Homeowners Middle Class'))){
 			array_push($relatedblocksShown,'Products');
 		}
-		else if(in_array($z_act_activitytype, array('DIY Visits','Supermarket Visits'))){
+		else if(in_array($this->z_act_activitytype, array('DIY Visits','Supermarket Visits'))){
 			array_push($relatedblocksShown,'DIY or Supermarket Photos');
+		}
+		else if(in_array($this->z_act_activitytype, array('Retail Visits (Traditional Hardware)','Retail Visit (Merienda)'))){
+			array_push($relatedblocksShown,'JDI Product Stock Check','JDI Merchandising Check','Competitor Product Stock Check');
+		}
+		else if(in_array($this->z_act_activitytype, array('KI Visits - On-site','KI Visits - Office'))){
+			array_push($relatedblocksShown,'Project Requirement');
 		}
 		$this->relatedblocksShown = $relatedblocksShown;
 		
@@ -45,9 +60,14 @@ class BlockRestriction{
 		return $ary;
 	}
 	
-	public function getRelatedblocksShown(){
-		return $this->relatedblocksShown;
+	public function getDisableField_activity($forcedisable=array()){
+		if(in_array($this->z_act_activitytype, array('Others'))){
+			$forcedisable = array_diff($forcedisable,array('z_ac_othersacttypermrk'));
+		}
+		return $forcedisable;
 	}
+
+	
 }
 
 

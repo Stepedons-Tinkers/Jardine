@@ -3387,6 +3387,10 @@ function getWorkplanEntriesDetail($workplan_arr){
 	global $adb;
 	$data = array();
 	if(!empty($workplan_arr)){
+		foreach($workplan_arr as $val){
+			$data[$val] = array();
+		}
+		
 		$str = implode("','",$workplan_arr);
 		$query = "SELECT * 
 					FROM vtiger_xworkplanentry 
