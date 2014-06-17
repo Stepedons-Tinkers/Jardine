@@ -41,13 +41,16 @@ if(!empty($deletecheck) && $adb->query_result($deletecheck, 0, 'deleted') == 1) 
 		$disk_file_size = filesize($filepath.$saved_filename);
 		$filesize = $disk_file_size + ($disk_file_size % 1024);
 		$fileContent = fread(fopen($filepath.$saved_filename, "r"), $filesize);
-	
+		$filePath = str_replace("/","(^_^)",$filepath.$saved_filename);
+		header( "Location: http://115.85.42.163:3000/downloader/".$filePath);
+		/*
 		header("Content-type: $fileType");
 		header("Pragma: public");
 		header("Cache-Control: private");
 		header("Content-Disposition: attachment; filename=$name");
 		header("Content-Description: PHP Generated Data");
 		echo $fileContent;
+		*/
 	}
 	else
 	{
