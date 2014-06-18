@@ -11,14 +11,15 @@ require_once 'include/Webservices/Utils.php';
 require_once 'include/Webservices/ModuleTypes.php';
 require_once 'include/utils/CommonUtils.php';
 
-	function vtws_sync($mtime,$elementType,$syncType,$user){
+	function vtws_sync($mtime,$elementType,$syncType){
 		global $adb, $recordString,$modifiedTimeString;
         
-		$numRecordsLimit = 100;
+		$numRecordsLimit = 1;
 		$ignoreModules = array("Users");
 		$typed = true;
 		$dformat = "Y-m-d H:i:s";
-		$datetime = date($dformat, $mtime);
+		//2014-05-18 00:00:00
+		$datetime = $mtime;//date($dformat, $mtime);
 		$setypeArray = array();
 		$setypeData = array();
 		$setypeHandler = array();
@@ -117,8 +118,6 @@ require_once 'include/utils/CommonUtils.php';
 			$maxModifiedTime = $datetime;
 		}
 
-
-
 		foreach($accessableModules as $elementType){
 			$handler = vtws_getModuleHandlerFromName($elementType, $user);
 			$moduleMeta = $handler->getMeta();
@@ -168,14 +167,17 @@ require_once 'include/utils/CommonUtils.php';
 					if(!$moduleMeta->hasAccess()){
 						continue;
 					}
-					$output["deleted"][] = vtws_getId($moduleMeta->getEntityId(), $key);
+					$output["deleted"][] = $key;//vtws_getId($moduleMeta->getEntityId(), $key);
 				}
 				else{
 					if(!$moduleMeta->hasAccess() ||!$moduleMeta->hasPermission(EntityMeta::$RETRIEVE,$key)){
 						continue;
 					}
 					try{
-						$output["updated"][] = DataTransform::sanitizeDataWithColumn($arre,$moduleMeta);;
+						//echo "<pre>";
+						//print_r($arre);
+						//echo "</pre>";
+						$output["updated"][] = $arre;//DataTransform::sanitizeDataWithColumn($arre,$moduleMeta);;
 					}catch(WebServiceException $e){
 						//ignore records the user doesn't have access to.
 						continue;
