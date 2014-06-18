@@ -36,7 +36,8 @@ include("AuthToken.php");
 		*/
 		
 		$salt = substr($username, 0, 2);
-		$salt = '$1$' . $salt . '$';
+		// $salt = '$1$' . $salt . '$';
+		$salt = '$1$' . str_pad($salt, 9, '0');
 		$encrypted_password = crypt($pwd, $salt);	
 		
 		if(strcmp($password,$encrypted_password)!==0){
