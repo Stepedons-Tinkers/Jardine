@@ -49,6 +49,7 @@ if($focus->mode != 'edit') {
 		$focus->column_fields['z_smr_firstname'] = $value['first_name'];
 		$focus->column_fields['z_smr_lastname'] = $value['last_name'];
 		$focus->column_fields['z_area'] = $value['z_area'];
+		$focus->column_fields['z_smr_businessunit'] = $value['z_users_businessunit'];
 		break;
 	}
 }

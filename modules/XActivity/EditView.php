@@ -50,6 +50,10 @@ if($record) {
 }
 else{
 	$focus->column_fields['z_ac_source'] = 'Web';
+	if(!empty($current_user->businessunit['id'])){
+		$_REQUEST['z_ac_businessunit'] = $current_user->businessunit['id'];
+		$_REQUEST['z_ac_businessunit_type'] = 'XBusinessUnit';
+	}
 }
 
 if($isduplicate == 'true') {

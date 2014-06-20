@@ -28,6 +28,8 @@ if (typeof jQuery != 'undefined') {
 								jQuery("#z_smr_lastname").val(myData.last_name);
 								var area = myData.z_area.split(' |##| ');
 								jQuery("#z_area").val(area);
+								jQuery("#z_smr_businessunit").val(myData.z_users_businessunit);
+								jQuery("#z_smr_businessunit_display").val(myData.z_users_businessunit_display);
 								
 							  },
 					 async:   false

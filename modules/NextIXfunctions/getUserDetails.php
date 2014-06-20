@@ -12,6 +12,12 @@ function XSMR_assignedto(){
 		$data = $value;
 		break;
 	}
+	// $data['z_users_businessunit_name'] = getBusinessUnitName($data['z_users_businessunit']);
+	$data['z_users_businessunit_display'] = '';
+	if(!empty($data['z_users_businessunit'])){
+		$businessunit = getEntityName('XBusinessUnit',array($data['z_users_businessunit']));
+		$data['z_users_businessunit_display'] = $businessunit[$data['z_users_businessunit']];
+	}
 	
 	echo "___THIS_IS_THE_INDICATOR___";
 	echo json_encode($data);	

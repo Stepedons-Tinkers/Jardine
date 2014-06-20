@@ -3275,6 +3275,25 @@ function getSupremeAdmins(){
 	return $data;
 }
 
+function getBusinessUnitName($businessunitid=''){
+	global $adb;
+	
+	$data = "";
+	if(!empty($businessunitid)){
+		$query = "SELECT z_bu_buname 
+					FROM vtiger_xbusinessunit
+					WHERE xbusinessunitid=?";
+		$result = $adb->pquery($query,array($businessunitid));
+		$noofrows = $adb->num_rows($result);
+		if($noofrows) {
+			while($resultrow = $adb->fetchByAssoc($result)) {
+				$data = $resultrow['z_bu_buname'];
+			}
+		}		
+	}
+	return $data;
+}
+
 function getUserDetails_id($userIdarr){
 	global $adb;
 	$str = implode("','",$userIdarr);

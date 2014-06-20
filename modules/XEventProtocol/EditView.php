@@ -30,6 +30,13 @@ if($record) {
 	$focus->mode = 'edit';
 	$focus->retrieve_entity_info($record, $currentModule);
 }
+else{
+	if(!empty($current_user->businessunit['id'])){
+		$_REQUEST['z_evp_businessunit'] = $current_user->businessunit['id'];
+		$_REQUEST['z_evp_businessunit_type'] = 'XBusinessUnit';
+	}
+}
+
 if($isduplicate == 'true') {
 	$focus->id = '';
 	$focus->mode = '';

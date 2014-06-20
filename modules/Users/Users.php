@@ -675,6 +675,10 @@ class Users extends CRMEntity {
 		//ed edited 
 		$this->rolename = getRoleName($this->roleid);	//include/utils/UserInfoUtil.php
 		$this->area = explode(' |##| ',$this->column_fields['z_area']);
+		$businessunitname = getBusinessUnitName($this->column_fields['z_users_businessunit']);
+		$this->businessunit = array('id'=>$this->column_fields['z_users_businessunit'],
+									'name'=>$businessunitname);
+								
 		//Supreme Admin
 		$this->isSupreme = 0;
 		$supremeAdmins = getSupremeAdmins(); 	//include/utils/CommonUtils.php
