@@ -21,7 +21,12 @@ function vtlib_setvalue_from_popup(recordid,value,target_fieldname) {
 					if(a.target_fieldname == 'blocksShown'){
 						var blocksarr = ["General Information", "With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings"];
 						for(var i=0;i<blocksarr.length;i++){
-							if(a.value.indexOf(blocksarr[i]) == -1){
+							var as = [];
+							jQuery.each(a.value, function(x,y){
+								as.push(y);
+							});
+							if(jQuery.inArray(blocksarr[i], as) == -1){
+							// if(a.value.indexOf(blocksarr[i]) == -1){
 								window.opener.document.getElementById(blocksarr[i]).style.display = 'none';
 
 								window.opener.jQuery("[id='"+blocksarr[i]+"']").find('input').val('');
@@ -35,9 +40,13 @@ function vtlib_setvalue_from_popup(recordid,value,target_fieldname) {
 						}					
 					}
 					else if(a.target_fieldname == 'forcedisable'){
-						var fieldsarr = ["z_ac_othersacttypermrk"];
+						var fieldsarr = ["z_ac_othersacttypermrk","z_ac_reasonremarks","z_ac_details"];
 						for(var i=0;i<fieldsarr.length;i++){
-							if(a.value.indexOf(fieldsarr[i]) == -1){
+							var as = [];
+							jQuery.each(a.value, function(x,y){
+								as.push(y);
+							});
+							if(jQuery.inArray(fieldsarr[i], as) == -1){
 								window.opener.document.getElementById(fieldsarr[i]).removeAttribute("disabled");
 								window.opener.jQuery("#"+fieldsarr[i]).changeNoColor();
 							}

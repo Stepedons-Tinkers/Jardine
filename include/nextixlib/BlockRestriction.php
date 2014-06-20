@@ -61,8 +61,20 @@ class BlockRestriction{
 	}
 	
 	public function getDisableField_activity($forcedisable=array()){
+		$manipulate_forcedisable_fields = array('z_ac_othersacttypermrk','z_ac_reasonremarks','z_ac_details');
+		foreach($manipulate_forcedisable_fields as $value){
+			if(!in_array($value,$forcedisable))
+				$forcedisable[] = $value;
+		}
+
 		if(in_array($this->z_act_activitytype, array('Others'))){
 			$forcedisable = array_diff($forcedisable,array('z_ac_othersacttypermrk'));
+		}
+		else if(in_array($this->z_act_activitytype, array('Waiting','Travel'))){
+			$forcedisable = array_diff($forcedisable,array('z_ac_reasonremarks'));
+		}
+		else if(in_array($this->z_act_activitytype, array('Admin Work'))){
+			$forcedisable = array_diff($forcedisable,array('z_ac_details'));
 		}
 		return $forcedisable;
 	}

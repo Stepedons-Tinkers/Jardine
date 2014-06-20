@@ -108,7 +108,7 @@ $disp_view = getView($focus->mode);
 
 //hide blocks
 	$hideBlocksTPL = array();
-	$forcedisable = array('z_ac_source','z_ac_othersacttypermrk');
+	$forcedisable = array('z_ac_source','z_ac_othersacttypermrk','z_ac_reasonremarks','z_ac_details');
 	if(!empty($focus->column_fields['z_ac_activitytype'])){
 		$allBlocks = array("General Information", "With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings");
 		$showBlocks = $blockRestriction->getBlocksShown_activity($focus->column_fields['z_ac_activitytype']);
