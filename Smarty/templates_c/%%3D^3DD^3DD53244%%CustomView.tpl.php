@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-08 17:20:42
+<?php /* Smarty version 2.6.18, created on 2014-06-21 17:33:33
          compiled from CustomView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'CustomView.tpl', 92, false),)), $this); ?>
@@ -883,4 +883,4 @@ function stdfilterdateValidate()
 standardFilterDisplay();
 '; ?>
 
-</script>
+</script>

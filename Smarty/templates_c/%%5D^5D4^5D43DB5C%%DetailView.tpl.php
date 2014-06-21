@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 22:14:30
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:23
          compiled from DetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'DetailView.tpl', 53, false),array('modifier', 'vtiger_imageurl', 'DetailView.tpl', 235, false),array('modifier', 'getTranslatedString', 'DetailView.tpl', 246, false),array('modifier', 'count', 'DetailView.tpl', 267, false),array('modifier', 'in_array', 'DetailView.tpl', 342, false),array('modifier', 'replace', 'DetailView.tpl', 386, false),)), $this); ?>
@@ -1282,4 +1282,4 @@ getTagCloud();
 
 <?php if ($this->_tpl_vars['MODULE'] == 'Leads' || $this->_tpl_vars['MODULE'] == 'Contacts' || $this->_tpl_vars['MODULE'] == 'Accounts' || $this->_tpl_vars['MODULE'] == 'Campaigns' || $this->_tpl_vars['MODULE'] == 'Vendors' || $this->_tpl_vars['MODULE'] == 'HomeOwner'): ?>
 	<form name="SendMail"><div id="sendmail_cont" style="z-index:100001;position:absolute;"></div></form>
-<?php endif; ?>
+<?php endif; ?>

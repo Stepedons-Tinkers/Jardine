@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 22:50:31
+<?php /* Smarty version 2.6.18, created on 2014-06-21 17:41:52
          compiled from CreateView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'CreateView.tpl', 45, false),array('modifier', 'vtiger_imageurl', 'CreateView.tpl', 100, false),array('modifier', 'getTranslatedString', 'CreateView.tpl', 112, false),array('modifier', 'cat', 'CreateView.tpl', 118, false),array('modifier', 'in_array', 'CreateView.tpl', 193, false),)), $this); ?>
@@ -502,4 +502,4 @@ unset($_smarty_tpl_vars);
 <?php endforeach; endif; unset($_from); ?>
 </script>
 <?php endif; ?>
-<!-- END -->
+<!-- END -->

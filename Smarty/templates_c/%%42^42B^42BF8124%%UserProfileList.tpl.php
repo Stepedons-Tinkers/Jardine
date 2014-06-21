@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 22:13:33
+<?php /* Smarty version 2.6.18, created on 2014-06-21 18:55:23
          compiled from UserProfileList.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'UserProfileList.tpl', 18, false),)), $this); ?>
@@ -163,4 +163,3 @@ function DeleteProfile(obj,profileid)
         );
 }
 </script>
-

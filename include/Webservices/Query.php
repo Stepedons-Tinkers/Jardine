@@ -66,4 +66,21 @@
 		return $result;
 	}
 	
+	function vtws_querypicklist($q,$user){
+		
+		global $adb;
+		$q = str_replace ("\"","",$q);
+		$result = $adb->pquery($q,array());
+		
+		$data = array();
+		$i = 0;
+		while( $resultrow = $adb->fetchByAssoc($result)){
+			$data[$i] = $resultrow;
+			$i++;
+		}
+
+		return $data;
+	}
+	
+	
 ?>

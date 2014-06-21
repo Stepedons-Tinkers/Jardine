@@ -33,5 +33,10 @@ include_once('vtlib/Vtiger/Module.php');
 // $products = Vtiger_Module::getInstance('XCustomers');
 // $products->setRelatedList(Vtiger_Module::getInstance('XCCPerson'), 'Customer Contact Person',Array('ADD'),'get_dependents_list');
 
+// $products = Vtiger_Module::getInstance('XCustomers');
+// $products->setRelatedList(Vtiger_Module::getInstance('XCustomerProducts'), 'Customer Products',Array('ADD'),'get_dependents_list');
+
+// $products = Vtiger_Module::getInstance('XSalesProtocols');
+// $products->setRelatedList(Vtiger_Module::getInstance('Documents'), 'Sales Protocol Files',Array('ADD'),'get_attachments');
 
 ?>

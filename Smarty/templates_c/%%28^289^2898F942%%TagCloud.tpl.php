@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 21:44:55
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:26:14
          compiled from Home/TagCloud.tpl */ ?>
 <div id="tagcloud" style="overflow: auto; width: 100%; padding-left: 2%; padding-right: 3%; min-height: 250px;" >
 	<img src='<?php echo $this->_tpl_vars['IMAGE_PATH']; ?>

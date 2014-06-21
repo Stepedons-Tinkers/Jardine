@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-17 22:35:07
+<?php /* Smarty version 2.6.18, created on 2014-06-21 17:30:06
          compiled from EditViewHidden.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purify', 'EditViewHidden.tpl', 121, false),)), $this); ?>
@@ -161,4 +161,4 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtlib_purif
 <input type="hidden" name="return_viewname" value="<?php echo $this->_tpl_vars['RETURN_VIEWNAME']; ?>
 ">
 <input type="hidden" name="createmode" value="<?php echo $this->_tpl_vars['CREATEMODE']; ?>
-" />
+" />

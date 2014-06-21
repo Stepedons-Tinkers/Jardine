@@ -55,10 +55,10 @@
 		
 		
 		$entity = $handler->retrieves($ids);
-		$details = array("details" => $entity);
+		//$details =  $entity;
 		
 		VTWS_PreserveGlobal::flush();
-		return $details;
+		return $entity;
 	}
 	
 	function vtws_retrieve($id, $user){

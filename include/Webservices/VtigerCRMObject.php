@@ -120,7 +120,7 @@ class VtigerCRMObject{
 		foreach($ids as $fieldname => $id){
 			if(!empty($id)){
 				$this->instance->retrieve_entity_info($id,$elementType);
-				$this->details[$id] = $this->instance->column_fields;
+				$this->details[] = array('id'=>$id,'details'=>$this->instance->column_fields);
 			}
 		}
 		$error = $adb->hasFailedTransaction();

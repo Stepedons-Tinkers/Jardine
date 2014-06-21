@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 22:11:39
+<?php /* Smarty version 2.6.18, created on 2014-06-21 17:30:06
          compiled from DisplayFields.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'in_array', 'DisplayFields.tpl', 27, false),)), $this); ?>
@@ -36,4 +36,4 @@ unset($_smarty_tpl_vars);
  ?>
 	<?php endforeach; endif; unset($_from); ?>
    </tr>
-<?php endforeach; endif; unset($_from); ?>
+<?php endforeach; endif; unset($_from); ?>

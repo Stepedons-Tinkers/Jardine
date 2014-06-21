@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 22:13:42
+<?php /* Smarty version 2.6.18, created on 2014-06-21 18:55:33
          compiled from ProfileDetailView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'ProfileDetailView.tpl', 77, false),array('modifier', 'getTranslatedString', 'ProfileDetailView.tpl', 249, false),)), $this); ?>
@@ -517,4 +517,3 @@ function fnToggleVIew(obj){
 '; ?>
 
 </script>
-

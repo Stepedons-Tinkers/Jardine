@@ -35,6 +35,7 @@ function deactivate(){
 }
 
 function approve(){
+	include_once('include/custom_workflows/Notifications.php');
 	global $current_user;
 
 	$currentModule = 'XCustomers';
@@ -43,8 +44,9 @@ function approve(){
     $focus = CRMEntity::getInstance($currentModule);
     $focus->retrieve_entity_info($record, $currentModule);
     $focus->id  = "x".$record;
-
+	
 	approveCustomers($focus);
+	approveCustomers_notification($focus);	
 	
 	header("Location: index.php?action=DetailView&module=XCustomers&record=$record");
 }

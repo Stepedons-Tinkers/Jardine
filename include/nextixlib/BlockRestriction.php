@@ -79,7 +79,15 @@ class BlockRestriction{
 		return $forcedisable;
 	}
 
-	
+	public function getBlocksShown_customer($z_cu_customertype){
+		//related
+		$relatedblocksShown = array('Customer Contact Person');
+		if(in_array($z_cu_customertype, array('Dealer', 'Sub-dealer', 'General Trade', 'Modern Trade'))){
+			array_push($relatedblocksShown,'Customer Products');
+		}
+
+		$this->relatedblocksShown = $relatedblocksShown;
+	}	
 }
 
 

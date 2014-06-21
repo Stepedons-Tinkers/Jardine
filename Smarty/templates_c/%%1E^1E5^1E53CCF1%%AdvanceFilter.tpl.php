@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 21:48:39
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:08
          compiled from AdvanceFilter.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'parse_calendardate', 'AdvanceFilter.tpl', 13, false),array('modifier', 'getTranslatedString', 'AdvanceFilter.tpl', 27, false),array('modifier', 'vtiger_imageurl', 'AdvanceFilter.tpl', 186, false),array('modifier', 'addslashes', 'AdvanceFilter.tpl', 235, false),)), $this); ?>
@@ -314,4 +314,4 @@ function addConditionGroup(parentNodeId) {
 ';
 	</script>
 	<?php endforeach; endif; unset($_from); ?>
-</div>
+</div>

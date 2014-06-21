@@ -9,6 +9,7 @@
  ************************************************************************************/
 require_once('Smarty_setup.php');
 require_once('user_privileges/default_module_view.php');
+require_once("include/nextixlib/BlockRestriction.php");
 
 global $mod_strings, $app_strings, $currentModule, $current_user, $theme, $singlepane_view;
 
@@ -16,6 +17,7 @@ $focus = CRMEntity::getInstance($currentModule);
 
 $tool_buttons = Button_Check($currentModule);
 $smarty = new vtigerCRM_Smarty();
+$blockRestriction = new BlockRestriction();
 
 $record = $_REQUEST['record'];
 $isduplicate = vtlib_purify($_REQUEST['isDuplicate']);
@@ -57,6 +59,12 @@ if ($mod_seq_field != null) {
 $smarty->assign('MOD_SEQ_ID', $mod_seq_id);
 // END
 
+//hide blocks
+	if(!empty($focus->column_fields['z_cu_customertype'])){
+		$blockRestriction->getBlocksShown_customer($focus->column_fields['z_cu_customertype']);
+	}
+//hide blocks end	
+
 $validationArray = split_validationdataArray(getDBValidationData($focus->tab_name, $tabid));
 $smarty->assign('VALIDATION_DATA_FIELDNAME',$validationArray['fieldname']);
 $smarty->assign('VALIDATION_DATA_FIELDDATATYPE',$validationArray['datatype']);
@@ -75,6 +83,16 @@ $smarty->assign('SinglePane_View', $singlepane_view);
 
 if($singlepane_view == 'true') {
 	$related_array = getRelatedLists($currentModule,$focus);
+	
+	//hide related blocks
+	$relatedblocksShown = $blockRestriction->getRelatedblocksShown();
+	foreach($related_array as $relatedname => $value){
+		if(!in_array($relatedname,$relatedblocksShown)){
+			unset($related_array[$relatedname]);
+		}
+	}
+	//hide related blocks end	
+	
 	$smarty->assign("RELATEDLISTS", $related_array);
 		
 	require_once('include/ListView/RelatedListViewSession.php');

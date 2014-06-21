@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 23:31:52
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:24
          compiled from RelatedListNew.tpl */ ?>
 <script language="JavaScript" type="text/javascript" src="modules/PriceBooks/PriceBooks.js"></script>
 <script language="JavaScript" type="text/javascript" src="include/js/ListView.js"></script>
@@ -89,4 +89,3 @@ function OpenWindow(url)
 	openPopUp('xAttachFile',this,url,'attachfileWin',380,375,'menubar=no,toolbar=no,location=no,status=no,resizable=no');	
 }
 </script>
-

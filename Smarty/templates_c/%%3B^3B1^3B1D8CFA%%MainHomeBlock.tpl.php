@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 21:44:50
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:46
          compiled from Home/MainHomeBlock.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'Home/MainHomeBlock.tpl', 3, false),array('modifier', 'vtiger_imageurl', 'Home/MainHomeBlock.tpl', 19, false),)), $this); ?>
@@ -146,4 +146,4 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslat
 ','<?php echo $this->_tpl_vars['tablestuff']['Stufftitle']; ?>
 ','<?php echo $this->_tpl_vars['tablestuff']['Stufftype']; ?>
 ');
-</script>	
+</script>	

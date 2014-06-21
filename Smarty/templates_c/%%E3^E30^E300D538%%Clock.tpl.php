@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 21:44:48
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:04
          compiled from Clock.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'Clock.tpl', 21, false),)), $this); ?>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-05 13:58:20
+<?php /* Smarty version 2.6.18, created on 2014-06-21 18:21:25
          compiled from modules/PickList/DeletePickList.tpl */ ?>
 <div style="position:relative;display: block;" class="layerPopup">
 	<table border="0" cellpadding="5" cellspacing="0" class="layerHeadingULine">
@@ -79,4 +79,4 @@
 		</tr>	
 		<?php endif; ?>
 	</table>
-</div>
+</div>

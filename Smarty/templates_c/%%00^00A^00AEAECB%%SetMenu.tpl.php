@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 21:45:09
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:59
          compiled from SetMenu.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'SetMenu.tpl', 30, false),array('modifier', 'vtiger_imageurl', 'SetMenu.tpl', 65, false),)), $this); ?>
@@ -81,4 +81,4 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslat
 							}
 '; ?>
 
-						</script>
+						</script>

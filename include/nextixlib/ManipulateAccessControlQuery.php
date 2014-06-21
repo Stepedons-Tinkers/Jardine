@@ -47,7 +47,7 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 				$restrictionType = "HierarchyPeer_Area_field";
 			}
 		}
-		else if(in_array($this->module, array('XCCPerson'))){
+		else if(in_array($this->module, array('XCCPerson','XCustomerProducts'))){
 			if(in_array($this->rolename,$userrole_1)){
 				$restrictionType = "Customer_field";
 			}
@@ -192,6 +192,27 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 			if (is_object($result)) {
 				$query = " INNER JOIN $tableName_c $tableName_c ON $tableName_c.id = " .
 				"vtiger_xccperson.z_cuc_customer ";
+			}		
+		}
+		else if ($this->module == 'XCustomerProducts' && !empty($this->area)) {
+			$tableName_c = 'vt_tmp_u_c' . $this->userid;
+			$areas = array();
+			foreach($this->area as $value)
+				$areas[] ="SELECT '{$value}' AS area";
+			$areas_str = implode(' UNION ', $areas);
+				
+			echo $query_temp = "(SELECT xcustomersid AS id
+								FROM vtiger_xcustomers
+								INNER JOIN ($areas_str) user_area ON user_area.area = vtiger_xcustomers.z_area)
+								";
+			$query_temp = "create temporary table IF NOT EXISTS $tableName_c(id int(11) primary key) ignore " .
+					$query_temp;
+			$db = PearDatabase::getInstance();
+			$result = $db->pquery($query_temp, array());
+			
+			if (is_object($result)) {
+				$query = " INNER JOIN $tableName_c $tableName_c ON $tableName_c.id = " .
+				"vtiger_xcustomerproducts.z_cp_customer ";
 			}		
 		}
 		return $query;

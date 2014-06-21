@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-17 17:59:17
+<?php /* Smarty version 2.6.18, created on 2014-06-21 17:30:06
          compiled from EditViewUI.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'EditViewUI.tpl', 60, false),array('modifier', 'getTranslatedString', 'EditViewUI.tpl', 92, false),array('modifier', 'getTranslatedCurrencyString', 'EditViewUI.tpl', 447, false),array('modifier', 'substr', 'EditViewUI.tpl', 504, false),)), $this); ?>
@@ -2237,4 +2237,4 @@ _mass_edit_check" class="small" ><?php endif; ?>
 					})
 				</script>
 			</td>
-		<?php endif; ?>
+		<?php endif; ?>

@@ -115,12 +115,12 @@
 		}
 
 		foreach($elements as $element){
-			if ($meta->hasMandatoryFields($element)) {
+			//if ($meta->hasMandatoryFields($element)) {
 				$entity[] = $handler->updates($elementType,$element);
 				VTWS_PreserveGlobal::flush();
-			} else {
-				return null;
-			}
+			//} else {
+			//	return null;
+			//}
 		}
 
 		return array("update"=>$entity);

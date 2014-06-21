@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 22:14:32
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:23
          compiled from viewBox.tpl */ ?>
 <script>
 function callSearch(searchtype,hview,module,searchfield)

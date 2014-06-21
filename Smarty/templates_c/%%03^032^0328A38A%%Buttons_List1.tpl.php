@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 21:45:01
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:52
          compiled from Buttons_List1.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'Buttons_List1.tpl', 15, false),array('modifier', 'vtiger_imageurl', 'Buttons_List1.tpl', 41, false),)), $this); ?>
@@ -198,4 +198,4 @@ tbarExport.gif" alt="<?php echo $this->_tpl_vars['APP']['LBL_EXPORT']; ?>
 		</table>
 	</td>
 </tr>
-</TABLE>
+</TABLE>

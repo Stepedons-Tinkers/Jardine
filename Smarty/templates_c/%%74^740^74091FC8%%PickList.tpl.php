@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-01 14:11:15
+<?php /* Smarty version 2.6.18, created on 2014-06-21 18:20:50
          compiled from modules/PickList/PickList.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'modules/PickList/PickList.tpl', 21, false),)), $this); ?>
@@ -104,4 +104,4 @@ unset($_smarty_tpl_vars);
 
 <div id="actiondiv" style="display:block;position:absolute;"></div>
 <div id="editdiv" style="display:block;position:absolute;width:510px;"></div>
-			
+			

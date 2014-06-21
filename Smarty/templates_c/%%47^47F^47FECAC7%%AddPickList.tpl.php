@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-01 14:11:29
+<?php /* Smarty version 2.6.18, created on 2014-06-21 18:21:00
          compiled from modules/PickList/AddPickList.tpl */ ?>
 <div style="position:relative;display: block;" id="orgLay" class="layerPopup">
 	<table border="0" cellpadding="5" cellspacing="0" class="layerHeadingULine">
@@ -71,4 +71,4 @@
 			</td>			
 		</tr>
 	</table>
-</div>
+</div>

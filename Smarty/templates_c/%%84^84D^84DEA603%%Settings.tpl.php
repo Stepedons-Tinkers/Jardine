@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 21:45:01
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:52
          compiled from Settings.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'Settings.tpl', 17, false),array('modifier', 'getTranslatedString', 'Settings.tpl', 43, false),)), $this); ?>
@@ -89,4 +89,4 @@ if ($this->_foreach['itr']['total'] > 0):
 	</table>
 	</td>
 </tr>
-</table>
+</table>

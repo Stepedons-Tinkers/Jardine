@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-05-30 21:48:38
+<?php /* Smarty version 2.6.18, created on 2014-06-21 15:24:08
          compiled from Buttons_List.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'getTranslatedString', 'Buttons_List.tpl', 18, false),array('modifier', 'vtiger_imageurl', 'Buttons_List.tpl', 34, false),)), $this); ?>
@@ -220,4 +220,4 @@ findduplicates.gif" alt="<?php echo $this->_tpl_vars['APP']['LBL_FIND_DUPICATES'
 	</td>
 </tr>
 <tr><td style="height:2px"></td></tr>
-</TABLE>
+</TABLE>
