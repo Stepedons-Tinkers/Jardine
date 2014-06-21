@@ -75,7 +75,7 @@ if (typeof jQuery != 'undefined') {
 				 type : 'post',
 				 data : datastring,
 				 success: function(result) {
-								console.log(result);
+								// alert(result);
 								var data = result.split("##############BELOWISDATA##############");
 								returnData = data[1];    
 						  },
