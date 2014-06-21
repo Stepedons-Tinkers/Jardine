@@ -50,10 +50,10 @@ class NextIXOverwriteRestriction		//used in util/UserInfoUtil.php
 		
 		// $groupedModules = new GroupedModules();
 		$mod_func = 'perm'.$this->module;
-		// //ALL
-		// if($this->module == 'NextIXfunctions'){
-			// return "yes";
-		// }
+		//ALL
+		if($this->module == 'NextIXfunctions'){
+			return "yes";
+		}
 		// if($this->actionname == 'Popup'){
 			// return "yes";
 		// }
