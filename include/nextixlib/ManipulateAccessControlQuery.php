@@ -201,7 +201,7 @@ class ManipulateAccessControlQuery {	//data/CRMEntity.php ->getNonAdminAccessCon
 				$areas[] ="SELECT '{$value}' AS area";
 			$areas_str = implode(' UNION ', $areas);
 				
-			echo $query_temp = "(SELECT xcustomersid AS id
+			$query_temp = "(SELECT xcustomersid AS id
 								FROM vtiger_xcustomers
 								INNER JOIN ($areas_str) user_area ON user_area.area = vtiger_xcustomers.z_area)
 								";

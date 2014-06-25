@@ -109,7 +109,7 @@ class NextIXOverwriteRestriction		//used in util/UserInfoUtil.php
 				if($this->record_id != ''){
 					$focus_this = CRMEntity::getInstance($this->module);
 					$focus_this->id = $this->record_id;
-					$focus_this->retrieve_entity_info($this->record_id, $this->module);
+					$focus_this->retrieve_entity_info_nextix($this->record_id, $this->module);
 					$area_temp = explode(' |##| ',$focus_this->column_fields['z_area']);
 					$coArea = array_intersect($area_temp, $this->current_user->area);
 					if(empty($coArea))
@@ -122,11 +122,11 @@ class NextIXOverwriteRestriction		//used in util/UserInfoUtil.php
 				if($this->record_id != ''){
 					$focus_this = CRMEntity::getInstance($this->module);
 					$focus_this->id = $this->record_id;
-					$focus_this->retrieve_entity_info($this->record_id, $this->module);
+					$focus_this->retrieve_entity_info_nextix($this->record_id, $this->module);
 						
 					$focus_customer = CRMEntity::getInstance('XCustomers');
 					$focus_customer->id = $focus_this->column_fields['z_cuc_customer'];
-					$focus_customer->retrieve_entity_info($focus_customer->id, 'XCustomers');
+					$focus_customer->retrieve_entity_info_nextix($focus_customer->id, 'XCustomers');
 					$area_temp = explode(' |##| ',$focus_customer->column_fields['z_area']);
 					$coArea = array_intersect($area_temp, $this->current_user->area);
 					if(empty($coArea))
@@ -137,11 +137,11 @@ class NextIXOverwriteRestriction		//used in util/UserInfoUtil.php
 				if($this->record_id != ''){
 					$focus_this = CRMEntity::getInstance($this->module);
 					$focus_this->id = $this->record_id;
-					$focus_this->retrieve_entity_info($this->record_id, $this->module);
+					$focus_this->retrieve_entity_info_nextix($this->record_id, $this->module);
 						
 					$focus_customer = CRMEntity::getInstance('XCustomers');
-					$focus_customer->id = $focus_this->column_fields['z_cuc_customer'];
-					$focus_customer->retrieve_entity_info($focus_customer->id, 'XCustomers');
+					$focus_customer->id = $focus_this->column_fields['z_cp_customer'];
+					$focus_customer->retrieve_entity_info_nextix($focus_customer->id, 'XCustomers');
 					$area_temp = explode(' |##| ',$focus_customer->column_fields['z_area']);
 					$coArea = array_intersect($area_temp, $this->current_user->area);
 					if(empty($coArea))

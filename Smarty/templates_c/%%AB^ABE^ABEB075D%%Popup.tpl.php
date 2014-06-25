@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2014-06-21 21:00:59
+<?php /* Smarty version 2.6.18, created on 2014-06-21 21:45:38
          compiled from Popup.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'vtiger_imageurl', 'Popup.tpl', 141, false),array('modifier', 'vtlib_purify', 'Popup.tpl', 166, false),array('function', 'html_options', 'Popup.tpl', 152, false),)), $this); ?>
@@ -72,7 +72,7 @@ if (typeof jQuery != \'undefined\') {
 				 type : \'post\',
 				 data : datastring,
 				 success: function(result) {
-								console.log(result);
+								// alert(result);
 								var data = result.split("##############BELOWISDATA##############");
 								returnData = data[1];    
 						  },
