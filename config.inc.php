@@ -80,6 +80,8 @@ $host_name = $dbconfig['db_hostname'];
 
 $site_URL = 'http://localhost/Jardine';
 
+$download_URL = 'http://124.105.240.108:3000/downloader/';
+
 // root directory path
 
 $root_directory = '/var/www/html/Jardine/';

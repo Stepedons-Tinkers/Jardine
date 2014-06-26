@@ -14,7 +14,7 @@ require_once 'include/utils/CommonUtils.php';
 	function vtws_sync($mtime,$elementType,$syncType){
 		global $adb, $recordString,$modifiedTimeString;
         
-		$numRecordsLimit = 1;
+		$numRecordsLimit = 1000;
 		$ignoreModules = array("Users");
 		$typed = true;
 		$dformat = "Y-m-d H:i:s";
@@ -130,7 +130,8 @@ require_once 'include/utils/CommonUtils.php';
 				$fieldComp = explode(".",$tableName_fieldName);
 				$deleteColumnNames[$tableName_fieldName] = $fieldComp[1];
 			}
-			$params = array($moduleMeta->getTabName(),$datetime,$maxModifiedTime);
+			//$params = array($moduleMeta->getTabName(),$datetime,$maxModifiedTime);
+			$params = array($moduleMeta->getTabName(),$datetime);
 			
 
 			$queryGenerator = new QueryGenerator($elementType, $user);
@@ -151,13 +152,23 @@ require_once 'include/utils/CommonUtils.php';
 				$fromClause = vtws_getEmailFromClause();
 			else
 				$fromClause = $queryGenerator->getFromClause();
-			$fromClause .= " INNER JOIN (select modifiedtime, crmid,deleted,setype FROM $baseCRMTable WHERE setype=? and modifiedtime >? and modifiedtime<=?";
+				
+				
+			//$fromClause .= " INNER JOIN (select modifiedtime, crmid,deleted,setype FROM $baseCRMTable WHERE setype=? and modifiedtime >? and modifiedtime<=?";
+			
+			$fromClause .= " INNER JOIN (select modifiedtime, crmid,deleted,setype FROM $baseCRMTable WHERE setype=? and modifiedtime >=?";
+			/*
 			if(!$applicationSync){
 				$fromClause.= 'and smownerid IN('.generateQuestionMarks($ownerIds).')';
 				$params = array_merge($params,$ownerIds);
 			}
+			*/
+			
 			$fromClause.= ' ) vtiger_ws_sync ON (vtiger_crmentity.crmid = vtiger_ws_sync.crmid)';
 			$q = $selectClause." ".$fromClause;
+			
+ 
+			
 			$result = $adb->pquery($q, $params);
 			$recordDetails = array();
 			$deleteRecordDetails = array();

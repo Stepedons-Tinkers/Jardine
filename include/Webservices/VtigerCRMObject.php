@@ -119,7 +119,29 @@ class VtigerCRMObject{
 		$adb->startTransaction();
 		foreach($ids as $fieldname => $id){
 			if(!empty($id)){
+			 
 				$this->instance->retrieve_entity_info($id,$elementType);
+				
+				if( $elementType == 'Documents') {
+					$fileattach = "select attachmentsid from vtiger_seattachmentsrel where crmid = ?";
+					$res = $adb->pquery($fileattach,array($id));
+					$fileid = $adb->query_result($res,0,'attachmentsid');
+					
+					$dbQuery = "SELECT * FROM vtiger_attachments WHERE attachmentsid = ?" ;
+					$result = $adb->pquery($dbQuery, array($fileid)) or die("Couldn't get file list");
+
+					$name = $adb->query_result($result, 0, "name");
+					$filepath = $adb->query_result($result, 0, "path");
+					
+					$name = html_entity_decode($name, ENT_QUOTES, $default_charset);
+					$saved_filename = $fileid."_".$name;
+					
+					$filePath = str_replace("/","(^_^)",$filepath.$saved_filename);
+					$this->instance->column_fields['file_path'] = "http://124.105.240.108:3000/downloader/".$filePath;
+
+				}
+				
+				
 				$this->details[] = array('id'=>$id,'details'=>$this->instance->column_fields);
 			}
 		}

@@ -163,6 +163,7 @@ if(!empty($order_by)) {
 	}
 }
 
+
 //Postgres 8 fixes
 if( $adb->dbType == "pgsql")
 	$list_query = fixPostgresQuery( $list_query, $log, 0);

@@ -42,7 +42,7 @@ if(!empty($deletecheck) && $adb->query_result($deletecheck, 0, 'deleted') == 1) 
 		$filesize = $disk_file_size + ($disk_file_size % 1024);
 		$fileContent = fread(fopen($filepath.$saved_filename, "r"), $filesize);
 		$filePath = str_replace("/","(^_^)",$filepath.$saved_filename);
-		header( "Location: http://115.85.42.163:3000/downloader/".$filePath);
+		header( "Location: ".$download_URL.$filePath);
 		/*
 		header("Content-type: $fileType");
 		header("Pragma: public");
