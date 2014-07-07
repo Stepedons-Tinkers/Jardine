@@ -19,7 +19,7 @@ function vtlib_setvalue_from_popup(recordid,value,target_fieldname) {
 			jQuery.each(myData, function(e,a) {
 				if(a.recordid == ''){
 					if(a.target_fieldname == 'blocksShown'){
-						var blocksarr = ["General Information", "With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings"];
+						var blocksarr = ["General Information", "With CoSMRs", "DIY or Supermarket", "Project Visit", "Trainings"];
 						for(var i=0;i<blocksarr.length;i++){
 							var as = [];
 							jQuery.each(a.value, function(x,y){

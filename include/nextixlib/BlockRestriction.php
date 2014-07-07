@@ -25,11 +25,11 @@ class BlockRestriction{
 		$this->z_act_acttypcat = $focus_activity->column_fields['z_act_acttypcat'];
 		
 		$blocksShown = array('General Information');
-		if(in_array($this->z_act_activitytype, array('Retail Visits (Traditional Hardware)','Retail Visit (Merienda)')))
-			array_push($blocksShown,'Retail Visit');
+		// if(in_array($this->z_act_activitytype, array('Retail Visits (Traditional Hardware)','Retail Visit (Merienda)')))
+			// array_push($blocksShown,'Retail Visit');
 		// else if(in_array($this->z_act_activitytype, array('Sub-Dealer / Wholesaler Visit','Dealer Depot Visits')))	
 			// array_push($blocksShown,'Dealer Visit');
-		else if(in_array($this->z_act_activitytype, array('DIY Visits','Supermarket Visits')))	
+		if(in_array($this->z_act_activitytype, array('DIY Visits','Supermarket Visits')))	
 			array_push($blocksShown,'DIY or Supermarket');
 		else if(in_array($this->z_act_activitytype, array('Company Work-with Co-SMR/ Supervisor')))	
 			array_push($blocksShown,'With CoSMRs');

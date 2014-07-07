@@ -59,6 +59,12 @@ if ($mod_seq_field != null) {
 $smarty->assign('MOD_SEQ_ID', $mod_seq_id);
 // END
 
+//hide fields
+$hideFieldsTPL = array();
+if($focus->column_fields['z_cu_customertype'] != 'Modern Trade')
+	array_push($hideFieldsTPL,'z_cu_chainname');
+//hide fields end
+
 //hide blocks
 	if(!empty($focus->column_fields['z_cu_customertype'])){
 		$blockRestriction->getBlocksShown_customer($focus->column_fields['z_cu_customertype']);
@@ -133,6 +139,8 @@ if($current_user->isSupreme || in_array($current_user->rolename, array('Marketin
 		$modules_actions[2]['link'] = "<a class='webMnu' href='index.php?module=NextIXfunctions&action={$currentModule}&functionNextIX=approve&entityid={$focus->id}' onclick='return jQuery.fn.confirmationPrompt();'>Approve</a>";
 }
 $smarty->assign("MODULES_ACTIONS", $modules_actions);
+
+$smarty->assign('hideFieldsTPL', $hideFieldsTPL);
 
 $smarty->assign('DETAILVIEW_AJAX_EDIT', PerformancePrefs::getBoolean('DETAILVIEW_AJAX_EDIT', true));
 

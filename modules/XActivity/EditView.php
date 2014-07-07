@@ -85,8 +85,8 @@ if($focus->mode != 'edit' && $focus->column_fields['assigned_user_id'] == '') {
 	}
 }
 
-$custom_mandatory = array('z_ac_smr','z_ac_issuesidentified','z_ac_feedbackfromcu','z_ac_ongoingcampaigns','z_ac_lastdelivery',
-		'z_ac_promostubsdetails','z_ac_projectname','z_ac_projectstage','z_ac_projectcategory','z_ac_date',
+$custom_mandatory = array('z_ac_smr','z_ac_issuesidentified','z_ac_feedbackfromcu','z_ac_ongoingcampaigns',
+		'z_ac_projectname','z_ac_projectstage','z_ac_projectcategory','z_ac_date',
 		'z_ac_time','z_ac_venue','z_ac_noofattenees','z_ac_attendees','z_ac_attendancesheet');
 
 $disp_view = getView($focus->mode);
@@ -114,13 +114,13 @@ $disp_view = getView($focus->mode);
 	$hideBlocksTPL = array();
 	$forcedisable = array('z_ac_source','z_ac_othersacttypermrk','z_ac_reasonremarks','z_ac_details');
 	if(!empty($focus->column_fields['z_ac_activitytype'])){
-		$allBlocks = array("General Information", "With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings");
+		$allBlocks = array("General Information", "With CoSMRs", "DIY or Supermarket", "Project Visit", "Trainings");
 		$showBlocks = $blockRestriction->getBlocksShown_activity($focus->column_fields['z_ac_activitytype']);
 		$forcedisable = $blockRestriction->getDisableField_activity($forcedisable);
 		$hideBlocksTPL = array_diff($allBlocks, $showBlocks['value']);
 	}
 	else{
-		$hideBlocksTPL = array("With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings");
+		$hideBlocksTPL = array("With CoSMRs", "DIY or Supermarket", "Project Visit", "Trainings");
 	}
 //hide blocks end	
 	

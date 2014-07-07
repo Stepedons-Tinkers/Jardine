@@ -45,6 +45,10 @@ if(empty($_REQUEST['record']) && $focus->mode != 'edit'){
 	setObjectValuesFromRequest($focus);
 }
 
+$hideFieldsTPL = array('z_cu_isactive');
+if($focus->column_fields['z_cu_customertype'] != 'Modern Trade')
+	array_push($hideFieldsTPL,'z_cu_chainname');
+
 // set status to "Pending For Approval" if in Edit View
 $focus->column_fields['z_cu_customerrecstat'] = 'Pending For Approval';
 
@@ -135,7 +139,7 @@ $picklistDependencyDatasource = Vtiger_DependencyPicklist::getPicklistDependency
 $smarty->assign("PICKIST_DEPENDENCY_DATASOURCE", Zend_Json::encode($picklistDependencyDatasource));
 
 
-$smarty->assign('hideFieldsTPL', array('z_cu_isactive'));
+$smarty->assign('hideFieldsTPL', $hideFieldsTPL);
 $smarty->assign('forcedisable', array('assigned_user_id','z_cu_customerrecstat'));
 
 if($focus->mode == 'edit') {

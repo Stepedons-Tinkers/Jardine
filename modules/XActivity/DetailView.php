@@ -62,7 +62,7 @@ $smarty->assign('MOD_SEQ_ID', $mod_seq_id);
 //hide blocks
 	$hideBlocksTPL = array();
 	if(!empty($focus->column_fields['z_ac_activitytype'])){
-		$allBlocks = array("General Information", "With CoSMRs", "DIY or Supermarket", "Retail Visit", "Project Visit", "Trainings");
+		$allBlocks = array("General Information", "With CoSMRs", "DIY or Supermarket", "Project Visit", "Trainings");
 		$showBlocks = $blockRestriction->getBlocksShown_activity($focus->column_fields['z_ac_activitytype']);
 		$hideBlocksTPL = array_diff($allBlocks, $showBlocks['value']);
 	}
