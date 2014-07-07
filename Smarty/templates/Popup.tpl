@@ -159,6 +159,10 @@ function set_focus() {ldelim}
 								<input type="hidden" name="curr_row" id="curr_row" value="{$CURR_ROW}">
 								<input type="hidden" name="fldname_pb" value="{$FIELDNAME}">
 								<input type="hidden" name="productid_pb" value="{$PRODUCTID}">
+								
+								<input type="hidden" id="NumberOfSelectedRecords" name="NumberOfSelectedRecords" value="{$NumberOfSelectedRecords}">
+								<input type="hidden" id="NumberOfAllowedRecords" name="NumberOfAllowedRecords" value="{$NumberOfAllowedRecords}">
+								
 								<input name="popuptype" id="popup_type" type="hidden" value="{$POPUPTYPE}">
 								<input name="recordid" id="recordid" type="hidden" value="{$RECORDID}">
 								<input name="record_id" id="record_id" type="hidden" value="{$RECORD_ID}">

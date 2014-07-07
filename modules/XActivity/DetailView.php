@@ -95,6 +95,12 @@ if($singlepane_view == 'true') {
 		}
 	}
 	//hide related blocks end
+	if(isset($related_array['Products'])){
+		$productsCount = getActivityProduct_records($focus->id);
+		if($productsCount >= 3){
+			$related_array['Products']['actions']='';
+		}
+	}
 	
 	$smarty->assign("RELATEDLISTS", $related_array);
 	

@@ -3426,5 +3426,23 @@ function getWorkplanEntriesDetail($workplan_arr){
 		return $data;	
 	}
 }
+
+function getActivityProduct_records($actid){
+	global $adb;
+	$data = 0;
+	$query = "SELECT count(*) as count
+				FROM vtiger_crmentityrel
+				INNER JOIN vtiger_crmentity ON vtiger_crmentity.crmid = vtiger_crmentityrel.relcrmid
+				WHERE vtiger_crmentity.deleted = 0
+				AND vtiger_crmentityrel.crmid = {$actid}";
+	$result = $adb->pquery($query,array());
+	$noofrows = $adb->num_rows($result);
+	if($noofrows) {
+		while($resultrow = $adb->fetchByAssoc($result)) {
+			$data = $resultrow['count'];
+		}
+	}
+	return $data;
+}
 //ed edited end
 ?>

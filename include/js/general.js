@@ -2326,6 +2326,17 @@ function SelectAll(mod,parmod)
 			alert(alert_arr.SELECT);
 			return false;
 		}
+		//ed edited
+		if(module == 'XActivity' && mod == 'XProduct'){
+			var NumberOfSelectedRecords = document.getElementById('NumberOfSelectedRecords').value;
+			var NumberOfAllowedRecords = document.getElementById('NumberOfAllowedRecords').value;
+
+			if(NumberOfAllowedRecords < (+NumberOfSelectedRecords + +y)){
+				alert("Total Records Related should be at most "+NumberOfAllowedRecords+".");
+				return false;
+			}
+		}
+		//ed edited end
 		if(confirm(alert_arr.ADD_CONFIRMATION+y+alert_arr.RECORDS))
 		{
 			if(parmod == 'Calendar')

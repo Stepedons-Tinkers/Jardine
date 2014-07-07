@@ -249,6 +249,9 @@ if($_REQUEST['form'] == 'vtlibPopupView') {
 
 $smarty->assign("RETURN_ACTION",vtlib_purify($_REQUEST['return_action']));
 
+$numberOfSelectedRecords = 'TRUE';
+$numberOfAllowedRecords = 'TRUE';
+
 //Retreive the list from Database
 if($currentModule == 'PriceBooks')
 {
@@ -326,7 +329,6 @@ else
 		$where_relquery .=" and vtiger_users.id!=".$adb->sql_escape_string($_REQUEST['recordid']);
 		$smarty->assign("RECORDID",vtlib_purify($_REQUEST['recordid']));
 	}
-
 	//ed edited
 	if($currentModule == 'XBusinessUnit'){
 		$where_relquery .=" and vtiger_xbusinessunit.z_bu_isactive='1'";
@@ -338,6 +340,17 @@ else
 		$where_relquery .=" and vtiger_xactivitytype.z_act_active='1'";
 	}	
 	else if($currentModule == 'XProduct'){
+		$numberOfAllowedRecords = '3';
+		if(strpos($where_relquery,'vtiger_xproduct.xproductid not in (') !== false){
+			$temp_prod = explode('vtiger_xproduct.xproductid not in (', $where_relquery);
+			$temp_prod = explode(')', $temp_prod[1]);
+			$temp_prod = explode(',', $temp_prod[0]);
+			$temp_prod = count($temp_prod);
+			$numberOfSelectedRecords = $temp_prod;
+		}
+		else{
+			$numberOfSelectedRecords = '0';
+		}
 		$where_relquery .=" and vtiger_xproduct.z_prd_isactive='1'";
 	}	
 	else if($currentModule == 'XSupplier'){
@@ -453,6 +466,8 @@ if($popUpModuleDependency->checkIfDependentQuery()){
 		$query .= ' GROUP BY vtiger_crmentity.crmid ';
 }
 $smarty->assign("AllValuedFields", $getAllValuedFields);
+$smarty->assign("NumberOfSelectedRecords", $numberOfSelectedRecords);
+$smarty->assign("NumberOfAllowedRecords", $numberOfAllowedRecords);
 //ed edited end
 
 $query.=" LIMIT $limstart,$list_max_entries_per_page";
@@ -484,7 +499,6 @@ if($popuptype == 'set_return_emails'){
 		$focus->search_fields_name[$fieldlabel] = $fieldname;
 	}
 }
-
 $listview_header = getSearchListViewHeader($focus,"$currentModule",$url_string,$sorder,$order_by);
 $smarty->assign("LISTHEADER", $listview_header);
 $smarty->assign("HEADERCOUNT",count($listview_header)+1);
